@@ -24,6 +24,7 @@ class User extends Authenticatable
         'phone',
         'legal_city',
         'zip_code',
+        'user_img'
     ];
 
     /**
