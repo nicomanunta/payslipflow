@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            $table->unsignedBigInteger('contract_id');
+            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
+            $table->string('payroll_month', 7);
+            $table->date('payroll_day_paid');
+            $table->decimal('payroll_net_salary', 10, 2)->unsigned();
+            $table->decimal('payroll_gross_salary', 10, 2)->unsigned();
             $table->timestamps();
         });
     }
