@@ -12,12 +12,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //rotte crud
-Roure::middleware(['auth', 'verified'])->name('admin.')->group(function(){
+Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){
     Route::resource('employees', EmployeeController::class);
     Route::resource('contracts', ContractController::class);
     Route::resource('payrolls', PayrollController::class);
     Route::resource('extras', extraController::class);
-})
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
