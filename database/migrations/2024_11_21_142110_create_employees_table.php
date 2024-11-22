@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('employee_name', 100);
             $table->string('employee_surname', 100);
-            $table->string('employee_email', 100);->unique();
-            $table->string('employee_phone', 20);->unique();
+            $table->string('employee_email', 100)->unique();
+            $table->string('employee_phone', 20)->unique();
             $table->date('employee_birth_date');
             $table->string('employee_role', 150);
             $table->enum('employee_status', ['Attivo', 'Sospeso', 'In prova', 'Licenziato', 'Pensione'])->default('Attivo');
