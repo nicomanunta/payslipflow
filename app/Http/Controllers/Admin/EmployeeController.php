@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreExtraRequest;
-use App\Http\Requests\UpdateExtraRequest;
-use App\Models\Extra;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Employee;
 
-class ExtraController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ExtraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreExtraRequest $request)
+    public function store(StoreEmployeeRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ExtraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Extra $extra)
+    public function show(Employee $employee)
     {
         //
     }
@@ -43,7 +43,7 @@ class ExtraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Extra $extra)
+    public function edit(Employee $employee)
     {
         //
     }
@@ -51,7 +51,7 @@ class ExtraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateExtraRequest $request, Extra $extra)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         //
     }
@@ -59,7 +59,7 @@ class ExtraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Extra $extra)
+    public function destroy(Employee $employee)
     {
         //
     }

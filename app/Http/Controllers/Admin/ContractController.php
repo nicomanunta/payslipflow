@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StorePayrollRequest;
-use App\Http\Requests\UpdatePayrollRequest;
-use App\Models\Payroll;
+use App\Http\Requests\StoreContractRequest;
+use App\Http\Requests\UpdateContractRequest;
+use App\Models\Contract;
 
-class PayrollController extends Controller
+class ContractController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PayrollController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePayrollRequest $request)
+    public function store(StoreContractRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class PayrollController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Payroll $payroll)
+    public function show(Contract $contract)
     {
         //
     }
@@ -43,7 +43,7 @@ class PayrollController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Payroll $payroll)
+    public function edit(Contract $contract)
     {
         //
     }
@@ -51,7 +51,7 @@ class PayrollController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePayrollRequest $request, Payroll $payroll)
+    public function update(UpdateContractRequest $request, Contract $contract)
     {
         //
     }
@@ -59,7 +59,7 @@ class PayrollController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Payroll $payroll)
+    public function destroy(Contract $contract)
     {
         //
     }
