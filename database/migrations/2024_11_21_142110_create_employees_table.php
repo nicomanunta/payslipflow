@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('employee_surname', 100);
             $table->string('employee_email', 100)->unique();
             $table->string('employee_phone', 20)->unique();
+            $table->string('employee_state', 50)->nullable();
+            $table->string('employee_region', 50)->nullable();
+            $table->string('employee_city', 50)->nullable();
             $table->date('employee_birth_date');
             $table->string('employee_role', 150);
             $table->enum('employee_status', ['Attivo', 'Sospeso', 'In prova', 'Licenziato', 'Pensione'])->default('Attivo');

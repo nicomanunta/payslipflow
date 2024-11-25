@@ -4,7 +4,7 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nome Azienda')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -14,6 +14,27 @@
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+        
+        {{-- Phone --}}
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Telefono')" />
+            <x-text-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+    
+        {{-- Legal City --}}
+        <div class="mt-4">
+            <x-input-label for="legal_city" :value="__('Sede legale')" />
+            <x-text-input id="legal_city" class="block mt-1 w-full" type="text" name="legal_city" :value="old('legal_city')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('legal_city')" class="mt-2" />
+        </div>
+
+        {{-- Zip Code --}}
+        <div class="mt-4">
+            <x-input-label for="zip_code" :value="__('Codice postale')" />
+            <x-text-input id="zip_code" class="block mt-1 w-full" type="number" name="zip_code" :value="old('zip_code')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('zip_code')" class="mt-2" />
         </div>
 
         <!-- Password -->
