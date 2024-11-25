@@ -25,6 +25,7 @@ return new class extends Migration
             $table->decimal('contract_inps_tax', 5, 2)->unsigned()->nullable();
             $table->decimal('contract_naspi_tax', 5, 2)->unsigned()->nullable();
             $table->decimal('contract_surcharge_municipal', 5, 2)->unsigned()->nullable();
+            $table->decimal('contract_surcharge_regional', 5, 2)->unsigned()->nullable();
             $table->date('contract_start_date');
             $table->date('contract_end_date')->nullable();
             $table->timestamps();
