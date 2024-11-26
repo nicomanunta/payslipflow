@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'email', 'exists:users,email'],
             'password' => ['required', 'string'],
         ];
     }
@@ -81,5 +81,15 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+    }
+
+    public function messages(){
+
+        return [
+            'email.required' => 'L\'email è obbligatoria.',
+            'email.email' => 'L\'email non è valida.',
+            'email.exists' => 'Questa email non è registrata.',
+            'password.required' => 'La password è obbligatoria.',
+        ];
     }
 }
