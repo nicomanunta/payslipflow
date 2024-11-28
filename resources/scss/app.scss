@@ -1,5 +1,52 @@
 @import 'bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@500&family=Roboto&display=swap');
 
-h1{
-    font-size: 100px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #F3F4F6;
+}
+
+// FONT
+.montserrat-bold{ //per titoli e bottoni
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal
+}
+.poppins-medium{ //per sottotitoli
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.rorboto-regular{ //per testi
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+// PALETTE COLORI
+.dark-grey{ //per titoli
+    color: #1F2937;
+}
+.steel-blue{ //per sottotitoli  
+    color: #3B82F6;
+}
+.medium-grey{ //per testi
+    color: #4B5563;
+}
+.bg-steel-blue{ //background per bottoni, testo bianco
+    background-color: #3B82F6;
+}
+.bg-mint-green{ //background per hover bottoni, testo bianco
+    background-color: #10B981;
+}
+.bg-light-grey{ //background generale
+    background-color: #F3F4F6;
+}
+.bg-light-blu{ //background sezioni particolari
+    background-color: #EFF6FF;
 }
