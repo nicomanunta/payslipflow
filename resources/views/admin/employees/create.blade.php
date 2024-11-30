@@ -93,9 +93,9 @@
 
                     {{-- employee_status --}}
                     <div class="form-group">
-                        <label for="employee_status">Stato dipendente</label>
+                        <label for="employee_status">Status lavorativo</label>
                         <select class="form-control" name="employee_status" id="employee_status">
-                            <option value="">Seleziona lo stato del dipendente</option>
+                            <option value="">Seleziona lo status lavorativo</option>
                             <option value="Attivo" {{old('employee_status') == 'Attivo' ? 'selected' : ''}}>Attivo</option>
                             <option value="In prova" {{old('employee_status') == 'In prova' ? 'selected' : ''}}>In prova</option>
                             <option value="Sospeso" {{old('employee_status') == 'Sospeso' ? 'selected' : ''}}>Sospeso</option>
