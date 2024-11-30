@@ -6,7 +6,7 @@
                 <h1>Aggiungi un profilo di un dipendente</h1>
             </div>
             <div class="col-12">
-                {{-- FORM PER TABELLA EMPLOYEE --}}
+                {{-- FORM CREATE PER TABELLA EMPLOYEE --}}
                 <form action="{{route('admin.employees.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
@@ -48,8 +48,8 @@
                     
                     {{-- employee_state --}}
                     <div class="form-group">
-                        <label class="" for="employee_state">Stato</label>
-                        <input class="form-control" type="text" name="employee_state" id="employee_state" placeholder="Paese di residenza" value="{{ old('employee_state')}}">
+                        <label class="" for="employee_state">Paese di residenza</label>
+                        <input class="form-control" type="text" name="employee_state" id="employee_state" placeholder="Paese" value="{{ old('employee_state')}}">
                         @error('employee_state')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -57,8 +57,8 @@
 
                     {{-- employee_region --}}
                     <div class="form-group">
-                        <label class="" for="employee_region">Regione</label>
-                        <input class="form-control" type="text" name="employee_region" id="employee_region" placeholder="Regione di residenza" value="{{old('employee_region')}}">
+                        <label class="" for="employee_region">Regione di residenza</label>
+                        <input class="form-control" type="text" name="employee_region" id="employee_region" placeholder="Regione" value="{{old('employee_region')}}">
                         @error('employee_regione')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -66,8 +66,8 @@
 
                     {{-- employee_city --}}
                     <div class="form-group">
-                        <label class="" for="employee_city">Comune</label>
-                        <input class="form-control" type="text" name="employee_city" id="employee_city" placeholder="Comune di residenza" value="{{old('employee_city')}}">
+                        <label class="" for="employee_city">Comune di residenza</label>
+                        <input class="form-control" type="text" name="employee_city" id="employee_city" placeholder="Comune" value="{{old('employee_city')}}">
                         @error('employee_city')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -102,6 +102,9 @@
                             <option value="Licenziato" {{old('employee_status') == 'Licenziato' ? 'selected' : ''}}>Licenziato</option>
                             <option value="Pensione" {{old('employee_status') == 'Pensione' ? 'selected' : ''}}>Pensione</option>
                         </select>
+                        @error('employee_status')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
 
                     {{-- employee_hiring_date --}}
