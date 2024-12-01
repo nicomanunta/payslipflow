@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->string('contract_name', 255);
             $table->set('contract_type', ['Full-Time', 'Part-Time', 'Tempo indeterminato', 'Tempo determinato', 'Stage', 'Lavoro a progetto','Freelance', 'Apprendistato',]);
-            $table->string('contract_level', 50);
+            $table->string('contract_level', 50)->nullable();
             $table->decimal('contract_gross_monthly_salary', 10, 2)->unsigned();
             $table->integer('contract_vacation_days')->unsigned()->nullable();
             $table->decimal('contract_inps_tax', 5, 2)->unsigned()->nullable();

@@ -13,7 +13,7 @@
                     {{-- employee_name --}}
                     <div class="form-group">
                         <label class="" for="employee_name">Nome</label>
-                        <input class="form-control" type="text" name="employee_name" id="employee_name" placeholder="Nome" value="{{ old('employee_name')}}">
+                        <input class="form-control" type="text" name="employee_name" id="employee_name" placeholder="Nome" value="{{ old('employee_name')}}" required>
                         @error('employee_name')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -22,7 +22,7 @@
                     {{-- employee_surname --}}
                     <div class="form-group">
                         <label class="" for="employee_surname">Cognome</label>
-                        <input class="form-control" type="text" name="employee_surname" id="employee_surname" placeholder="Cognome" value="{{ old('employee_surname')}}">
+                        <input class="form-control" type="text" name="employee_surname" id="employee_surname" placeholder="Cognome" value="{{ old('employee_surname')}}" required>
                         @error('employee_surname')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -31,7 +31,7 @@
                     {{-- employee_email --}}
                     <div class="form-group">
                         <label class="" for="employee_email">Email</label>
-                        <input class="form-control" type="text" name="employee_email" id="employee_email" placeholder="Email" value="{{ old('employee_email')}}">
+                        <input class="form-control" type="text" name="employee_email" id="employee_email" placeholder="Email" value="{{ old('employee_email')}}" required>
                         @error('employee_email')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -40,7 +40,7 @@
                     {{-- employee_phone --}}
                     <div class="form-group">
                         <label class="" for="employee_phone">Telefono</label>
-                        <input class="form-control" type="tel" name="employee_phone" id="employee_phone" placeholder="Telefono" value="{{ old('employee_phone')}}">
+                        <input class="form-control" type="tel" name="employee_phone" id="employee_phone" placeholder="Telefono" value="{{ old('employee_phone')}}" required>
                         @error('employee_phone')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -76,7 +76,7 @@
                     {{-- employee_birth_date --}}
                     <div class="form-group">
                         <label class="" for="employee_birth_date">Data di nascita</label>
-                        <input class="form-control" type="date" name="employee_birth_date" id="employee_birth_date" placeholder="Data di nascita" value="{{old('employee_birth_date')}}">
+                        <input class="form-control" type="date" name="employee_birth_date" id="employee_birth_date" placeholder="Data di nascita" value="{{old('employee_birth_date')}}" required>
                         @error('employee_birth_date')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -85,7 +85,7 @@
                     {{-- employee_role --}}
                     <div class="form-group">
                         <label class="" for="employee_role">Posizione lavorativa</label>
-                        <input class="form-control" type="text" name="employee_role" id="employee_role" placeholder="Posizione lavorativa" value="{{old('employee_role')}}">
+                        <input class="form-control" type="text" name="employee_role" id="employee_role" placeholder="Posizione lavorativa" value="{{old('employee_role')}}" required>
                         @error('employee_role')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -110,7 +110,7 @@
                     {{-- employee_hiring_date --}}
                     <div class="form-group">
                         <label class="" for="employee_hiring_date">Data di assunzione</label>
-                        <input class="form-control" type="date" name="employee_hiring_date" id="employee_hiring_date" placeholder="Data di assunzione" value="{{old('employee_hiring_date')}}">
+                        <input class="form-control" type="date" name="employee_hiring_date" id="employee_hiring_date" placeholder="Data di assunzione" value="{{old('employee_hiring_date')}}" required>
                         @error('employee_hiring_date')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
