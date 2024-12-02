@@ -6,7 +6,7 @@
                 <h1>Aggiorna contratto di {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
             </div>
             <div class="col-12">
-                {{-- FORM CREATE PER TABELLA CONTRACTS --}}
+                {{-- FORM EDIT PER TABELLA CONTRACTS --}}
                 <form action="{{route('admin.contracts.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
