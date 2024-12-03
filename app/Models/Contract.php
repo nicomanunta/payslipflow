@@ -19,5 +19,9 @@ class Contract extends Model
     public function payrolls(){
         return $this->hasMany(Payroll::class);
     }
+    
+    public function deduction(){
+        return $this->hasOne(Deduction::class);
+    }
 }
 

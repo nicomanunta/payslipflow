@@ -6,10 +6,11 @@
                 <h1>Aggiorna contratto di {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
             </div>
             <div class="col-12">
-                {{-- FORM EDIT PER TABELLA CONTRACTS --}}
+                {{-- FORM EDIT PER TABELLA CONTRACTS & DEDUCTIONS --}}
                 <form action="{{route('admin.contracts.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
+                    {{-- TABELLA CONTRACTS --}}
                     <input type="hidden" name="employee_id" value="{{ $employee->id }}">
                     
                     {{--contract_name--}}
@@ -104,6 +105,43 @@
                         <label for="contract_end_date">Data inizio</label>
                         <input class="form-control" type="date" name="contract_end_date" id="contract_end_date" placeholder="Data inizio" value="{{old('contract_end_date', $contract->contract_end_date)}}">
                         @error('contract_end_date')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- TABELLA DEDUCTIONS --}}
+                    {{-- dependent_family_members --}}
+                    <div class="form-group">
+                        <label for="dependent_family_members">Familiari a carico</label>
+                        <input type="number" class="form-control" name="dependent_family_members" id="dependent_family_members" placeholder="Numero di familiari a carico" value="{{old('dependent_family_members', $deduction->dependent_family_members)}}">
+                        @error('dependent_family_members')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- dependent_children_under_24 --}}
+                    <div class="form-group">
+                        <label for="dependent_children_under_24">Figli a carico sotto i 24 anni</label>
+                        <input type="number" class="form-control" name="dependet_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24" value="{{old('dependent_children_under_24', $deduction->dependent_children_under_24)}}">
+                        @error('dependent_children_under_24')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- dependent_children_over_24 --}}
+                    <div class="form-group">
+                        <label for="dependent_children_over_24">Figli a carico sopra i 24 anni </label>
+                        <input type="number" class="form-control" name="dependent_children_over_24" id="dependent_children_over_24" placeholder="Numero di figli a carico over 24" value="{{old('dependent_children_over_24', $deduction->dependent_children_over_24)}}">
+                        @error('dependent_children_over_24')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- dependent_children_with_disabilities --}}
+                    <div class="form-group">
+                        <label for="dependent_children_with_disabilities">Figli a carico con disabilità </label>
+                        <input type="number" class="form-control" name="dependent_children_with_disabilities" id="dependent_children_with_disabilities" placeholder="Numero di figli a carico con disabilità" value="{{old('dependent_children_with_disabilities', $deduction->dependent_children_with_disabilities)}}">
+                        @error('dependent_children_with_disabilities')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

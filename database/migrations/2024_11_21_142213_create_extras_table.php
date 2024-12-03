@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payroll_id');
             $table->foreign('payroll_id')->references('id')->on('payrolls')->onDelete('cascade');
-            $table->decimal('extra_weekday_overtime_hours', 8, 2)->unsigned()->default(0);
-            $table->decimal('extra_weekend_overtime_hours', 8, 2)->unsigned()->default(0);
-            $table->decimal('extra_holiday_overtime_hours', 8, 2)->unsigned()->default(0);
+            $table->string('extra_weekday_overtime_hours', 5)->default(00:00);
+            $table->string('extra_weekend_overtime_hours', 5)->default(00:00);
+            $table->string('extra_holiday_overtime_hours', 5)->default(00:00);
             $table->boolean('extra_thirteenth_salary')->default(false);
             $table->boolean('extra_fourteenth_salary')->default(false);
             $table->decimal('extra_reimbursement_expenses', 8, 2)->unsigned()->default(0);

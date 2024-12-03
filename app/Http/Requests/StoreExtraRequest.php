@@ -22,7 +22,18 @@ class StoreExtraRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'extra_weekday_overtime_hours' => ['nullable', 'regex:/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/'],
+            'extra_weekend_overtime_hours' => ['nullable', 'regex:/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/'],
+            'extra_holiday_overtime_hours' => ['nullable', 'regex:/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/'],
+            'extra_thirteenth_salary' => ['nullable', 'boolean'],
+            'extra_fourteenth_salary' => ['nullable', 'boolean'],
+            'extra_reimbursement_expenses' => ['nullable', 'numeric', 'min:0', 'max:999999.99'],
+            'bonus_rewards' => ['nullable', 'numeric', 'min:0', 'max:999999.99'],
         ];
+    }
+    public function messages(){
+        return[
+
+        ]
     }
 }
