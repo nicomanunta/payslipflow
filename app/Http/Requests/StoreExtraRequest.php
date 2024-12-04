@@ -33,7 +33,19 @@ class StoreExtraRequest extends FormRequest
     }
     public function messages(){
         return[
+            'extra_weekday_overtime_hours.regex' => 'Il formato delle ore di straordinario dev essere HH:MM (ore:minuti).',
 
-        ]
+            'extra_weekend_overtime_hours.regex' => 'Il formato delle ore di straordinario dev essere HH:MM (ore:minuti).',
+
+            'extra_holyday_overtime_hours.regex' => 'Il formato delle ore di straordinario dev essere HH:MM (ore:minuti).',
+
+            'extra_thirteenth_salary.boolean' => 'Spunta l\'opzione se il campo "Tredicesima" è presente.',
+
+            'extra_fourteenth_salary.boolean' => 'Spunta l\'opzione se il campo "Quattordicesima" è presente.',
+
+            'bonus_rewards.numeric' => 'I bonus e i premi devono essere dei numeri validi.', 
+            'bonus_rewards.min' => 'I bonus e i premi non possono essere numeri negativi.', 
+            'bonus_rewards.max' => 'I numeri e i premi non possono essere superiori a 999999.99.',  
+        ];
     }
 }
