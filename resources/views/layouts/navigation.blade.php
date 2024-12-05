@@ -1,6 +1,6 @@
 
 
-<nav x-data="{ open: false }" class="h-100 bg-steel-blue dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="h-100 bg-steel-blue dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 overflow-auto">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div class="flex justify-between h-16">
@@ -53,6 +53,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -98,6 +99,7 @@
                 </form>
             </div>
         </div>
+        
     </div>
 </nav>
 

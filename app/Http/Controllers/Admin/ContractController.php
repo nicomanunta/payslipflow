@@ -4,7 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreContractRequest;
 use App\Http\Requests\UpdateContractRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Contract;
+use App\Models\Employee;
+use App\Models\Payroll;
+use App\Models\Deduction;
+use App\Models\Extra;
+use App\Models\User;
 
 class ContractController extends Controller
 {
@@ -13,7 +21,9 @@ class ContractController extends Controller
      */
     public function index()
     {
-        //
+        $contracts = Contract::all();
+
+        return view('admin.contracts.index', compact('contracts'));
     }
 
     /**

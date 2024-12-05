@@ -4,7 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StorePayrollRequest;
 use App\Http\Requests\UpdatePayrollRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Payroll;
+use App\Models\Employee;
+use App\Models\Contract;
+use App\Models\Deduction;
+use App\Models\Extra;
+use App\Models\User;
 
 class PayrollController extends Controller
 {
@@ -13,7 +21,9 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        //
+        $payrolls = Payroll::all();
+
+        return view('admin.payrolls.index', compact('payrolls'));
     }
 
     /**

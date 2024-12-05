@@ -4,16 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Employee;
+use App\Models\Contract;
+use App\Models\Payroll;
+use App\Models\Deduction;
+use App\Models\Extra;
+use App\Models\User;
 
 class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
+        $employees = Employee::all();
+
+        return view('admin.employees.index', compact('employees'));
     }
 
     /**
@@ -21,7 +32,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $employees = Employee::where('user_id', auth()->id())->get();
+
+        return view('admin.employees.create', compact('users', 'employees'));
     }
 
     /**
