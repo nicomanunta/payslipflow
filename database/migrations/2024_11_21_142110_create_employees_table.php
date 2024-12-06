@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('employee_status', ['Attivo', 'Sospeso', 'In prova', 'Licenziato', 'Pensione'])->default('Attivo');
             $table->date('employee_hiring_date');
             $table->string('employee_img')->nullable();
+            $table->string('slug', 250)->unique();
             $table->timestamps();
         });
     }

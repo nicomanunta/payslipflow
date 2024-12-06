@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){
     Route::resource('employees', EmployeeController::class);
     Route::resource('contracts', ContractController::class);
     Route::resource('payrolls', PayrollController::class);
-    Route::resource('extras', extraController::class);
+    Route::resource('extras', ExtraController::class);
 });
 
 Route::middleware('auth')->group(function () {

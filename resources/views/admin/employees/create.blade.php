@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="" for="employee_region">Regione di residenza</label>
                         <input class="form-control" type="text" name="employee_region" id="employee_region" placeholder="Regione" value="{{old('employee_region')}}">
-                        @error('employee_regione')
+                        @error('employee_region')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -124,6 +124,8 @@
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
+
+                    <button type="submit">invia</button>
                 </form>
             </div>
         </div>

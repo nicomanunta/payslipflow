@@ -29,7 +29,7 @@ class StoreEmployeeRequest extends FormRequest
             'employee_name' => ['required', 'string', 'max:100'],
             'employee_surname' => ['required', 'string', 'max:100'],
             'employee_email' => ['required', 'string', 'email', 'max:100', Rule::unique('employees')],
-            'employee_phone' => ['required', new Phone('AUTO'), 'max:20', Rule::unique('employees')],
+            'employee_phone' => ['required','regex:/^[0-9]{10}$/', 'size:10', Rule::unique('employees')],
             'employee_state' => ['nullable', 'string', 'max:50'],
             'employee_region' => ['nullable', 'string', 'max:50'],
             'employee_city' => ['nullable', 'string', 'max:50'],
@@ -37,7 +37,8 @@ class StoreEmployeeRequest extends FormRequest
             'employee_role' => ['required', 'string', 'max:150'],
             'employee_status' => ['required', 'in:Attivo,Sospeso,In prova,Licenziato,Pensione'],
             'employee_hiring_date' => ['required', 'date'],
-            'employee_img' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],    
+            'employee_img' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],  
+            
         ];
     }
     
@@ -57,8 +58,8 @@ class StoreEmployeeRequest extends FormRequest
             'employee_email.unique' => 'Questa email è già registrata.',
 
             'employee_phone.required' => 'Il numero di telefono è obbligatorio.',
-            'employee_phone.phone' => 'Il numero di telefono deve essere valido.',
-            'employee_phone.max' => 'Il numero di telefono non può superare i 20 caratteri.',
+            'employee_phone.regex' => 'Il numero di telefono deve essere valido.',
+            'employee_phone.size' => 'Il numero di telefono deve essere di 10 cifre.',
             'employee_phone.unique' => 'Questo numero di telefono è già registrato.',
 
             'employee_state.max' => 'Lo Stato di residenza non può superare i 50 caratteri.',
@@ -81,6 +82,8 @@ class StoreEmployeeRequest extends FormRequest
             'employee_img.image' => 'L\'immagine deve essere un file immagine valido.',
             'employee_img.mimes' => 'L\'immagine deve essere un file con formato: jpeg, png o jpg.',
             'employee_img.max' => 'L\'immagine non può superare i 2 MB.',  
+
+            
         ];
     }
 }

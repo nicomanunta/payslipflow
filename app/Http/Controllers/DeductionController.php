@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDeductionRequest;
 use App\Http\Requests\UpdateDeductionRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Deduction;
 
 class DeductionController extends Controller

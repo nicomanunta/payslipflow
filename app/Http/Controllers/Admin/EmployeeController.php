@@ -43,7 +43,21 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        // dati inseriti nel form
+        $form_data = $request->all();
+       
+        // richiesta nuovo dipendente
+        $employee = new Employee();
+        $employee->user_id = auth()->user()->id;
+        $slug = Str::slug($form_data['employee_name']. '-' .$form_data['employee_surname']);
+        $form_data['slug'] = $slug;
+
+        $employee->fill($form_data);
+        
+        $employee->save();
+
+        return redirect()->route('admin.employees.index');
+        
     }
 
     /**

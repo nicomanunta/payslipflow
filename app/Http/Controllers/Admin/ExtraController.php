@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreExtraRequest;
 use App\Http\Requests\UpdateExtraRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Extra;
 
 class ExtraController extends Controller
