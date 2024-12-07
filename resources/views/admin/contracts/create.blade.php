@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Crea contratto di {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
+                <h1>Crea contratto di {{$employees->employee_name}} {{$employees->employee_surname}}</h1>
             </div>
             <div class="col-12">
                 
@@ -30,8 +30,8 @@
                             <option value="Full-Time" {{in_array('Full-Time', old('contract_type', [])) ? 'selected' : ''}}>Full-Time</option>
                             <option value="Part-Time" {{in_array('Part-Time', old('contract_type', [])) ? 'selected' : ''}}>Part-Time</option>
                             <option value="Tempo indeterminato" {{in_array('Tempo indeterminato', old('contract_type', [] ? 'selected' : ''))}}>Tempo indeterminato</option>
-                            <option value="Tempo determinato" {{in_array('Tempo dterminato', old('contract_type', [])) ? 'selected' : ''}}>Tempo determinato</option>
-                            <option value="Lavoro a progetto" {{in_array('Lavoro a progetto', old('contract_type', [])) 'selected' : ''}}>Lavoro a progetto</option>
+                            <option value="Tempo determinato" {{in_array('Tempo determinato', old('contract_type', [])) ? 'selected' : ''}}>Tempo determinato</option>
+                            <option value="Lavoro a progetto" {{in_array('Lavoro a progetto', old('contract_type', [])) ? 'selected' : ''}}>Lavoro a progetto</option>
                             <option value="Freelance" {{in_array('Freelance', old('contract_type', [])) ? 'selected' : ''}}>Freelance</option>
                             <option value="Stage" {{in_array('Stage', old('contract_type', [])) ? 'selected' : ''}}>Stage</option>
                             <option value="Apprendistato" {{in_array('Apprendistato', old('contract_type', [])) ? 'selected' : ''}}>Apprendistato</option>

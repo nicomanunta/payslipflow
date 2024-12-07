@@ -27,9 +27,19 @@
                           <td>{{$employee->employee_email}}</td>
                           <td>{{$employee->employee_phone}}</td>
                           <td>
-                              profilo
-                              contratto
-                              busta
+                              <a href="{{route('admin.employees.show', $employee->id)}}"><button><i class="fa-solid fa-user"></i></button></a>
+                              @if($employee->contract) 
+                                  <!-- Link alla visualizzazione del contratto -->
+                                  <a href="{{ route('admin.employees.show', $employee->contract->id) }}">
+                                      <button><i class="fa-solid fa-file-contract"></i></button>
+                                  </a>
+                              @else
+                                  <!-- Link alla creazione del contratto -->
+                                  <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
+                                      <button><i class="fa-solid fa-plus"></i></button>
+                                  </a>
+                              @endif
+                              <a href="{{route('admin.payrolls.create', )}}"><button><i class="fa-solid fa-euro-sign"></i></button></a>
                           </td>
                         </tr>
                         @endforeach

@@ -31,7 +31,11 @@ class ContractController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $employees = Employee::all();
+        $contracts = Contract::where('employee_id', auth()->id())->get();
+
+        return view('admin.contracts.create', compact('users', 'employees', 'contracts'));
     }
 
     /**
