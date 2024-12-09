@@ -3,7 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Compila la busta paga per {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
+                @if (request()->has('employee_id') && $selectedEmployee = $employees->firstWhere('id', request()->input('employee_id')))
+                    <h1>Compila la busta paga di {{$employees->employee_name}} {{$employees->employee_surname}}</h1>    
+                @else
+                    <h1>Compila la busta paga </h1>      
+                @endif
             </div>
             <div class="col-12">
                 {{-- FORM CREATE PER TABELLA PAYROLLS & EXTRAS --}}
@@ -12,8 +16,12 @@
 
                     {{-- TABELLA PAYROLLS --}}
                     {{-- employee_id --}}
-                    <div class="form-group">
-                        <label for="employee_id">Dipendente</label>
+                    @if (request()->has('employee_id') && $selectedEmployee = $employees->firstWhere('id', request()->input('employee_id')))
+                        {{-- Se l'employee_id è passato nella query string --}}
+                        <input type="hidden" name="employee_id" value="{{ $selectedEmployee->id }}">
+                        <input type="text" class="form-control" value="{{ $selectedEmployee->employee_name }} {{ $selectedEmployee->employee_surname }}" disabled>
+                    @else
+                        {{-- Se l'employee_id non è passato, mostra il select --}}
                         <select name="employee_id" id="employee_id" class="form-control">
                             <option value="">Seleziona un dipendente</option>
                             @foreach ($employees as $employee)
@@ -22,10 +30,10 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('employee_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    @endif
+                    @error('employee_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
 
                     {{-- payroll_month --}}
                     <div class="form-group">
@@ -76,7 +84,7 @@
                     {{-- extra_thirteenth_salary --}}
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" name="extra_thirteenth_salary" id="extra_thirteenth_salary" value="1" 
-                        {{ old('extra_thirteenth_salary', $deduction->extra_thirteenth_salary) ? 'checked' : '' }}>
+                        {{ old('extra_thirteenth_salary') ? 'checked' : '' }}>
                         <label class="form-check-label" for="extra_thirteenth_salary">Tredicesima</label>
                         @error('extra_thirteenth_salary')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -86,7 +94,7 @@
                     {{-- extra_fourteenth_salary --}}
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" name="extra_fourteenth_salary" id="extra_fourteenth_salary" value="1" 
-                        {{ old('extra_fourteenth_salary', $deduction->extra_fourteenth_salary) ? 'checked' : '' }}>
+                        {{ old('extra_fourteenth_salary') ? 'checked' : '' }}>
                         <label class="form-check-label" for="extra_fourteenth_salary">Quattordicesima</label>
                         @error('extra_fourteenth_salary')
                             <div class="invalid-feedback">{{$message}}</div>

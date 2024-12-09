@@ -29,9 +29,24 @@ class PayrollController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $users = User::all();
+
+        // Controllo se 'employee_id' è presente nella richiesta
+        $employeeId = $request->get('employee_id');
+
+        if ($employeeId) {
+            // Recupero il dipendente solo se 'employee_id' è presente
+            $employees = Employee::findOrFail($employeeId);
+        } else {
+            // Altrimenti, prendo tutti i dipendenti
+            $employees = Employee::all();
+        }
+
+        $payrolls = Payroll::where('employee_id', auth()->id())->get();
+
+        return view('admin.payrolls.create', compact('users', 'employees', 'payrolls'));
     }
 
     /**

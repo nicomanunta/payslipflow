@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Crea contratto di {{$employees->employee_name}} {{$employees->employee_surname}}</h1>
+                <h1>Crea contratto di {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
             </div>
             <div class="col-12">
                 
@@ -25,18 +25,56 @@
 
                     {{--contract_type--}}
                     <div class="form-group">
-                        <label classe for="contract_type">Tipo di contratto</label>
-                        <select class="form-control" name="contract_type[]" id="contract_type" multiple required>
-                            <option value="Full-Time" {{in_array('Full-Time', old('contract_type', [])) ? 'selected' : ''}}>Full-Time</option>
-                            <option value="Part-Time" {{in_array('Part-Time', old('contract_type', [])) ? 'selected' : ''}}>Part-Time</option>
-                            <option value="Tempo indeterminato" {{in_array('Tempo indeterminato', old('contract_type', [] ? 'selected' : ''))}}>Tempo indeterminato</option>
-                            <option value="Tempo determinato" {{in_array('Tempo determinato', old('contract_type', [])) ? 'selected' : ''}}>Tempo determinato</option>
-                            <option value="Lavoro a progetto" {{in_array('Lavoro a progetto', old('contract_type', [])) ? 'selected' : ''}}>Lavoro a progetto</option>
-                            <option value="Freelance" {{in_array('Freelance', old('contract_type', [])) ? 'selected' : ''}}>Freelance</option>
-                            <option value="Stage" {{in_array('Stage', old('contract_type', [])) ? 'selected' : ''}}>Stage</option>
-                            <option value="Apprendistato" {{in_array('Apprendistato', old('contract_type', [])) ? 'selected' : ''}}>Apprendistato</option>
-                        </select>
+                        <label for="contract_type">Tipo di contratto</label><br>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Full-Time" id="contract_type_1" 
+                                {{ in_array('Full-Time', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_1">Full-Time</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Part-Time" id="contract_type_2"
+                                {{ in_array('Part-Time', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_2">Part-Time</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Tempo indeterminato" id="contract_type_3"
+                                {{ in_array('Tempo indeterminato', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_3">Tempo indeterminato</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Tempo determinato" id="contract_type_4"
+                                {{ in_array('Tempo determinato', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_4">Tempo determinato</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Lavoro a progetto" id="contract_type_5"
+                                {{ in_array('Lavoro a progetto', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_5">Lavoro a progetto</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Freelance" id="contract_type_6"
+                                {{ in_array('Freelance', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_6">Freelance</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Stage" id="contract_type_7"
+                                {{ in_array('Stage', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_7">Stage</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Apprendistato" id="contract_type_8"
+                                {{ in_array('Apprendistato', old('contract_type', [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_8">Apprendistato</label>
+                        </div>
                     </div>
+                    
 
                     {{--contract_level--}}
                     <div class="form-group">
@@ -103,8 +141,8 @@
 
                     {{--contract_end_date--}}
                     <div class="form-group">
-                        <label for="contract_end_date">Data inizio</label>
-                        <input class="form-control" type="date" name="contract_end_date" id="contract_end_date" placeholder="Data inizio" value="{{old('contract_end_date')}}">
+                        <label for="contract_end_date">Data fine</label>
+                        <input class="form-control" type="date" name="contract_end_date" id="contract_end_date" placeholder="Data fine" value="{{old('contract_end_date')}}">
                         @error('contract_end_date')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -147,6 +185,7 @@
                         @enderror
                     </div>
 
+                    <button type="submit">invia</button>
                 </form>
             </div>
         </div>

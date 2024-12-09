@@ -20,27 +20,35 @@
                         @foreach ($employees as $employee)
                             
                         <tr>
-                          <td>{{$employee->employee_name}}</td>
-                          <td>{{$employee->employee_surname}}</td>
-                          <td>{{$employee->employee_role}}</td>
-                          <td>{{$employee->age}}</td>
-                          <td>{{$employee->employee_email}}</td>
-                          <td>{{$employee->employee_phone}}</td>
-                          <td>
-                              <a href="{{route('admin.employees.show', $employee->id)}}"><button><i class="fa-solid fa-user"></i></button></a>
-                              @if($employee->contract) 
-                                  <!-- Link alla visualizzazione del contratto -->
-                                  <a href="{{ route('admin.employees.show', $employee->contract->id) }}">
-                                      <button><i class="fa-solid fa-file-contract"></i></button>
-                                  </a>
-                              @else
-                                  <!-- Link alla creazione del contratto -->
-                                  <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
-                                      <button><i class="fa-solid fa-plus"></i></button>
-                                  </a>
-                              @endif
-                              <a href="{{route('admin.payrolls.create', )}}"><button><i class="fa-solid fa-euro-sign"></i></button></a>
-                          </td>
+                            <td>{{$employee->employee_name}}</td>
+                            <td>{{$employee->employee_surname}}</td>
+                            <td>{{$employee->employee_role}}</td>
+                            <td>{{$employee->age}}</td>
+                            <td>{{$employee->employee_email}}</td>
+                            <td>{{$employee->employee_phone}}</td>
+                            <td>
+                                {{-- visualizzazione profilo + contratto + buste paga  --}}
+                                <a href="{{route('admin.employees.show', $employee->id)}}">
+                                    <button>
+                                        <i class="fa-solid fa-user"></i>
+                                    </button>
+                                </a>
+                                {{-- creazione di un nuovo contratto --}}
+                                @if($employee->contracts->isNotEmpty())    
+                                @else
+                                    <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
+                                        <button>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                    </a>
+                                @endif
+                                {{-- creazione busta paga --}}
+                                <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
+                                    <button>
+                                        <i class="fa-solid fa-euro-sign"></i>
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                       
