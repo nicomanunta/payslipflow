@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('contract_id');
             $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
-            $table->tinyInteger('dependent_family_members')->unsigned()->dafault(0);
-            $table->tinyInteger('dependent_children_under_24')->unsigned()->dafault(0);
-            $table->tinyInteger('dependent_children_over_24')->unsigned()->dafault(0);
-            $table->tinyInteger('dependent_children_with_disabilities')->unsigned()->dafault(0);
+            $table->tinyInteger('dependent_family_members')->unsigned()->default(0);
+            $table->tinyInteger('dependent_children_under_24')->unsigned()->default(0);
+            $table->tinyInteger('dependent_children_over_24')->unsigned()->default(0);
+            $table->tinyInteger('dependent_children_with_disabilities')->unsigned()->default(0);
             $table->timestamps();
         });
     }

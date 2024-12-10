@@ -48,14 +48,19 @@ class ContractController extends Controller
     public function store(StoreContractRequest $request){
 
         $form_data = $request->all();
-        $contract = new Contract();
 
-        $contract->contract_type = $request->input('contract_type');;
+        $contract = new Contract();
+        $contract->contract_type = $request->input('contract_type');
         $contract->employee_id = $form_data['employee_id'];
         $contract->user_id = auth()->user()->id;
 
         $contract->fill($form_data);
         $contract->save();
+
+        $deduction = new Deduction();
+        $deduction->contract_id = $contract->id;
+        $deduction->fill($form_data);
+        $deduction->save();
 
         return redirect()->route('admin.employees.show', ['employee' => $contract->employee_id]);
     }

@@ -28,7 +28,7 @@
                             <td>{{$employee->employee_phone}}</td>
                             <td>
                                 {{-- visualizzazione profilo + contratto + buste paga  --}}
-                                <a href="{{route('admin.employees.show', $employee->id)}}">
+                                <a href="{{route('admin.employees.show', ['employee' => $employee->id])}}">
                                     <button>
                                         <i class="fa-solid fa-user"></i>
                                     </button>

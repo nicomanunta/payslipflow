@@ -53,7 +53,6 @@ class EmployeeController extends Controller
         $form_data['slug'] = $slug;
 
         $employee->fill($form_data);
-        
         $employee->save();
 
         return redirect()->route('admin.employees.index');
@@ -65,10 +64,9 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        $employees = Employee::where('user_id', auth()->id())->get();
-
-
-        return view('admin.employees.show', compact('employees'));
+        $contract = $employee->contracts()->latest()->first();
+        $payroll = $employee->payrolls()->latest()->take(2)->get();
+        return view('admin.employees.show', compact('employee', 'contract', 'payroll'));
     }
 
     /**
