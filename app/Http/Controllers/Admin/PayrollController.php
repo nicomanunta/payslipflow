@@ -39,14 +39,17 @@ class PayrollController extends Controller
         if ($employeeId) {
             // Recupero il dipendente solo se 'employee_id' è presente
             $employees = Employee::findOrFail($employeeId);
+            $payrolls = Payroll::where('employee_id', $employeeId)->get();
         } else {
             // Altrimenti, prendo tutti i dipendenti
             $employees = Employee::all();
         }
 
-        $payrolls = Payroll::where('employee_id', auth()->id())->get();
+        $contract = Contract::where('employee_id', $employeeId)->latest()->first();
+        $deduction = Deduction::where('contract_id', $contract->id)->first();
 
-        return view('admin.payrolls.create', compact('users', 'employees', 'payrolls'));
+
+        return view('admin.payrolls.create', compact('users', 'employees', 'payrolls', 'contract', 'deduction'));
     }
 
     /**
@@ -54,7 +57,23 @@ class PayrollController extends Controller
      */
     public function store(StorePayrollRequest $request)
     {
-        //
+        $form_data = $request->all();
+
+        $employee = Employee::findOrFail($form_data['employee_id']);
+        $latestContract = $employee->contracts()->orderBy('start_date', 'desc')->first();
+
+        $payroll = new Payroll();
+        $payroll->employee_id = $employee->id;
+        $payroll->contract_id = $latestContract->id;
+        $payroll->fill($form_data);
+        $payroll->save();
+
+        $extra = new Extra();
+        $extra->payroll_id = $payroll->id;
+        $extra->fill($form_data);
+        $extra->save();
+
+        return redirect()->route('admin.employees.index');
     }
 
     /**

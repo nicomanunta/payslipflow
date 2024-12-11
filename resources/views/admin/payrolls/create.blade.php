@@ -118,8 +118,90 @@
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
+                    {{-- payroll_payroll_net_salary --}}
+                    <div class="form-group">
+                        <label for="payroll_payroll_net_salary">Salario netto (€)</label>
+                        <input type="number" id="payroll_net_salary" class="form-control" readonly disabled>
+                        <h1 id="payroll_net_salary">{{ old('payroll_net_salary', '€ 0,00') }}</h1>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary mt-3">Salva Busta Paga</button>
+
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const grossSalary = @json($contract->gross_salary ?? 0); // Salario lordo
+            const inpsTax = @json($contract->inps_tax ?? 0); // Tassa INPS
+            const municipalTax = @json($contract->municipal_tax ?? 0); // Tassa municipale
+            const regionalTax = @json($contract->regional_tax ?? 0); // Tassa regionale
+    
+            const weekdayOvertimeInput = document.getElementById('extra_weekday_overtime_hours');
+            const weekendOvertimeInput = document.getElementById('extra_weekend_overtime_hours');
+            const holidayOvertimeInput = document.getElementById('extra_holiday_overtime_hours');
+            const thirteenthCheckbox = document.getElementById('extra_thirteenth_salary');
+            const fourteenthCheckbox = document.getElementById('extra_fourteenth_salary');
+            const reimbursementInput = document.getElementById('extra_reimbursement_expenses');
+            const bonusInput = document.getElementById('bonus_rewards');
+            const netSalaryInput = document.getElementById('payroll_net_salary');
+    
+            function calculateNetSalary() {
+                // Convert time inputs (HH:MM) to total hours
+                const weekdayOvertime = convertTimeToDecimal(weekdayOvertimeInput.value);
+                const weekendOvertime = convertTimeToDecimal(weekendOvertimeInput.value);
+                const holidayOvertime = convertTimeToDecimal(holidayOvertimeInput.value);
+    
+                // Calcolo straordinari (esempio: €10/h per feriali, €15/h per weekend, €20/h per festivi)
+                const weekdayOvertimePay = weekdayOvertime * 10;
+                const weekendOvertimePay = weekendOvertime * 15;
+                const holidayOvertimePay = holidayOvertime * 20;
+    
+                // Rimborso e bonus
+                const reimbursement = parseFloat(reimbursementInput.value) || 0;
+                const bonus = parseFloat(bonusInput.value) || 0;
+    
+                // Salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
+                let totalGrossSalary = grossSalary + weekdayOvertimePay + weekendOvertimePay + holidayOvertimePay;
+                if (thirteenthCheckbox.checked) {
+                    totalGrossSalary += grossSalary / 12; // Tredicesima
+                }
+                if (fourteenthCheckbox.checked) {
+                    totalGrossSalary += grossSalary / 12; // Quattordicesima
+                }
+                totalGrossSalary += reimbursement + bonus;
+    
+                // Calcolo tasse
+                const totalTaxes = (totalGrossSalary * inpsTax / 100) +
+                                   (totalGrossSalary * municipalTax / 100) +
+                                   (totalGrossSalary * regionalTax / 100);
+    
+                // Salario netto
+                const netSalary = totalGrossSalary - totalTaxes;
+    
+                // Aggiorna il campo "payroll_net_salary"
+                netSalaryInput.value = netSalary.toFixed(2);
+            }
+    
+            function convertTimeToDecimal(time) {
+                const [hours, minutes] = time.split(':').map(Number);
+                return hours + minutes / 60;
+            }
+    
+            // Event listeners per calcolare dinamicamente il salario netto
+            weekdayOvertimeInput.addEventListener('change', calculateNetSalary);
+            weekendOvertimeInput.addEventListener('change', calculateNetSalary);
+            holidayOvertimeInput.addEventListener('change', calculateNetSalary);
+            thirteenthCheckbox.addEventListener('change', calculateNetSalary);
+            fourteenthCheckbox.addEventListener('change', calculateNetSalary);
+            reimbursementInput.addEventListener('input', calculateNetSalary);
+            bonusInput.addEventListener('input', calculateNetSalary);
+    
+            // Esegui un calcolo iniziale
+            calculateNetSalary();
+        });
+    </script>
+    
 @endsection
