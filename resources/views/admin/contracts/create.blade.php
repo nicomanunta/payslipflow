@@ -94,6 +94,15 @@
                         @enderror
                     </div>
 
+                    {{--contract_week_hours--}}
+                    <div class="form-group">
+                        <label class="" for="contract_week_hours">Ore settimanali</label>
+                        <input class="form-control" type="number" name="contract_week_hours" id="contract_week_hours" placeholder="Ore settimanali" min="0" value="{{old('contract_week_hours')}}" required>
+                        @error('contract_week_hours')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
                     {{--contract_vacation_days--}}
                     <div class="form-group">
                         <label for="contract_vacation_days">Ferie annuali</label>
@@ -167,23 +176,6 @@
                         @enderror
                     </div>
 
-                    {{-- dependent_children_over_24 --}}
-                    <div class="form-group">
-                        <label for="dependent_children_over_24">Figli a carico sopra i 24 anni </label>
-                        <input type="number" class="form-control" name="dependent_children_over_24" id="dependent_children_over_24" placeholder="Numero di figli a carico over 24 " value="{{old('dependent_children_over_24')}}">
-                        @error('dependent_children_over_24')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    {{-- dependent_children_with_disabilities --}}
-                    <div class="form-group">
-                        <label for="dependent_children_with_disabilities">Figli a carico con disabilità </label>
-                        <input type="number" class="form-control" name="dependent_children_with_disabilities" id="dependent_children_with_disabilities" placeholder="Numero di figli a carico con disabilità " value="{{old('dependent_children_with_disabilities')}}">
-                        @error('dependent_children_with_disabilities')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
 
                     <button type="submit">invia</button>
                 </form>

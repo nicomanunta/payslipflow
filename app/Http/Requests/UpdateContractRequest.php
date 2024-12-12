@@ -26,6 +26,7 @@ class UpdateContractRequest extends FormRequest
             'contract_type' => ['required', 'array'],
             'contract_level' => ['string', 'max:50'],
             'contract_gross_monthly_salary' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
+            'contract_week_hours' => ['required', 'numeric', 'min:0', 'max:40'],
             'contract_vacation_days' => ['integer', 'min:0', 'max:365'],
             'contract_inps_tax' => ['numeric', 'min:0', 'max:100'],
             'contract_surcharge_municipal' => ['numeric', 'min:0', 'max:100'],
@@ -46,6 +47,11 @@ class UpdateContractRequest extends FormRequest
 
             'contract_level.string' => 'Il livello del contratto deve essere valido.',
             'contract_level.max' => 'Il livello del contratto non può superare i 50 caratteri.',
+
+            'contract_gross_monthly_salary.required' => 'La rettribuzione mensile lorda è obbligatoria.',
+            'contract_gross_monthly_salary.numeric' => 'La retribuzione mensile lorda deve essere un numero valido.',
+            'contract_gross_monthly_salary.min' => 'La retribuzione mensile lorda non può essere negativo.',
+            'contract_gross_monthly_salary.max' => 'La retribuzione mensile lorda non può superare 99.999.999,99€.',
 
             'contract_gross_monthly_salary.required' => 'La rettribuzione mensile lorda è obbligatoria.',
             'contract_gross_monthly_salary.numeric' => 'La retribuzione mensile lorda deve essere un numero valido.',

@@ -26,6 +26,7 @@ class StoreContractRequest extends FormRequest
             'contract_type' => ['required', 'array'],
             'contract_level' => ['string', 'max:50'],
             'contract_gross_monthly_salary' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
+            'contract_week_hours' => ['required', 'numeric', 'min:0', 'max:40'],
             'contract_vacation_days' => ['integer', 'min:0', 'max:365'],
             'contract_inps_tax' => ['numeric', 'min:0', 'max:100'],
             'contract_surcharge_municipal' => ['numeric', 'min:0', 'max:100'],
@@ -51,6 +52,11 @@ class StoreContractRequest extends FormRequest
             'contract_gross_monthly_salary.numeric' => 'La retribuzione mensile lorda deve essere un numero valido.',
             'contract_gross_monthly_salary.min' => 'La retribuzione mensile lorda non può essere negativo.',
             'contract_gross_monthly_salary.max' => 'La retribuzione mensile lorda non può superare 99.999.999,99€.',
+
+            'contract_week_hours.required' => 'Le ore settimanali sono obbligatorie.',
+            'contract_week_hours.numeric' => 'Le ore settimanali devono essere un numero valido.',
+            'contract_week_hours.min' => 'Le ore settimanali non possono essere negative.',
+            'contract_week_hours.max' => 'Le ore settimnali non possono superare 40.',
 
             'contract_vacation_days.integer' => 'Il numero di ferie deve essere intero.',
             'contract_vacation_days.min' => 'Il numero di ferie non può essere negativo.',

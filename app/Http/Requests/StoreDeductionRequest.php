@@ -24,8 +24,7 @@ class StoreDeductionRequest extends FormRequest
         return [
             'dependent_family_members' => ['nullable', 'integer', 'min:0', 'max:100'],
             'dependent_children_under_24' => ['nullable', 'integer', 'min:0', 'max:100'],
-            'dependent_children_over_24' => ['nullable', 'integer', 'min:0', 'max:100'],
-            'dependent_children_with_disabilities' => ['nullable', 'integer', 'min:0', 'max:100'],
+            
         ];
     }
 
@@ -38,14 +37,6 @@ class StoreDeductionRequest extends FormRequest
             'dependent_children_under_24.integer' => 'Il numero dei figli a carico under 24 deve essere un numero intero.',
             'dependent_children_under_24.min' => 'Il numero dei figli a carico under 24 non può essere negativo.',
             'dependent_children_under_24.max' => 'Il numero dei figli a carico under 24 non può essere superiore a 100.',
-
-            'dependent_children_over_24.integer' => 'Il numero dei figli a carico over 24 deve essere un numero intero.',
-            'dependent_children_over_24.min' => 'Il numero dei figli a carico over 24 non può essere negativo.',
-            'dependent_children_over_24.max' => 'Il numero dei figli a carico over 24 non può essere superiore a 100.',
-
-            'dependent_children_with_disabilities.integer' => 'Il numero dei figli a carico con disabilità deve essere un numero intero.',
-            'dependent_children_with_disabilities.min' => 'Il numero dei figli a carico con disabilità non può essere negativo.',
-            'dependent_children_with_disabilities.max' => 'Il numero dei figli a carico con disabilità non può essere superiore a 100.',
 
         ];
     }

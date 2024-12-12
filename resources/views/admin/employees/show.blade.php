@@ -42,6 +42,8 @@
                         <br>
                         LORDO MENSILE: {{$contract->contract_gross_monthly_salary}}€
                         <br>
+                        ORE SETTIMANALI: {{$contract->contract_week_hours}}ore
+                        <br>
                         NUMERO DI FERIE: {{$contract->contract_vacation_days}}
                         <br>
                         PERCENTUALE INPS: {{$contract->contract_inps_tax}}%

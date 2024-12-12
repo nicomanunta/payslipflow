@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('contract_type')->nullable();
             $table->string('contract_level', 50)->nullable();
             $table->decimal('contract_gross_monthly_salary', 10, 2)->unsigned();
+            $table->tinyInteger('contract_week_hours')->unsigned()->default(40);
             $table->integer('contract_vacation_days')->unsigned()->nullable();
             $table->decimal('contract_inps_tax', 5, 2)->unsigned()->nullable();
             $table->decimal('contract_surcharge_municipal', 5, 2)->unsigned()->nullable();

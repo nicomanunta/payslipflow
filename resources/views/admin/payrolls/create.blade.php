@@ -122,7 +122,7 @@
                     <div class="form-group">
                         <label for="payroll_payroll_net_salary">Salario netto (€)</label>
                         <input type="number" id="payroll_net_salary" class="form-control" readonly disabled>
-                        <h1 id="payroll_net_salary">{{ old('payroll_net_salary', '€ 0,00') }}</h1>
+                        
                     </div>
 
 
@@ -134,10 +134,15 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const grossSalary = @json($contract->gross_salary ?? 0); // Salario lordo
-            const inpsTax = @json($contract->inps_tax ?? 0); // Tassa INPS
-            const municipalTax = @json($contract->municipal_tax ?? 0); // Tassa municipale
-            const regionalTax = @json($contract->regional_tax ?? 0); // Tassa regionale
+            const grossSalary = parseFloat(@json($contract->contract_gross_monthly_salary ?? 0)); // Salario lordo
+            const weeklyHours = parseFloat(@json($contract->contract_week_hours ?? 0)); // Ore settimanali
+            const inpsTax = parseFloat(@json($contract->contract_inps_tax ?? 0)); // Tassa INPS
+            const municipalTax = parseFloat(@json($contract->contract_surcharge_municipal ?? 0)); // Tassa municipale
+            const regionalTax = parseFloat(@json($contract->contract_surcharge_regional ?? 0)); // Tassa regionale
+
+            // calcolo ore mensili e paga oraria
+            const totalWorkingHoursInMonth = weeklyHours * 4.33; 
+            const hourlyRate = grossSalary / totalWorkingHoursInMonth; 
     
             const weekdayOvertimeInput = document.getElementById('extra_weekday_overtime_hours');
             const weekendOvertimeInput = document.getElementById('extra_weekend_overtime_hours');
@@ -155,9 +160,9 @@
                 const holidayOvertime = convertTimeToDecimal(holidayOvertimeInput.value);
     
                 // Calcolo straordinari (esempio: €10/h per feriali, €15/h per weekend, €20/h per festivi)
-                const weekdayOvertimePay = weekdayOvertime * 10;
-                const weekendOvertimePay = weekendOvertime * 15;
-                const holidayOvertimePay = holidayOvertime * 20;
+                const weekdayOvertimePay = weekdayOvertime * (hourlyRate * 1.25);
+                const weekendOvertimePay = weekendOvertime * (hourlyRate * 1.50);
+                const holidayOvertimePay = holidayOvertime * (hourlyRate * 2);
     
                 // Rimborso e bonus
                 const reimbursement = parseFloat(reimbursementInput.value) || 0;
@@ -166,12 +171,12 @@
                 // Salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
                 let totalGrossSalary = grossSalary + weekdayOvertimePay + weekendOvertimePay + holidayOvertimePay;
                 if (thirteenthCheckbox.checked) {
-                    totalGrossSalary += grossSalary / 12; // Tredicesima
+                    totalGrossSalary += grossSalary ; // Tredicesima
                 }
                 if (fourteenthCheckbox.checked) {
-                    totalGrossSalary += grossSalary / 12; // Quattordicesima
+                    totalGrossSalary += grossSalary; // Quattordicesima
                 }
-                totalGrossSalary += reimbursement + bonus;
+                totalGrossSalary += bonus;
     
                 // Calcolo tasse
                 const totalTaxes = (totalGrossSalary * inpsTax / 100) +
@@ -179,7 +184,7 @@
                                    (totalGrossSalary * regionalTax / 100);
     
                 // Salario netto
-                const netSalary = totalGrossSalary - totalTaxes;
+                const netSalary = totalGrossSalary - totalTaxes + reimbursement;
     
                 // Aggiorna il campo "payroll_net_salary"
                 netSalaryInput.value = netSalary.toFixed(2);

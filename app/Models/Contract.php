@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     
-    protected $fillable = ['employee_id', 'user_id', 'contract_name', 'contract_type', 'contract_level', 'contract_gross_monthly_salary', 'contract_vacation_days', 'contract_inps_tax', 'contract_surcharge_municipal', 'contract_surcharge_regional', 'contract_start_date', 'contract_end_date'];
+    protected $fillable = ['employee_id', 'user_id', 'contract_name', 'contract_type', 'contract_level', 'contract_gross_monthly_salary', 'contract_week_hours', 'contract_vacation_days', 'contract_inps_tax', 'contract_surcharge_municipal', 'contract_surcharge_regional', 'contract_start_date', 'contract_end_date'];
 
     // converto "contract_type" in array
     protected $casts = [
