@@ -139,6 +139,8 @@
             const inpsTax = parseFloat(@json($contract->contract_inps_tax ?? 0)); // Tassa INPS
             const municipalTax = parseFloat(@json($contract->contract_surcharge_municipal ?? 0)); // Tassa municipale
             const regionalTax = parseFloat(@json($contract->contract_surcharge_regional ?? 0)); // Tassa regionale
+            const dependentFamily = parseFloat(@json($deduction->deduction_family_members ?? 0)); // familiari a carico 
+            const dependentChildren = parseFloat(@json($deduction->deduction_children_members ?? 0)); // figli a carico
 
             // calcolo ore mensili e paga oraria
             const totalWorkingHoursInMonth = weeklyHours * 4.33; 
@@ -154,21 +156,21 @@
             const netSalaryInput = document.getElementById('payroll_net_salary');
     
             function calculateNetSalary() {
-                // Convert time inputs (HH:MM) to total hours
+                // convert time inputs (HH:MM) to total hours
                 const weekdayOvertime = convertTimeToDecimal(weekdayOvertimeInput.value);
                 const weekendOvertime = convertTimeToDecimal(weekendOvertimeInput.value);
                 const holidayOvertime = convertTimeToDecimal(holidayOvertimeInput.value);
     
-                // Calcolo straordinari (esempio: €10/h per feriali, €15/h per weekend, €20/h per festivi)
+                // calcolo straordinari (esempio: €10/h per feriali, €15/h per weekend, €20/h per festivi)
                 const weekdayOvertimePay = weekdayOvertime * (hourlyRate * 1.25);
                 const weekendOvertimePay = weekendOvertime * (hourlyRate * 1.50);
                 const holidayOvertimePay = holidayOvertime * (hourlyRate * 2);
     
-                // Rimborso e bonus
+                // rimborso e bonus
                 const reimbursement = parseFloat(reimbursementInput.value) || 0;
                 const bonus = parseFloat(bonusInput.value) || 0;
     
-                // Salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
+                // salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
                 let totalGrossSalary = grossSalary + weekdayOvertimePay + weekendOvertimePay + holidayOvertimePay;
                 if (thirteenthCheckbox.checked) {
                     totalGrossSalary += grossSalary ; // Tredicesima
@@ -178,15 +180,79 @@
                 }
                 totalGrossSalary += bonus;
     
-                // Calcolo tasse
-                const totalTaxes = (totalGrossSalary * inpsTax / 100) +
-                                   (totalGrossSalary * municipalTax / 100) +
-                                   (totalGrossSalary * regionalTax / 100);
+                // calcolo inps
+                const totalINPS = totalGrossSalary * inpsTax / 100;
+
+                // imponibile IRPEF 
+                const taxableIRPEF = (totalGrossSalary - totalINPS) * 12;
+                
+                // calcolo irpef
+                let totalIrpef = 0;
+
+                if (taxableIRPEF <= 28000) {
+                    // primo scaglione
+                    totalIrpef = taxableIRPEF * 23 / 100;
+
+                } else if( taxableIRPEF <= 50000) {
+                    // secondo scaglione
+                    totalIrpef = 6440 + ((taxableIRPEF - 28000) * 35 / 100);
+
+                } else {
+                    // terzo scaglione
+                    totalIrpef = 14140 + ((taxableIRPEF - 50000) * 43 / 100);
+
+                }
+
+                // calcolo detrazioni base
+                let basicDeduction = 0
+
+                if (taxableIRPEF <= 15000) {
+
+                    basicDeduction = 1955;
+
+                } else if(taxableIRPEF <= 28000) {
+                    
+                    basicDeduction = 1910 + 1190 * ((28000 - taxableIRPEF)/13000);
+
+                } else if(taxableIRPEF <= 50000) {
+
+                    basicDeduction = 1910 * ((50000 - taxableIRPEF) / 22000);
+
+                } else {
+                    basicDeduction = 0;
+                }
+
+                // calcolo detrazioni per familiari 
+                let familyDeduction = (750 * ((80000 - taxableIRPEF)/80000)) * dependentFamily;
+
+                // calcolo detrazioni per figli
+                let childrenDeduction = 0; 
+                if (dependentChildren > 0) {
+                    
+                    childrenDeduction = (950 + (950 * (dependentChildren - 1))) * ((95000 + (15000 * (dependentChildren - 1)) - taxableIRPEF)/(95000 + (15000 * (dependentChildren - 1))));
+
+                } 
+
+                // detrazione totali
+                let totalDeduction = basicDeduction + familyDeduction + childrenDeduction;
+
+                //irpef finale da pagare
+                let irpefToPay = totalIrpef - totalDeduction;
+
+                // CALCOLARE ADDIZIONALI REGIONALI E COMUNALI SUUL'IMPONIBILE IRPEF GIA RECUPERATI ALL'INIZIO DELLA FUNZIONE
+               
+
+
+
+                
+
+
+
+                // CALCOLO FINALE -> DA taxableIrpef TOGLIERE: irpefToPay, ADDIZIONALI REGIONALI E COMUNALI, DIVIDERE IL TUTTO PER 12 E SI OTTIENE IL NETTO MENSILE
+                // salario netto
+                const netSalary = taxableIRPEF - irpefToPay -   + reimbursement;
     
-                // Salario netto
-                const netSalary = totalGrossSalary - totalTaxes + reimbursement;
-    
-                // Aggiorna il campo "payroll_net_salary"
+                // aggiorna il campo "payroll_net_salary"
                 netSalaryInput.value = netSalary.toFixed(2);
             }
     
@@ -195,7 +261,7 @@
                 return hours + minutes / 60;
             }
     
-            // Event listeners per calcolare dinamicamente il salario netto
+            // event listeners per calcolare dinamicamente il salario netto
             weekdayOvertimeInput.addEventListener('change', calculateNetSalary);
             weekendOvertimeInput.addEventListener('change', calculateNetSalary);
             holidayOvertimeInput.addEventListener('change', calculateNetSalary);
@@ -204,7 +270,7 @@
             reimbursementInput.addEventListener('input', calculateNetSalary);
             bonusInput.addEventListener('input', calculateNetSalary);
     
-            // Esegui un calcolo iniziale
+            // esegui un calcolo iniziale
             calculateNetSalary();
         });
     </script>
