@@ -241,16 +241,14 @@
 
                 // CALCOLARE ADDIZIONALI REGIONALI E COMUNALI SUUL'IMPONIBILE IRPEF GIA RECUPERATI ALL'INIZIO DELLA FUNZIONE
                
+                const surchargeMunicipal = taxableIRPEF *  municipalTax / 100;
+                const surchargeRegional = taxableIRPEF * regionalTax / 100;
 
-
-
+                const totalSurcharge = surchargeMunicipal + surchargeRegional;
                 
-
-
-
                 // CALCOLO FINALE -> DA taxableIrpef TOGLIERE: irpefToPay, ADDIZIONALI REGIONALI E COMUNALI, DIVIDERE IL TUTTO PER 12 E SI OTTIENE IL NETTO MENSILE
                 // salario netto
-                const netSalary = taxableIRPEF - irpefToPay -   + reimbursement;
+                const netSalary = (taxableIRPEF - irpefToPay - totalSurcharge) / 12  + reimbursement;
     
                 // aggiorna il campo "payroll_net_salary"
                 netSalaryInput.value = netSalary.toFixed(2);
