@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('payroll_month', 7);
             $table->date('payroll_day_paid');
             $table->decimal('payroll_net_salary', 10, 2)->unsigned();
-            $table->decimal('payroll_gross_salary', 10, 2)->unsigned();
+            $table->decimal('payroll_taxable_irpef', 10, 2)->unsigned();
             $table->timestamps();
         });
     }

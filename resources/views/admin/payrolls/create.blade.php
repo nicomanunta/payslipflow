@@ -50,7 +50,7 @@
                         <input type="date" class="form-control" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
                     </div>
                     {{-- payroll_net_salary --}}
-                    {{-- payroll_gross_salary --}}
+                    {{-- payroll_taxable_irpef --}}
 
 
                     {{-- TABELLA EXTRAS --}}
@@ -110,24 +110,41 @@
                         @enderror
                     </div>
 
-                    {{-- bonus_rewards --}}
+                    {{-- extra_bonus_rewards --}}
                     <div class="form-group">
-                        <label for="bonus_rewards">Bonus o premi</label>
-                        <input class="form-control" type="number" step="0.01" min="0" name="bonus_rewards" id="bonus_rewards" placeholder="Bonus o premi" value="{{old('bonus_rewards')}}">
-                        @error('bonus_rewards')
+                        <label for="extra_bonus_rewards">Bonus o premi</label>
+                        <input class="form-control" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
+                        @error('extra_bonus_rewards')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
 
-                    {{-- payroll_gross_salary --}}
+                    {{-- extra_notes --}}
+                    <div class="form-group">
+                        <label for="extra_notes">Note</label>
+                        <textarea name="extra_notes" id="extra_notes" class="form-control" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
+                        @error('extra_notes')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- payroll_taxable_irpef --}}
+                    <div class="form-group">
+                        <label for="payroll_taxable_irpef">Imponibile irpef (€)</label>
+                        <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="form-control" readonly>    
+                        @error('payroll_taxable_irpef')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror 
+                    </div>
                     
-                    <input type="number" id="payroll_gross_salary" class="form-control" hidden>  
                 
-                    {{-- payroll_payroll_net_salary --}}
+                    {{-- payroll_net_salary --}}
                     <div class="form-group">
                         <label for="payroll_net_salary">Salario netto (€)</label>
-                        <input type="number" id="payroll_net_salary" class="form-control" readonly disabled>
-                        
+                        <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="form-control" readonly >  
+                        @error('payroll_net_salary')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror 
                     </div>
 
 
@@ -144,6 +161,7 @@
             const inpsTax = parseFloat(@json($contract->contract_inps_tax ?? 0)); // Tassa INPS
             const municipalTax = parseFloat(@json($contract->contract_surcharge_municipal ?? 0)); // Tassa municipale
             const regionalTax = parseFloat(@json($contract->contract_surcharge_regional ?? 0)); // Tassa regionale
+            const contractStartDate = @json($contract->contract_start_date ?? 0); // data di assunzione
             const dependentFamily = parseFloat(@json($deduction->dependent_family_members ?? 0)); // familiari a carico 
             const dependentChildren = parseFloat(@json($deduction->dependent_children_members ?? 0)); // figli a carico
 
@@ -157,8 +175,8 @@
             const thirteenthCheckbox = document.getElementById('extra_thirteenth_salary');
             const fourteenthCheckbox = document.getElementById('extra_fourteenth_salary');
             const reimbursementInput = document.getElementById('extra_reimbursement_expenses');
-            const bonusInput = document.getElementById('bonus_rewards');
-            const grossSalaryInput = document.getElementById('payroll_gross_salary');
+            const bonusInput = document.getElementById('extra_bonus_rewards');
+            const grossSalaryInput = document.getElementById('payroll_taxable_irpef');
             const netSalaryInput = document.getElementById('payroll_net_salary');
     
             function calculateNetSalary() {
@@ -175,20 +193,56 @@
                 // rimborso e bonus
                 const reimbursement = parseFloat(reimbursementInput.value) || 0;
                 const bonus = parseFloat(bonusInput.value) || 0;
+                console.log('i bonus sono di '+ bonus);
+
                 
                 // salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
                 let totalGrossSalary = grossSalary + weekdayOvertimePay + weekendOvertimePay + holidayOvertimePay;
+
+
+                // CALCOLO TREDICESIMA e QUATTORDICESIMA
+                let currentDate = new Date();
+                let contractStartDateObj = new Date(contractStartDate);
+                console.log('data di oggi ' + currentDate);
+                console.log('data di assunzione ' + contractStartDateObj);
+
+
+                let monthsWorked = (currentDate.getFullYear() - contractStartDateObj.getFullYear()) * 12;
+                monthsWorked += currentDate.getMonth() - contractStartDateObj.getMonth();
+
+                console.log('mesi di assunzione ' + monthsWorked);
+
+
                 if (thirteenthCheckbox.checked) {
-                    totalGrossSalary += grossSalary ; 
+                    if (monthsWorked >= 12) {
+                        // Se il dipendente ha lavorato per almeno 12 mesi, assegna la tredicesima completa
+                        totalGrossSalary += grossSalary;
+                    } else {
+                        // Se il dipendente ha lavorato meno di 12 mesi, calcola la parte proporzionale
+                        let thirteenthPart = grossSalary * (monthsWorked / 12);
+                        totalGrossSalary += thirteenthPart;
+                        console.log('tredicesima ' + thirteenthPart);
+                        
+                    }
                 }
                 if (fourteenthCheckbox.checked) {
-                    totalGrossSalary += grossSalary; 
+                    if (monthsWorked >= 12) {
+                        // Se il dipendente ha lavorato per almeno 12 mesi, assegna la tredicesima completa
+                        totalGrossSalary += grossSalary;
+                    } else {
+                        // Se il dipendente ha lavorato meno di 12 mesi, calcola la parte proporzionale
+                        let thirteenthPart = grossSalary * (monthsWorked / 12);
+                        totalGrossSalary += thirteenthPart;
+                    }
                 }
+
                 totalGrossSalary += bonus;
+                console.log(totalGrossSalary);
+
     
                 // calcolo inps
                 const totalINPS = totalGrossSalary * inpsTax / 100;
-                console.log();
+                
 
 
                 // inizializza imponibile IRPEF annuale
@@ -206,7 +260,7 @@
                     // recupera gli imponibili mensili delle buste paghe salvate
                     let totalGrossFromPayrolls = 0;
                     savedPayrolls.forEach(payroll => {
-                        totalGrossFromPayrolls += payroll.payroll_gross_salary;
+                        totalGrossFromPayrolls += payroll.payroll_taxable_irpef;
                     });
 
                     // calcola la media degli imponibili mensili (esistenti + corrente)
@@ -220,7 +274,7 @@
                     let totalGrossFromLast11Payrolls = 0;
                     const last11Payrolls = savedPayrolls.slice(-11); // ultimi 11 record
                     last11Payrolls.forEach(payroll => {
-                        totalGrossFromLast11Payrolls += payroll.payroll_gross_salary;
+                        totalGrossFromLast11Payrolls += payroll.payroll_taxable_irpef;
                     });
 
                     // aggiungi l'imponibile mensile attuale

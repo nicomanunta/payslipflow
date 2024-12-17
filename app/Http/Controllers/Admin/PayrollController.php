@@ -59,8 +59,12 @@ class PayrollController extends Controller
     {
         $form_data = $request->all();
 
+        $form_data['extra_reimbursement_expenses'] = $form_data['extra_reimbursement_expenses'] ?? 0;
+        $form_data['extra_bonus_rewards'] = $form_data['extra_bonus_rewards'] ?? 0;
+        
+        // dd($form_data);
         $employee = Employee::findOrFail($form_data['employee_id']);
-        $latestContract = $employee->contracts()->orderBy('start_date', 'desc')->first();
+        $latestContract = $employee->contracts()->orderBy('contract_start_date', 'desc')->first();
 
         $payroll = new Payroll();
         $payroll->employee_id = $employee->id;

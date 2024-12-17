@@ -21,7 +21,8 @@ return new class extends Migration
             $table->boolean('extra_thirteenth_salary')->default(false);
             $table->boolean('extra_fourteenth_salary')->default(false);
             $table->decimal('extra_reimbursement_expenses', 8, 2)->unsigned()->default(0);
-            $table->decimal('bonus_rewards', 8, 2)->unsigned()->default(0);
+            $table->decimal('extra_bonus_rewards', 8, 2)->unsigned()->default(0);
+            $table->text('extra_notes')->nullable();
             $table->timestamps();
         });
     }

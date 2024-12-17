@@ -28,7 +28,8 @@ class StoreExtraRequest extends FormRequest
             'extra_thirteenth_salary' => ['nullable', 'boolean'],
             'extra_fourteenth_salary' => ['nullable', 'boolean'],
             'extra_reimbursement_expenses' => ['nullable', 'numeric', 'min:0', 'max:999999.99'],
-            'bonus_rewards' => ['nullable', 'numeric', 'min:0', 'max:999999.99'],
+            'extra_bonus_rewards' => ['nullable', 'numeric', 'min:0', 'max:999999.99'],
+            'extra_notes' => ['nullable', 'string'],
         ];
     }
     public function messages(){
@@ -43,9 +44,11 @@ class StoreExtraRequest extends FormRequest
 
             'extra_fourteenth_salary.boolean' => 'Spunta l\'opzione se il campo "Quattordicesima" è presente.',
 
-            'bonus_rewards.numeric' => 'I bonus e i premi devono essere dei numeri validi.', 
-            'bonus_rewards.min' => 'I bonus e i premi non possono essere numeri negativi.', 
-            'bonus_rewards.max' => 'I numeri e i premi non possono essere superiori a 999999.99.',  
+            'extra_bonus_rewards.numeric' => 'I bonus e i premi devono essere dei numeri validi.', 
+            'extra_bonus_rewards.min' => 'I bonus e i premi non possono essere numeri negativi.', 
+            'extra_bonus_rewards.max' => 'I numeri e i premi non possono essere superiori a 999999.99.',  
+
+            'extra_notes.string' =>'Le note devono essere un testo valido.';
         ];
     }
 }
