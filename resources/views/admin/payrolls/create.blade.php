@@ -158,7 +158,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const grossSalary = parseFloat(@json($contract->contract_gross_monthly_salary ?? 0)); // Salario lordo
             const weeklyHours = parseFloat(@json($contract->contract_week_hours ?? 0)); // Ore settimanali
-            const inpsTax = parseFloat(@json($contract->contract_inps_tax ?? 0)); // Tassa INPS
             const municipalTax = parseFloat(@json($contract->contract_surcharge_municipal ?? 0)); // Tassa municipale
             const regionalTax = parseFloat(@json($contract->contract_surcharge_regional ?? 0)); // Tassa regionale
             const contractStartDate = @json($contract->contract_start_date ?? 0); // data di assunzione
@@ -241,8 +240,10 @@
 
     
                 // calcolo inps
+                const inpsTax = 9.19;
                 const totalINPS = totalGrossSalary * inpsTax / 100;
                 
+                console.log('tassa inps ' + inpsTax );
 
 
                 // inizializza imponibile IRPEF annuale

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->decimal('contract_gross_monthly_salary', 10, 2)->unsigned();
             $table->tinyInteger('contract_week_hours')->unsigned()->default(40);
             $table->integer('contract_vacation_days')->unsigned()->nullable();
-            $table->decimal('contract_inps_tax', 5, 2)->unsigned()->nullable();
             $table->decimal('contract_surcharge_municipal', 5, 2)->unsigned()->nullable();
             $table->decimal('contract_surcharge_regional', 5, 2)->unsigned()->nullable();
             $table->date('contract_start_date');

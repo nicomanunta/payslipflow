@@ -6,15 +6,21 @@ use App\Http\Controllers\Admin\ContractController;
 use App\Http\Controllers\Admin\PayrollController;
 use App\Http\Controllers\Admin\ExtraController;
 use App\Http\Controllers\DeductionController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Employee;
+use App\Models\Payroll;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $activeEmployeesCount = Employee::where('employee_status', 'Attivo')->count();
+    $activePayrollsCount = Payroll::all()->count();
+    return view('dashboard', compact('activeEmployeesCount', 'activePayrollsCount'));
+})->name('dashboard');
 
 //rotte crud
 Route::middleware(['auth', 'verified'])->name('admin.')->group(function(){

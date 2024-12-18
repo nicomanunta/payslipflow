@@ -16,6 +16,7 @@ use App\Models\User;
 
 class EmployeeController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

@@ -21,7 +21,7 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        $payrolls = Payroll::all();
+        $payrolls = Payroll::with('employee')->get();
 
         return view('admin.payrolls.index', compact('payrolls'));
     }
@@ -42,7 +42,7 @@ class PayrollController extends Controller
             $payrolls = Payroll::where('employee_id', $employeeId)->get();
         } else {
             // Altrimenti, prendo tutti i dipendenti
-            $employees = Employee::all();
+            $employees = Employee::where('employee_status', 'Attivo')->get();;
         }
 
         $contract = Contract::where('employee_id', $employeeId)->latest()->first();
@@ -85,7 +85,7 @@ class PayrollController extends Controller
      */
     public function show(Payroll $payroll)
     {
-        //
+        
     }
 
     /**
@@ -93,7 +93,18 @@ class PayrollController extends Controller
      */
     public function edit(Payroll $payroll)
     {
-        //
+
+        // Recupera il dipendente associato alla busta paga
+        $employee = $payroll->employee;
+
+        // Recupera il contratto del dipendente
+        $contract = Contract::where('employee_id', $employee->id)->latest()->first();
+
+        // Recupera le eventuali deduzioni associate al contratto
+        $deduction = Deduction::where('contract_id', $contract->id)->first();
+
+        // Passa alla vista tutti i dati necessari
+        return view('admin.payrolls.edit', compact('payroll', 'employee', 'contract', 'deduction'));
     }
 
     /**
@@ -101,7 +112,7 @@ class PayrollController extends Controller
      */
     public function update(UpdatePayrollRequest $request, Payroll $payroll)
     {
-        //
+        
     }
 
     /**

@@ -9,7 +9,7 @@
                     <div class="card" style="width: 100%; min-height: 200px;">
                         <div class="card-body">
                           <h2 class="card-title">Dipendenti</h2>
-                          <h4>Dipendenti totali: </h4>
+                          <h4>Dipendenti totali: {{$activeEmployeesCount}}</h4>
                           <p class="text-subtitle text-body-secondary">premi per accedere all'elenco</p>
                           <a href="{{route('admin.employees.create')}}" class="card-link">Aggiungi un dipendente</a>
 
@@ -23,9 +23,9 @@
                     <div class="card" style="width: 100%; min-height: 200px;" >
                         <div class="card-body">
                           <h2 class="card-title">Buste paga</h2>
-                          <h4>Buste paga totali: </h4>
+                          <h4>Buste paga totali: {{$activePayrollsCount}}</h4>
                           <p class="text-subtitle text-body-secondary">premi per accedere all'elenco</p>
-                          <a href="{{route('admin.payrolls.create')}}" class="card-link">Crea una nuova busta paga</a>
+                          <a href="{{route('admin.employees.index')}}" class="card-link">Crea una nuova busta paga</a>
                         </div>
                     </div>
                 </a>

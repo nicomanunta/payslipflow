@@ -35,6 +35,11 @@
                                 </a>
                                 {{-- creazione di un nuovo contratto --}}
                                 @if($employee->contracts->isNotEmpty())    
+                                    <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
+                                        <button>
+                                            <i class="fa-solid fa-euro-sign"></i>
+                                        </button>
+                                    </a>
                                 @else
                                     <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
                                         <button>
@@ -43,11 +48,6 @@
                                     </a>
                                 @endif
                                 {{-- creazione busta paga --}}
-                                <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
-                                    <button>
-                                        <i class="fa-solid fa-euro-sign"></i>
-                                    </button>
-                                </a>
                             </td>
                         </tr>
                         @endforeach

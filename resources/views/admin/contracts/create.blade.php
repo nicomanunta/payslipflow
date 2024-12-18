@@ -112,15 +112,6 @@
                         @enderror
                     </div>
 
-                    {{--contract_inps_tax--}}
-                    <div class="form-group">
-                        <label for="contract_inps_tax">Aliquota INPS &#40;%&#41;</label>
-                        <input class="form-control" type="number" name="contract_inps_tax" id="contract_inps_tax" placeholder="Percentuale aliquota INPS" step="0.01" min="0" max="100" value="{{old('contract_inps_tax')}}">
-                        @error('contract_inps_tax')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
                     {{--contract_surcharge_regional--}}
                     <div class="form-group">
                         <label for="contract_surcharge_regional">Addizionale Regionale &#40;%&#41;</label>

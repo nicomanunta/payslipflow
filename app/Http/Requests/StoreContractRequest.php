@@ -28,7 +28,6 @@ class StoreContractRequest extends FormRequest
             'contract_gross_monthly_salary' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
             'contract_week_hours' => ['required', 'numeric', 'min:0', 'max:40'],
             'contract_vacation_days' => ['integer', 'min:0', 'max:365'],
-            'contract_inps_tax' => ['numeric', 'min:0', 'max:100'],
             'contract_surcharge_municipal' => ['numeric', 'min:0', 'max:100'],
             'contract_surcharge_regional' => ['numeric', 'min:0', 'max:100'],
             'contract_start_date' => ['required', 'date'],
@@ -61,10 +60,6 @@ class StoreContractRequest extends FormRequest
             'contract_vacation_days.integer' => 'Il numero di ferie deve essere intero.',
             'contract_vacation_days.min' => 'Il numero di ferie non può essere negativo.',
             'contract_vacation_days.max' => 'Il numero di ferie non può superare 365 giorni.',
-
-            'contract_inps_tax.numeric' => 'L\'aliquota INPS deve essere un numero valido.',
-            'contract_inps_tax.min' => 'L\'aliquota INPS non può essere negativa.',
-            'contract_inps_tax.max' => 'L\'aliquota INPS non può superare il 100%.',
 
             'contract_surcharge_municipal.numeric' => 'L\'addizionale comunale deve essere un numero valido.',
             'contract_surcharge_municipal.min' => 'L\'addizionale comunale non può essere negativa.',
