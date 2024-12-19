@@ -5,6 +5,22 @@
             <div class="col-12">
                 {{-- DATI TABELLA EMPLOYEES --}}
                 <h1>Profilo {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
+
+                @if($employee->contracts->isNotEmpty())    
+                    {{-- creazione busta paga --}}
+                    <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
+                        <button class="my-3">
+                            crea busta paga
+                        </button>
+                    </a>
+                @else
+                    {{-- creazione di un nuovo contratto --}}
+                    <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
+                        <button class="my-3">
+                            aggiungi contratto
+                        </button>
+                    </a>
+                @endif
                 <p>
                     EMAIL:{{$employee->employee_email}}
                     <br>
@@ -24,7 +40,7 @@
                     <br>
                     DATA DI ASSUNZIONE:{{$employee->employee_hiring_date}}
                     <br>
-                    FOTO: <img src="{{ asset('storage/' . $employee->employee_img) }}" alt="Foto del dipendente">
+                    FOTO: <img width="20%" src="{{ asset('storage/' . $employee->employee_img) }}" alt="Foto del dipendente">
 
                 </p>
             </div>
@@ -47,8 +63,6 @@
                         <br>
                         NUMERO DI FERIE: {{$contract->contract_vacation_days}}
                         <br>
-                        PERCENTUALE INPS: {{$contract->contract_inps_tax}}%
-                        <br>
                         PERCENTUALE ADDIZIONALE COMUNALE: {{$contract->contract_surcharge_municipal}}%
                         <br>
                         PERCENTUALE ADDIZIONALE REGIONALE: {{$contract->contract_surcharge_regional}}%
@@ -64,13 +78,13 @@
                 @if ($payroll)
                     @foreach ($payroll as $item)
                         <p>
-                            {{$item->payroll_month}}
+                            MESE: {{$item->payroll_month}}
                             <br>
-                            {{$item->payroll_day_paid}}
+                            DATA DI PAGAMENTO: {{$item->payroll_day_paid}}
                             <br>
-                            {{$item->payroll_net_salary}}
+                            SALARIO NETTO: {{$item->payroll_net_salary}}
                             <br>
-                            {{$item->payroll_gross_salary}}
+                            IMPONIBILE IRPEF: {{$item->payroll_taxable_irpef}}
                         </p>
                     @endforeach
                 @endif

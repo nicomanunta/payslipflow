@@ -21,7 +21,7 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        $payrolls = Payroll::with('employee')->get();
+        $payrolls = Payroll::with('employee')->latest()->get();
 
         return view('admin.payrolls.index', compact('payrolls'));
     }

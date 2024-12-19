@@ -24,7 +24,7 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         
-        $employees = Employee::all();
+        $employees = Employee::latest()->get();
 
         return view('admin.employees.index', compact('employees'));
     }
