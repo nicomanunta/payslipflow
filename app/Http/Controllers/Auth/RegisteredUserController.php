@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -39,13 +40,19 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $userImgPath = null;
+        if ($request->hasFile('user_img')) {
+            $userImgPath = $request->file('user_img')->store('user_img', 'public');
+            
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'user_img' => $request->user_img,
+            'user_img' => $userImgPath,
             'legal_city' => $request->legal_city,
-            'zip_code' => $request->phone,
+            'zip_code' => $request->zip_code,
             'password' => Hash::make($request->password),
         ]);
 

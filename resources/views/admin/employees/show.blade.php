@@ -24,7 +24,8 @@
                     <br>
                     DATA DI ASSUNZIONE:{{$employee->employee_hiring_date}}
                     <br>
-                    FOTO:{{$employee->employee_img}}
+                    FOTO: <img src="{{ asset('storage/' . $employee->employee_img) }}" alt="Foto del dipendente">
+
                 </p>
             </div>
             <div class="col-12">

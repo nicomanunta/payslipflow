@@ -13,6 +13,7 @@ use App\Models\Payroll;
 use App\Models\Deduction;
 use App\Models\Extra;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -46,7 +47,15 @@ class EmployeeController extends Controller
     {
         // dati inseriti nel form
         $form_data = $request->all();
-       
+
+        // salvataggio immagine se presente
+        $employeeImgPath = null;
+        if ($request->hasFile('employee_img')) {
+            // salva img nella cartella 'employee_img' 
+            $employeeImgPath = $request->file('employee_img')->store('employee_img', 'public');
+            $form_data['employee_img'] = $employeeImgPath;  // aggiungi il percorso dell'immagine ai dati
+        }
+        
         // richiesta nuovo dipendente
         $employee = new Employee();
         $employee->user_id = auth()->user()->id;

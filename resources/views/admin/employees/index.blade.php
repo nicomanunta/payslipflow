@@ -7,6 +7,7 @@
                 <table class="table">
                     <thead>
                       <tr>
+                        <th scope="col">Foto</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Cognome</th>
                         <th scope="col">Ruolo</th>
@@ -20,7 +21,11 @@
                         @foreach ($employees as $employee)
                             
                         <tr>
-                            <td>{{$employee->employee_name}}</td>
+                            <td>
+                                <img class="employee-img" src="{{ $employee->employee_img ? asset('storage/' . $employee->employee_img) : URL::asset('/img/profilo-vuoto.jpeg') }}" alt="">   
+                            </td>
+                            
+                            <td class="">{{$employee->employee_name}}</td>
                             <td>{{$employee->employee_surname}}</td>
                             <td>{{$employee->employee_role}}</td>
                             <td>{{$employee->age}}</td>
