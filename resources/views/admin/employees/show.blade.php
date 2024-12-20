@@ -5,20 +5,20 @@
             <div class="col-12">
                 {{-- DATI TABELLA EMPLOYEES --}}
                 <h1>Profilo {{$employee->employee_name}} {{$employee->employee_surname}}</h1>
-
+                <a href="{{route('admin.employees.edit', ['employee' => $employee->id])}}">
+                    <button class="m-3">modifica profilo</button></a>
                 @if($employee->contracts->isNotEmpty())    
+                    {{-- modifica contratto --}}
+                    <a href="{{route('admin.contracts.edit', ['contract' => $employee->contracts->last()->id])}}">
+                        <button class="m-3">modifica contratto</button></a>
                     {{-- creazione busta paga --}}
                     <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
-                        <button class="my-3">
-                            crea busta paga
-                        </button>
+                        <button class="my-3">crea busta paga</button>
                     </a>
                 @else
                     {{-- creazione di un nuovo contratto --}}
                     <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
-                        <button class="my-3">
-                            aggiungi contratto
-                        </button>
+                        <button class="my-3">aggiungi contratto</button>
                     </a>
                 @endif
                 <p>

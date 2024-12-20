@@ -59,7 +59,7 @@ class EmployeeController extends Controller
         // richiesta nuovo dipendente
         $employee = new Employee();
         $employee->user_id = auth()->user()->id;
-        $slug = Str::slug($form_data['employee_name']. '-' .$form_data['employee_surname']);
+        $slug = Str::slug($form_data['employee_name']. '-' .$form_data['employee_surname']. '-' .Employee::count());
         $form_data['slug'] = $slug;
 
         $employee->fill($form_data);
@@ -84,7 +84,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $users = User::all();
+
+        return view('admin.employees.edit', compact('users', 'employee'));
     }
 
     /**
@@ -92,7 +94,26 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $form_data = $request->all();
+
+        if ($request->hasFile('employee_img')) {
+            // cancella l'immagine precedente se esiste
+            if ($employee->employee_img) {
+                Storage::disk('public')->delete($employee->employee_img);
+            }
+            // salva la nuova immagine
+            $employeeImgPath = $request->file('employee_img')->store('employee_img', 'public');
+            $form_data['employee_img'] = $employeeImgPath;
+        }
+
+        // aggiorna slug
+        if (isset($form_data['employee_name']) || isset($form_data['employee_surname'])) {
+            $form_data['slug'] = Str::slug($form_data['employee_name'] . '-' . $form_data['employee_surname']. '-' .Employee::count());
+        }
+        $employee->update($form_data);
+
+        return redirect()->route('admin.employees.index');
+            
     }
 
     /**

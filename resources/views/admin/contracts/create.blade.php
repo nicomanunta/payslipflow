@@ -161,7 +161,7 @@
                     {{-- dependent_children_under_24 --}}
                     <div class="form-group">
                         <label for="dependent_children_under_24">Figli a carico sotto i 24 anni </label>
-                        <input type="number" class="form-control" name="dependet_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24 " value="{{old('dependent_children_under_24')}}">
+                        <input type="number" class="form-control" name="dependent_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24 " value="{{old('dependent_children_under_24')}}">
                         @error('dependent_children_under_24')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror

@@ -69,7 +69,7 @@ class ContractController extends Controller
      */
     public function show(Contract $contract)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +77,12 @@ class ContractController extends Controller
      */
     public function edit(Contract $contract)
     {
-        //
+        $users = User::all();
+
+        $employee = $contract->employee;
+        $deduction = $contract->deduction;
+
+        return view('admin.contracts.edit', compact('users', 'employee', 'contract', 'deduction'));
     }
 
     /**
@@ -85,7 +90,14 @@ class ContractController extends Controller
      */
     public function update(UpdateContractRequest $request, Contract $contract)
     {
-        //
+        $form_data = $request->all();
+
+        $contract->update($form_data);
+
+        $deduction = $contract->deduction;
+        $deduction->update($form_data);
+
+        return redirect()->route('admin.employees.show', ['employee' => $contract->employee_id]);
     }
 
     /**

@@ -7,8 +7,9 @@
             </div>
             <div class="col-12">
                 {{-- FORM EDIT PER TABELLA EMPLOYEES --}}
-                <form action="{{route('adimin.employee.update', ['employee' => $employee->id])}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.employees.update', ['employee' => $employee->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     {{--employee_name--}}
                     <div class="form-group">
@@ -124,6 +125,9 @@
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
+
+                    <button type="submit">invia</button>
+
                     
                 </form>
             </div>

@@ -7,16 +7,16 @@
             </div>
             <div class="col-12">
                 {{-- FORM EDIT PER TABELLA CONTRACTS & DEDUCTIONS --}}
-                <form action="{{route('admin.contracts.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.contracts.update', ['contract' => $contract->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
-
+                    @method('PUT')
                     {{-- TABELLA CONTRACTS --}}
                     <input type="hidden" name="employee_id" value="{{ $employee->id }}">
                     
                     {{--contract_name--}}
                     <div class="form-group">
                         <label class="" for="contract_name">Nome del contratto</label>
-                        <input class="form-control" type="text" name="contract_name" id="contract_name" placeholder="Nome | es. CCNL Metalmeccanico" value="{{old('contract_name'), $contract->contract_name }}" required>
+                        <input class="form-control" type="text" name="contract_name" id="contract_name" placeholder="Nome | es. CCNL Metalmeccanico" value="{{old('contract_name', $contract->contract_name)}}" required>
                         @error('contract_name')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -24,17 +24,54 @@
 
                     {{--contract_type--}}
                     <div class="form-group">
-                        <label classe for="contract_type">Tipo di contratto</label>
-                        <select class="form-control" name="contract_type[]" id="contract_type" multiple required>
-                            <option value="Full-Time" {{in_array('Full-Time', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Full-Time</option>
-                            <option value="Part-Time" {{in_array('Part-Time', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Part-Time</option>
-                            <option value="Tempo indeterminato" {{in_array('Tempo indeterminato', old('contract_type', $contract->contract_type ? 'selected' : ''))}}>Tempo indeterminato</option>
-                            <option value="Tempo determinato" {{in_array('Tempo dterminato', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Tempo determinato</option>
-                            <option value="Lavoro a progetto" {{in_array('Lavoro a progetto', old('contract_type', $contract->contract_type)) 'selected' : ''}}>Lavoro a progetto</option>
-                            <option value="Freelance" {{in_array('Freelance', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Freelance</option>
-                            <option value="Stage" {{in_array('Stage', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Stage</option>
-                            <option value="Apprendistato" {{in_array('Apprendistato', old('contract_type', $contract->contract_type)) ? 'selected' : ''}}>Apprendistato</option>
-                        </select>
+                        <label for="contract_type">Tipo di contratto</label><br>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Full-Time" id="contract_type_1" 
+                                {{ in_array('Full-Time', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_1">Full-Time</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Part-Time" id="contract_type_2"
+                                {{ in_array('Part-Time', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_2">Part-Time</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Tempo indeterminato" id="contract_type_3"
+                                {{ in_array('Tempo indeterminato', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_3">Tempo indeterminato</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Tempo determinato" id="contract_type_4"
+                                {{ in_array('Tempo determinato', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_4">Tempo determinato</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Lavoro a progetto" id="contract_type_5"
+                                {{ in_array('Lavoro a progetto', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_5">Lavoro a progetto</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Freelance" id="contract_type_6"
+                                {{ in_array('Freelance', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_6">Freelance</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Stage" id="contract_type_7"
+                                {{ in_array('Stage', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_7">Stage</label>
+                        </div>
+                    
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="contract_type[]" value="Apprendistato" id="contract_type_8"
+                                {{ in_array('Apprendistato', old('contract_type', $contract->contract_type ?? [])) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="contract_type_8">Apprendistato</label>
+                        </div>
                     </div>
 
                     {{--contract_level--}}
@@ -51,6 +88,15 @@
                         <label class="" for="contract_gross_monthly_salary">Retribuzione mensile lorda</label>
                         <input class="form-control" type="number" name="contract_gross_monthly_salary" id="contract_gross_monthly_salary" placeholder="Retribuzione mensile lorda" step="0.01" min="0" value="{{old('contract_gross_monthly_salary', $contract->contract_gross_monthly_salary)}}" required>
                         @error('contract_gross_monthly_salary')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{--contract_week_hours--}}
+                    <div class="form-group">
+                        <label class="" for="contract_week_hours">Ore settimanali</label>
+                        <input class="form-control" type="number" name="contract_week_hours" id="contract_week_hours" placeholder="Ore settimanali" min="0" value="{{old('contract_week_hours',$contract->contract_week_hours)}}" required>
+                        @error('contract_week_hours')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -113,29 +159,13 @@
                     {{-- dependent_children_under_24 --}}
                     <div class="form-group">
                         <label for="dependent_children_under_24">Figli a carico sotto i 24 anni</label>
-                        <input type="number" class="form-control" name="dependet_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24" value="{{old('dependent_children_under_24', $deduction->dependent_children_under_24)}}">
+                        <input type="number" class="form-control" name="dependent_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24" value="{{old('dependent_children_under_24', $deduction->dependent_children_under_24)}}">
                         @error('dependent_children_under_24')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
-                    {{-- dependent_children_over_24 --}}
-                    <div class="form-group">
-                        <label for="dependent_children_over_24">Figli a carico sopra i 24 anni </label>
-                        <input type="number" class="form-control" name="dependent_children_over_24" id="dependent_children_over_24" placeholder="Numero di figli a carico over 24" value="{{old('dependent_children_over_24', $deduction->dependent_children_over_24)}}">
-                        @error('dependent_children_over_24')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    {{-- dependent_children_with_disabilities --}}
-                    <div class="form-group">
-                        <label for="dependent_children_with_disabilities">Figli a carico con disabilità </label>
-                        <input type="number" class="form-control" name="dependent_children_with_disabilities" id="dependent_children_with_disabilities" placeholder="Numero di figli a carico con disabilità" value="{{old('dependent_children_with_disabilities', $deduction->dependent_children_with_disabilities)}}">
-                        @error('dependent_children_with_disabilities')
-                            <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
+                    
+                    <button type="submit">Invia</button>
 
                 </form>
             </div>
