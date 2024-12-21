@@ -99,15 +99,16 @@ class PayrollController extends Controller
         $employee = $payroll->employee;
 
         $extra = $payroll->extra;
-        // recupera il contratto del dipendente
-        $latestContract = $employee->contracts()->latest()->first();
+        
         // recupera tutte le buste paga associate al dipendente
         $payrolls = Payroll::where('employee_id', $employee->id)->get(); 
+        // recupera il contratto associato alla busta paga 
+        $contract = $payroll->contract;
         // recupera le eventuali deduzioni associate al contratto
-        $deduction = Deduction::where('contract_id', $latestContract->id)->first();
+        $deduction = Deduction::where('contract_id', $contract->id)->first();
 
         // Passa alla vista tutti i dati necessari
-        return view('admin.payrolls.edit', compact('payroll','payrolls', 'employee', 'deduction', 'extra'));
+        return view('admin.payrolls.edit', compact('payroll','payrolls', 'employee', 'deduction', 'extra', 'contract'));
     }
 
     /**
@@ -115,7 +116,14 @@ class PayrollController extends Controller
      */
     public function update(UpdatePayrollRequest $request, Payroll $payroll)
     {
-        
+        $form_data = $request->all();
+
+        $payroll->update($form_data);
+
+        $extra = $payroll->extra;
+        $extra->update($form_data);
+
+        return redirect()->route('admin.employees.index');
     }
 
     /**

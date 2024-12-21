@@ -163,7 +163,7 @@
             const contractStartDate = @json($contract->contract_start_date ?? 0); // data di assunzione
             const dependentFamily = parseFloat(@json($deduction->dependent_family_members ?? 0)); // familiari a carico 
             const dependentChildren = parseFloat(@json($deduction->dependent_children_members ?? 0)); // figli a carico
-
+           
             // calcolo ore mensili e paga oraria
             const totalWorkingHoursInMonth = weeklyHours * 4.33; 
             const hourlyRate = grossSalary / totalWorkingHoursInMonth; 
@@ -243,7 +243,7 @@
                 const inpsTax = 9.19;
                 const totalINPS = totalGrossSalary * inpsTax / 100;
                 
-                console.log('tassa inps ' + inpsTax );
+                console.log('tassa inps ' + totalINPS );
 
 
                 // inizializza imponibile IRPEF annuale
@@ -253,12 +253,11 @@
                 const payrollCount = savedPayrolls.length; // numero di buste salvate
                 console.log('numero di buste paga ' + payrollCount);
 
-                // caso 1: Prima busta paga
+                // caso 1: prima busta paga
                 if (payrollCount === 0) { 
                     taxableIRPEF = (parseFloat(totalGrossSalary) - parseFloat(totalINPS)) * 12; // basato solo sulla prima busta paga
                 }
-
-                // caso 2: Almeno una busta paga esistente
+                // caso 2: almeno una busta paga esistente
                 else if (payrollCount > 0 && payrollCount < 11) {
                     // recupera gli imponibili mensili delle buste paghe salvate
                     let totalGrossFromPayrolls = 0;
@@ -275,18 +274,19 @@
                     console.log('imponibile annuale per questo mese ' + taxableIRPEF);
 
                 }
-
-                // caso 3: 12 o più buste paghe esistenti
+                // caso 3: 11 o più buste paghe esistenti
                 else {
                     // recupera gli ultimi 11 imponibili mensili delle buste paghe salvate
                     let totalGrossFromLast11Payrolls = 0;
                     const last11Payrolls = savedPayrolls.slice(-11); // ultimi 11 record
+                    console.log('ultime 11 buste paga ' + last11Payrolls);
                     last11Payrolls.forEach(payroll => {
-                        totalGrossFromLast11Payrolls += parseFloat(payroll.payroll_taxable_irpef);
+                        totalGrossFromLast11Payrolls += parseFloat(payroll.payroll_taxable_irpef) / 12;
+                        console.log('ultime 11 buste paga ' + totalGrossFromLast11Payrolls);
                     });
 
                     // aggiungi l'imponibile mensile attuale
-                    taxableIRPEF = (totalGrossFromLast11Payrolls + (parseFloat(totalGrossSalary) - parseFloat(totalINPS))) * 12;
+                    taxableIRPEF = (totalGrossFromLast11Payrolls + (parseFloat(totalGrossSalary) - parseFloat(totalINPS))) ;
                 }
 
                 console.log('imponibile irpef annuale è di €' + taxableIRPEF);
@@ -353,23 +353,25 @@
 
 
                 //irpef finale da pagare
-                let irpefToPay = (totalIrpef - totalDeduction)  ;
+                let irpefToPay = (totalIrpef - totalDeduction) / 12;
                 console.log('irpef finale da pagare è di €' + irpefToPay);
 
 
-                // CALCOLARE ADDIZIONALI REGIONALI E COMUNALI SUUL'IMPONIBILE IRPEF GIA RECUPERATI ALL'INIZIO DELLA FUNZIONE
+                // CALCOLARE ADDIZIONALI REGIONALI E COMUNALI SUL'IMPONIBILE IRPEF GIA RECUPERATI ALL'INIZIO DELLA FUNZIONE
                
-                const surchargeMunicipal = taxableIRPEF *  municipalTax / 100;
-                const surchargeRegional = taxableIRPEF * regionalTax / 100;
+                const surchargeMunicipal = (taxableIRPEF *  municipalTax / 100) ;
+                const surchargeRegional = (taxableIRPEF * regionalTax / 100) ;
          
-                const totalSurcharge = (surchargeMunicipal + surchargeRegional) ;
+                const totalSurcharge = (surchargeMunicipal + surchargeRegional) / 12;
 
                 console.log('le addizionali totali sono di €' + totalSurcharge);
 
                 
-                // CALCOLO FINALE -> DA taxableIrpef TOGLIERE: irpefToPay, ADDIZIONALI REGIONALI E COMUNALI, DIVIDERE IL TUTTO PER 12 E SI OTTIENE IL NETTO MENSILE
+                // CALCOLO FINALE 
                 // salario netto
-                const netSalary = (taxableIRPEF - irpefToPay - totalSurcharge) / 12  + reimbursement;
+                const netSalary = totalGrossSalary - totalINPS - irpefToPay - totalSurcharge + reimbursement;
+    
+
 
                 console.log('il salario netto finale sarà di €' + netSalary);
 
