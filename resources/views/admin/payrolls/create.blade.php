@@ -249,11 +249,13 @@
                 // inizializza imponibile IRPEF annuale
                 let taxableIRPEF = 0;
                 let savedPayrolls = @json($payrolls); // buste salvate
+                console.log(savedPayrolls);
                 const payrollCount = savedPayrolls.length; // numero di buste salvate
+                console.log('numero di buste paga ' + payrollCount);
 
                 // caso 1: Prima busta paga
                 if (payrollCount === 0) { 
-                    taxableIRPEF = (totalGrossSalary - totalINPS) * 12; // basato solo sulla prima busta paga
+                    taxableIRPEF = (parseFloat(totalGrossSalary) - parseFloat(totalINPS)) * 12; // basato solo sulla prima busta paga
                 }
 
                 // caso 2: Almeno una busta paga esistente
@@ -261,12 +263,17 @@
                     // recupera gli imponibili mensili delle buste paghe salvate
                     let totalGrossFromPayrolls = 0;
                     savedPayrolls.forEach(payroll => {
-                        totalGrossFromPayrolls += payroll.payroll_taxable_irpef;
+                        totalGrossFromPayrolls += parseFloat(payroll.payroll_taxable_irpef) / 12;
+                        console.log('IMPONIBILE irpef passati €' + payroll.payroll_taxable_irpef);
+                        console.log('imponibile IRPEF mensile è di €' + totalGrossFromPayrolls);
                     });
 
                     // calcola la media degli imponibili mensili (esistenti + corrente)
-                    const averageMonthlyGross = (totalGrossFromPayrolls + totalGrossSalary - totalINPS) / (payrollCount + 1);
+                    const averageMonthlyGross = (totalGrossFromPayrolls + parseFloat(totalGrossSalary) - parseFloat(totalINPS)) / (payrollCount + 1);
+                    console.log('media imponibile ' + averageMonthlyGross);
                     taxableIRPEF = averageMonthlyGross * 12; // Ottieni imponibile annuale
+                    console.log('imponibile annuale per questo mese ' + taxableIRPEF);
+
                 }
 
                 // caso 3: 12 o più buste paghe esistenti
@@ -275,16 +282,12 @@
                     let totalGrossFromLast11Payrolls = 0;
                     const last11Payrolls = savedPayrolls.slice(-11); // ultimi 11 record
                     last11Payrolls.forEach(payroll => {
-                        totalGrossFromLast11Payrolls += payroll.payroll_taxable_irpef;
+                        totalGrossFromLast11Payrolls += parseFloat(payroll.payroll_taxable_irpef);
                     });
 
                     // aggiungi l'imponibile mensile attuale
-                    taxableIRPEF = (totalGrossFromLast11Payrolls + (totalGrossSalary - totalINPS));
+                    taxableIRPEF = (totalGrossFromLast11Payrolls + (parseFloat(totalGrossSalary) - parseFloat(totalINPS))) * 12;
                 }
-                console.log('imponibile irpef mensile è di €' + taxableIRPEF);
-
-                // imponibile IRPEF 
-                taxableIRPEF = (totalGrossSalary - totalINPS) * 12;
 
                 console.log('imponibile irpef annuale è di €' + taxableIRPEF);
 

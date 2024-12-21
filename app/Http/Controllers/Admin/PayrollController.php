@@ -45,6 +45,7 @@ class PayrollController extends Controller
             $employees = Employee::where('employee_status', 'Attivo')->get();;
         }
 
+        $payrolls = Payroll::where('employee_id', $employeeId)->get(); 
         $contract = Contract::where('employee_id', $employeeId)->latest()->first();
         $deduction = Deduction::where('contract_id', $contract->id)->first();
 
@@ -64,7 +65,7 @@ class PayrollController extends Controller
         
         // dd($form_data);
         $employee = Employee::findOrFail($form_data['employee_id']);
-        $latestContract = $employee->contracts()->orderBy('contract_start_date', 'desc')->first();
+        $latestContract = $employee->contracts()->orderBy('created_at', 'desc')->first();
 
         $payroll = new Payroll();
         $payroll->employee_id = $employee->id;
@@ -92,19 +93,21 @@ class PayrollController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Payroll $payroll)
-    {
+    {   
 
-        // Recupera il dipendente associato alla busta paga
+        // recupera il dipendente associato alla busta paga
         $employee = $payroll->employee;
 
-        // Recupera il contratto del dipendente
-        $contract = Contract::where('employee_id', $employee->id)->latest()->first();
-
-        // Recupera le eventuali deduzioni associate al contratto
-        $deduction = Deduction::where('contract_id', $contract->id)->first();
+        $extra = $payroll->extra;
+        // recupera il contratto del dipendente
+        $latestContract = $employee->contracts()->latest()->first();
+        // recupera tutte le buste paga associate al dipendente
+        $payrolls = Payroll::where('employee_id', $employee->id)->get(); 
+        // recupera le eventuali deduzioni associate al contratto
+        $deduction = Deduction::where('contract_id', $latestContract->id)->first();
 
         // Passa alla vista tutti i dati necessari
-        return view('admin.payrolls.edit', compact('payroll', 'employee', 'contract', 'deduction'));
+        return view('admin.payrolls.edit', compact('payroll','payrolls', 'employee', 'deduction', 'extra'));
     }
 
     /**

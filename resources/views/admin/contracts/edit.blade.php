@@ -10,6 +10,7 @@
                 <form action="{{route('admin.contracts.update', ['contract' => $contract->id])}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    
                     {{-- TABELLA CONTRACTS --}}
                     <input type="hidden" name="employee_id" value="{{ $employee->id }}">
                     
