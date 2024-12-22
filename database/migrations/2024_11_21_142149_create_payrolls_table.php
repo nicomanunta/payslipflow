@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
             $table->string('payroll_month', 7);
             $table->date('payroll_day_paid');
+            $table->decimal('monthly_employee_deduction', 10, 2)->unsigned();
             $table->decimal('payroll_net_salary', 10, 2)->unsigned();
             $table->decimal('payroll_taxable_irpef', 10, 2)->unsigned();
             $table->timestamps();

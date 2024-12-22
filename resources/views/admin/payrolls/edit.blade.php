@@ -111,6 +111,15 @@
                         @enderror
                     </div>
 
+                    {{-- monthly_employee_deduction --}}
+                    <div class="form-group">
+                        <label for="monthly_employee_deduction">Imponibile irpef (€)</label>
+                        <input type="number" id="monthly_employee_deduction" name="monthly_employee_deduction" class="form-control" readonly>    
+                        @error('monthly_employee_deduction')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror 
+                    </div>
+
                     {{-- payroll_taxable_irpef --}}
                     <div class="form-group">
                         <label for="payroll_taxable_irpef">Imponibile irpef (€)</label>
@@ -158,6 +167,7 @@
             const fourteenthCheckbox = document.getElementById('extra_fourteenth_salary');
             const reimbursementInput = document.getElementById('extra_reimbursement_expenses');
             const bonusInput = document.getElementById('extra_bonus_rewards');
+            const employeeDeductionInput = document.getElementById('monthly_employee_deduction');
             const grossSalaryInput = document.getElementById('payroll_taxable_irpef');
             const netSalaryInput = document.getElementById('payroll_net_salary');
     
@@ -171,11 +181,14 @@
                 const weekdayOvertimePay = weekdayOvertime * (hourlyRate * 1.25);
                 const weekendOvertimePay = weekendOvertime * (hourlyRate * 1.50);
                 const holidayOvertimePay = holidayOvertime * (hourlyRate * 2);
+                console.log('Straordinari nei giorni FERIALI €' + weekdayOvertimePay);
+                console.log('Straordinari nei giorni WEEKEND €' + weekendOvertimePay);
+                console.log('Straordinari nei giorni FESTIVI €' + holidayOvertimePay);
     
                 // rimborso e bonus
                 const reimbursement = parseFloat(reimbursementInput.value) || 0;
                 const bonus = parseFloat(bonusInput.value) || 0;
-                console.log('i bonus sono di '+ bonus);
+                console.log('Bonus €'+ bonus);
 
                 
                 // salario lordo totale (incluso straordinario, tredicesima e quattordicesima)
@@ -185,14 +198,14 @@
                 // CALCOLO TREDICESIMA e QUATTORDICESIMA
                 let currentDate = new Date();
                 let contractStartDateObj = new Date(contractStartDate);
-                console.log('data di oggi ' + currentDate);
-                console.log('data di assunzione ' + contractStartDateObj);
+                console.log('Data di oggi ' + currentDate);
+                console.log('Data di assunzione ' + contractStartDateObj);
 
 
                 let monthsWorked = (currentDate.getFullYear() - contractStartDateObj.getFullYear()) * 12;
                 monthsWorked += currentDate.getMonth() - contractStartDateObj.getMonth();
 
-                console.log('mesi di assunzione ' + monthsWorked);
+                console.log('Numero di mesi di assunzione ' + monthsWorked);
 
 
                 if (thirteenthCheckbox.checked) {
@@ -203,7 +216,7 @@
                         // Se il dipendente ha lavorato meno di 12 mesi, calcola la parte proporzionale
                         let thirteenthPart = grossSalary * (monthsWorked / 12);
                         totalGrossSalary += thirteenthPart;
-                        console.log('tredicesima ' + thirteenthPart);
+                        console.log('Tredicesima ' + thirteenthPart);
                         
                     }
                 }
@@ -219,14 +232,14 @@
                 }
 
                 totalGrossSalary += bonus;
-                console.log(totalGrossSalary);
+                console.log('Salario lordo €' + totalGrossSalary);
 
     
                 // calcolo inps
                 const inpsTax = 9.19;
                 const totalINPS = totalGrossSalary * inpsTax / 100;
                 
-                console.log('tassa inps ' + inpsTax );
+                console.log('Tassa inps €' + totalINPS );
 
 
                 // inizializza imponibile IRPEF annuale
@@ -257,15 +270,15 @@
                     let totalGrossFromPayrolls = 0;
                     savedPayrolls.forEach(payroll => {
                         totalGrossFromPayrolls += parseFloat(payroll.payroll_taxable_irpef) / 12;
-                        console.log('IMPONIBILE irpef passati €' + payroll.payroll_taxable_irpef);
-                        console.log('imponibile IRPEF mensile è di €' + totalGrossFromPayrolls);
+                        console.log('Imponibili irpef presenti nel DB €' + payroll.payroll_taxable_irpef);
+                        console.log('Imponibile irpef di questo mese è di €' + totalGrossFromPayrolls);
                     });
 
                     // calcola la media degli imponibili mensili (esistenti + corrente)
                     const averageMonthlyGross = (totalGrossFromPayrolls + parseFloat(totalGrossSalary) - parseFloat(totalINPS)) / (payrollCount + 1);
-                    console.log('media imponibile ' + averageMonthlyGross);
+                    console.log('Media imponibile ' + averageMonthlyGross);
                     taxableIRPEF = averageMonthlyGross * 12; // Ottieni imponibile annuale
-                    console.log('imponibile annuale per questo mese ' + taxableIRPEF);
+                    console.log('Imponibile annuale per questo mese ' + taxableIRPEF);
 
                 }
                 // caso 3: 12 o più buste paghe esistenti
@@ -273,15 +286,18 @@
                     // recupera gli ultimi 11 imponibili mensili delle buste paghe salvate
                     let totalGrossFromLast11Payrolls = 0;
                     const last11Payrolls = savedPayrolls.slice(-11); // ultimi 11 record
+                    console.log('Elenco ultime 11 buste paga ' + last11Payrolls);
                     last11Payrolls.forEach(payroll => {
                         totalGrossFromLast11Payrolls += parseFloat(payroll.payroll_taxable_irpef) / 12;
+                        console.log('Ultimi 11 imponibili mensili nelle buste paga €' + totalGrossFromLast11Payrolls);
+
                     });
 
                     // aggiungi l'imponibile mensile attuale
                     taxableIRPEF = (totalGrossFromLast11Payrolls + (parseFloat(totalGrossSalary) - parseFloat(totalINPS)));
                 }
 
-                console.log('imponibile irpef annuale è di €' + taxableIRPEF);
+                console.log('Imponibile irpef annuale in questo mese è di €' + taxableIRPEF);
 
                 
                 // calcolo irpef
@@ -300,7 +316,7 @@
                     totalIrpef = 14140 + ((taxableIRPEF - 50000) * 43 / 100);
 
                 }
-                console.log('irpef da pagare è di €' + totalIrpef);
+                console.log('Irpef annuale da pagare questo mese è di €' + totalIrpef);
 
                 // calcolo detrazioni base
                 let basicDeduction = 0
@@ -320,12 +336,12 @@
                 } else {
                     basicDeduction = 0;
                 }
-                console.log('le detrazioni per lavoratore dipendente  sono di €' + basicDeduction);
+                console.log('Detrazioni per lavoratore dipendente  sono di €' + basicDeduction);
 
                 // calcolo detrazioni per familiari 
                 let familyDeduction = (750 * ((80000 - taxableIRPEF)/80000)) * dependentFamily;
 
-                console.log('le detrazioni per famialiari sono di €' + familyDeduction);
+                console.log('Detrazioni per familiari sono di €' + familyDeduction);
 
 
                 // calcolo detrazioni per figli
@@ -336,17 +352,18 @@
 
                 } 
 
-                console.log('le detrazioni per figli sono di €' + childrenDeduction);
+                console.log('Detrazioni per figli sono di €' + childrenDeduction);
 
                 // detrazione totali annuali
                 let totalDeduction = (basicDeduction + familyDeduction + childrenDeduction) ;
+                console.log('Detrazioni totali all anno sono di €' + totalDeduction);
 
-                console.log('le detrazioni totali sono di €' + totalDeduction);
-
-
+                const monthlyDeduction = totalDeduction / 12;
+                console.log('Detrazioni di questo mese sono di €' + monthlyDeduction);
+    
                 //irpef finale da pagare
-                let irpefToPay = (totalIrpef - totalDeduction)  ;
-                console.log('irpef finale da pagare è di €' + irpefToPay);
+                let irpefToPay = (totalIrpef - totalDeduction) / 12;
+                console.log('Irpef finale da pagare questo mese è di €' + irpefToPay);
 
 
                 // CALCOLARE ADDIZIONALI REGIONALI E COMUNALI SUUL'IMPONIBILE IRPEF GIA RECUPERATI ALL'INIZIO DELLA FUNZIONE
@@ -354,19 +371,20 @@
                 const surchargeMunicipal = taxableIRPEF *  municipalTax / 100;
                 const surchargeRegional = taxableIRPEF * regionalTax / 100;
          
-                const totalSurcharge = (surchargeMunicipal + surchargeRegional) ;
+                const totalSurcharge = (surchargeMunicipal + surchargeRegional) / 12 ;
 
-                console.log('le addizionali totali sono di €' + totalSurcharge);
+                console.log('Le addizionali totali sono di €' + totalSurcharge);
 
                 
-                // CALCOLO FINALE -> DA taxableIrpef TOGLIERE: irpefToPay, ADDIZIONALI REGIONALI E COMUNALI, DIVIDERE IL TUTTO PER 12 E SI OTTIENE IL NETTO MENSILE
+                // CALCOLO FINALE 
                 // salario netto
-                const netSalary = (taxableIRPEF - irpefToPay - totalSurcharge) / 12  + reimbursement;
+                const netSalary = totalGrossSalary - totalINPS - irpefToPay - totalSurcharge + reimbursement;
 
                 console.log('il salario netto finale sarà di €' + netSalary);
 
     
                 // aggiorna il campo "payroll_net_salary"
+                employeeDeductionInput.value = monthlyDeduction.toFixed(2);
                 grossSalaryInput.value = taxableIRPEF.toFixed(2);
                 netSalaryInput.value = netSalary.toFixed(2);
             }
