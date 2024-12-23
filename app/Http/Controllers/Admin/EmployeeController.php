@@ -59,7 +59,16 @@ class EmployeeController extends Controller
         // richiesta nuovo dipendente
         $employee = new Employee();
         $employee->user_id = auth()->user()->id;
-        $slug = Str::slug($form_data['employee_name']. '-' .$form_data['employee_surname']. '-' .Employee::count());
+
+        //slug
+        $baseSlug = Str::slug($form_data['employee_name'] . '-' . $form_data['employee_surname']);
+        $slug = $baseSlug;
+        $counter = 0;
+        while (Employee::withTrashed()->where('slug', $slug)->first()) {
+            $counter++;
+            $slug = $baseSlug . '-' . $counter;
+        }
+
         $form_data['slug'] = $slug;
 
         $employee->fill($form_data);
@@ -108,7 +117,15 @@ class EmployeeController extends Controller
 
         // aggiorna slug
         if (isset($form_data['employee_name']) || isset($form_data['employee_surname'])) {
-            $form_data['slug'] = Str::slug($form_data['employee_name'] . '-' . $form_data['employee_surname']. '-' .Employee::count());
+
+            //slug
+            $baseSlug = Str::slug($form_data['employee_name'] . '-' . $form_data['employee_surname']);
+            $slug = $baseSlug;
+            $counter = 0;
+            while (Employee::withTrashed()->where('slug', $slug)->first()) {
+                $counter++;
+                $slug = $baseSlug . '-' . $counter;
+            };
         }
         $employee->update($form_data);
 
@@ -121,6 +138,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return redirect()->route('admin.employees.index');
     }
 }
