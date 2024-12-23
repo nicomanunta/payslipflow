@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('extra_bonus_rewards', 8, 2)->unsigned()->default(0);
             $table->text('extra_notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

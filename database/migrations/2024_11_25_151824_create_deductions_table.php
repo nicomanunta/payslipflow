@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('dependent_family_members')->nullable()->unsigned()->default(0);
             $table->tinyInteger('dependent_children_under_24')->nullable()->unsigned()->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

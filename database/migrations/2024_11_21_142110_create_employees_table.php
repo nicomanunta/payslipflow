@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('employee_name', 100);
             $table->string('employee_surname', 100);
+            $table->enum('employee_sex', ['Uomo', 'Donna']);
             $table->string('employee_email', 100)->unique();
             $table->string('employee_phone', 20)->unique();
             $table->string('employee_state', 50)->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->string('employee_img')->nullable();
             $table->string('slug', 250)->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
