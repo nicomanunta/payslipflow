@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #F3F4F6;
+    
 }
 
 // FONT
@@ -29,6 +29,9 @@
 
 
 // PALETTE COLORI
+.bg-general{
+    background-color: #F3F4F6;
+}
 .dark-grey{ //per titoli
     color: #1F2937;
 }
@@ -51,7 +54,6 @@
     background-color: #EFF6FF;
 }
 
-
 .m-25{
     margin-left: 25%;
 }
@@ -68,5 +70,16 @@
 td, th {
     text-align: center; 
     vertical-align: middle; 
+}
+
+
+// FILE EMPLOYEE SHOW
+.show-employee-img {
+    width: 200px; 
+    height: 200px;
+    object-fit: cover; 
+    border-radius: 50%;
+    display: block;
+    box-shadow: 8px 8px 8px #3b83f63f;
 }
 

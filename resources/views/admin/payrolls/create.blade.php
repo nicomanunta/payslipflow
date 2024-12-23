@@ -32,7 +32,7 @@
                         </select>
                     @endif
                     @error('employee_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                     @enderror
 
                     {{-- payroll_month --}}
@@ -40,7 +40,7 @@
                         <label for="payroll_month">Mese</label>
                         <input class="form-control" type="text" name="payroll_month" id="payroll_month" placeholder="MM-YYYY" value="{{old('payroll_month')}}">
                         @error('payroll_month')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -48,9 +48,10 @@
                     <div class="form-group">
                         <label for="payroll_day_paid">Data di pagamento</label>
                         <input type="date" class="form-control" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
+                        @error('payroll_day_paid')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
                     </div>
-                    {{-- payroll_net_salary --}}
-                    {{-- payroll_taxable_irpef --}}
 
 
                     {{-- TABELLA EXTRAS --}}
@@ -59,7 +60,7 @@
                         <label for="extra_weekday_overtime_hours">Ore di straordinario nei giorni feriali</label>
                         <input type="time" class="form-control" name="extra_weekday_overtime_hours" id="extra_weekday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni feriali" value="{{old('extra_weekday_overtime_hours', '00:00')}}">
                         @error('extra_weekday_overtime_hours')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     
@@ -68,7 +69,7 @@
                         <label for="extra_weekend_overtime_hours">Ore di straordinario nel fine settimana</label>
                         <input type="time" class="form-control" name="extra_weekend_overtime_hours" id="extra_weekend_overtime_hours" placeholder="Numero di ore di straordinario nel fine settimana" value="{{old('extra_weekend_overtime_hours', '00:00')}}">
                         @error('extra_weekend_overtime_hours')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -77,7 +78,7 @@
                         <label for="extra_holiday_overtime_hours">Ore di straordinario nei giorni festivi</label>
                         <input type="time" class="form-control" name="extra_holiday_overtime_hours" id="extra_holiday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni festivi" value="{{old('extra_holiday_overtime_hours', '00:00')}}">
                         @error('extra_holiday_overtime_hours')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -87,7 +88,7 @@
                         {{ old('extra_thirteenth_salary') ? 'checked' : '' }}>
                         <label class="form-check-label" for="extra_thirteenth_salary">Tredicesima</label>
                         @error('extra_thirteenth_salary')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     
@@ -97,7 +98,7 @@
                         {{ old('extra_fourteenth_salary') ? 'checked' : '' }}>
                         <label class="form-check-label" for="extra_fourteenth_salary">Quattordicesima</label>
                         @error('extra_fourteenth_salary')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -106,7 +107,7 @@
                         <label for="extra_reimbursement_expenses">Rimborso spese</label>
                         <input type="number" class="form-control" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
                         @error('extra_reimbursement_expenses')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -115,7 +116,7 @@
                         <label for="extra_bonus_rewards">Bonus o premi</label>
                         <input class="form-control" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
                         @error('extra_bonus_rewards')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -124,16 +125,16 @@
                         <label for="extra_notes">Note</label>
                         <textarea name="extra_notes" id="extra_notes" class="form-control" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
                         @error('extra_notes')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
-                    {{-- monthly_employee_deduction --}}
+                    {{-- payroll_monthly_employee_deduction --}}
                     <div class="form-group">
-                        <label for="monthly_employee_deduction">Detrazioni totali per questo mese</label>
-                        <input type="number" id="monthly_employee_deduction" name="monthly_employee_deduction" class="form-control" readonly>    
-                        @error('monthly_employee_deduction')
-                            <div class="invalid-feedback">{{$message}}</div>
+                        <label for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese</label>
+                        <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="form-control" readonly>    
+                        @error('payroll_monthly_employee_deduction')
+                            <div class="text-danger">{{$message}}</div>
                         @enderror 
                     </div>
 
@@ -142,7 +143,7 @@
                         <label for="payroll_taxable_irpef">Imponibile irpef (€)</label>
                         <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="form-control" readonly>    
                         @error('payroll_taxable_irpef')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror 
                     </div>
                     
@@ -152,7 +153,7 @@
                         <label for="payroll_net_salary">Salario netto (€)</label>
                         <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="form-control" readonly >  
                         @error('payroll_net_salary')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror 
                     </div>
 
@@ -184,7 +185,7 @@
             const fourteenthCheckbox = document.getElementById('extra_fourteenth_salary');
             const reimbursementInput = document.getElementById('extra_reimbursement_expenses');
             const bonusInput = document.getElementById('extra_bonus_rewards');
-            const employeeDeductionInput = document.getElementById('monthly_employee_deduction');
+            const employeeDeductionInput = document.getElementById('payroll_monthly_employee_deduction');
             const grossSalaryInput = document.getElementById('payroll_taxable_irpef');
             const netSalaryInput = document.getElementById('payroll_net_salary');
     

@@ -16,7 +16,7 @@
                         <label class="" for="employee_name">Nome</label>
                         <input class="form-control" type="text" name="employee_name" id="employee_name" placeholder="Nome" value="{{old('employee_name', $employee->employee_name)}}" required>
                         @error('employye_name')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -25,7 +25,20 @@
                         <label class="" for="employee_surname">Cognome</label>
                         <input class="form-control" type="text" name="employee_surname" id="employee_surname" placeholder="Cognome" value="{{old('employee_surname', $employee->employee_surname)}}" required>
                         @error('employee_surname')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    {{-- employee_sex --}}
+                    <div class="form-group">
+                        <label for="employee_sex">Sesso del dipendente</label>
+                        <select class="form-control" name="employee_sex" id="employee_sex">
+                            <option value="">Seleziona il sesso </option>
+                            <option value="Uomo" {{old('employee_sex', $employee->employee_sex) == 'Uomo' ? 'selected' : ''}}>Uomo</option>
+                            <option value="Donna" {{old('employee_sex', $employee->employee_sex) == 'Donna' ? 'selected' : ''}}>Donna</option>
+                        </select>
+                        @error('employee_sex')
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -34,7 +47,7 @@
                         <label class="" for="employee_email">Email</label>
                         <input class="form-control" type="text" name="employee_email" id="employee_email" placeholder="Email" value="{{old('employee_email', $employee->employee_email)}}" required>
                         @error('employee_email')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -43,7 +56,7 @@
                         <label class="" for="employee_phone">Telefono</label>
                         <input class="form-control" type="tel" name="employee_phone" id="employee_phone" placeholder="Telefono" value="{{old('employee_phone', $employee->employee_phone)}}" required>
                         @error('employee_phone')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -52,7 +65,7 @@
                         <label class="" for="employee_state">Paese di residenza</label>
                         <input class="form-control" type="text" name="employee_state" id="employee_state" placeholder="Paese" value="{{old('employee_state', $employee->employee_state)}}">
                         @error('employee_state')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -61,7 +74,7 @@
                         <label class="" for="employee_region">Regione di residenza</label>
                         <input class="form-control" type="text" name="employee_region" id="employee_region" placeholder="Regione" value="{{old('employee_region', $employee->employee_region)}}">
                         @error('employee_region')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -70,7 +83,7 @@
                         <label class="" for="employee_city">Comune di residenza</label>
                         <input class="form-control" type="text" name="employee_city" id="employee_city" placeholder="Comune" value="{{old('employee_city', $employee->employee_city)}}">
                         @error('employee_city')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -79,7 +92,7 @@
                         <label for="employee_birth_date">Data di nascita</label>
                         <input class="form-control" type="date" name="employee_birth_date" id="employee_birth_date" placeholder="Data di nascita" value="{{old('employee_birth_date', $employee->employee_birth_date)}}" required>
                         @error('employee_birth_date')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -88,7 +101,7 @@
                         <label class="" for="employee_role">Posizione lavorativa</label>
                         <input class="form-control" type="text" name="employee_role" id="employee_role" placeholder="Posizione lavorativa" value="{{old('employee_role', $employee->employee_role)}}" required>
                         @error('employee_role')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -104,7 +117,7 @@
                             <option value="Pensione" {{old('employee_status', $employee->employee_status) == 'Pensione' ? 'selected' : ''}}>Pensione</option>
                         </select>
                         @error('employee_status')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -113,7 +126,7 @@
                         <label class="" for="employee_hiring_date">Data di assunzione</label>
                         <input class="form-control" type="date" name="employee_hiring_date" id="employee_hiring_date" placeholder="Data di assunzione" value="{{old('employee_hiring_date', $employee->employee_hiring_date)}}" required>
                         @error('employee_hiring_date')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -122,7 +135,7 @@
                         <label for="employee_img">Foto</label>
                         <input class="form-control" type="file" name="employee_img" id="employee_img" placeholder="Foto" accept="image/*" value="{{$employee->employee_img}}" >
                         @error('employee_img')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 

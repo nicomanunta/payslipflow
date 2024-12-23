@@ -19,7 +19,7 @@
                         <label class="" for="contract_name">Nome del contratto</label>
                         <input class="form-control" type="text" name="contract_name" id="contract_name" placeholder="Nome | es. CCNL Metalmeccanico" value="{{old('contract_name', $contract->contract_name)}}" required>
                         @error('contract_name')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -80,7 +80,7 @@
                         <label class="" for="contract_level">Livello del contratto</label>
                         <input class="form-control" type="text" name="contract_level" id="contract_level" placeholder="Livello del contratto" value="{{old('contract_level', $contract->contract_level)}}">
                         @error('contract_level')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -89,7 +89,7 @@
                         <label class="" for="contract_gross_monthly_salary">Retribuzione mensile lorda</label>
                         <input class="form-control" type="number" name="contract_gross_monthly_salary" id="contract_gross_monthly_salary" placeholder="Retribuzione mensile lorda" step="0.01" min="0" value="{{old('contract_gross_monthly_salary', $contract->contract_gross_monthly_salary)}}" required>
                         @error('contract_gross_monthly_salary')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -98,7 +98,7 @@
                         <label class="" for="contract_week_hours">Ore settimanali</label>
                         <input class="form-control" type="number" name="contract_week_hours" id="contract_week_hours" placeholder="Ore settimanali" min="0" value="{{old('contract_week_hours',$contract->contract_week_hours)}}" required>
                         @error('contract_week_hours')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -107,7 +107,7 @@
                         <label for="contract_vacation_days">Ferie annuali</label>
                         <input class="form-control" type="number" name="contract_vacation_days" id="contract_vacation_days" placeholder="Numero di ferie annuali" step="1" min="0" value="{{old('contract_vacation_days', $contract->contract_vacation_days)}}">
                         @error('contract_vacation_days')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -116,7 +116,7 @@
                         <label for="contract_surcharge_regional">Addizionale Regionale &#40;%&#41;</label>
                         <input class="form-control" type="number" name="contract_surcharge_regional" id="contract_surcharge_regional" placeholder="Percentuale addizionale Regionale" step="0.01" min="0" max="100" value="{{old('contract_surcharge_regional', $contract->contract_surcharge_regional)}}">
                         @error('contract_surcharge_regional')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -125,7 +125,7 @@
                         <label for="contract_surcharge_municipal">Addizionale Comunale &#40;%&#41;</label>
                         <input class="form-control" type="number" name="contract_surcharge_municipal" id="contract_surcharge_municipal" placeholder="Percentuale addizionale Comunale " step="0.01" min="0" max="100" value="{{old('contract_surcharge_municipal', $contract->contract_surcharge_municipal)}}">
                         @error('contract_surcharge_municipal')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -134,7 +134,7 @@
                         <label for="contract_start_date">Data inizio</label>
                         <input class="form-control" type="date" name="contract_start_date" id="contract_start_date" placeholder="Data inizio" value="{{old('contract_start_date', $contract->contract_start_date)}}" required>
                         @error('contract_start_date')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -143,7 +143,7 @@
                         <label for="contract_end_date">Data inizio</label>
                         <input class="form-control" type="date" name="contract_end_date" id="contract_end_date" placeholder="Data inizio" value="{{old('contract_end_date', $contract->contract_end_date)}}">
                         @error('contract_end_date')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -153,7 +153,7 @@
                         <label for="dependent_family_members">Familiari a carico</label>
                         <input type="number" class="form-control" name="dependent_family_members" id="dependent_family_members" placeholder="Numero di familiari a carico" value="{{old('dependent_family_members', $deduction->dependent_family_members)}}">
                         @error('dependent_family_members')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -162,7 +162,7 @@
                         <label for="dependent_children_under_24">Figli a carico sotto i 24 anni</label>
                         <input type="number" class="form-control" name="dependent_children_under_24" id="dependent_children_under_24" placeholder="Numero di figli a carico under 24" value="{{old('dependent_children_under_24', $deduction->dependent_children_under_24)}}">
                         @error('dependent_children_under_24')
-                            <div class="invalid-feedback">{{$message}}</div>
+                            <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
                     

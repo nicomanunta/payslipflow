@@ -39,28 +39,21 @@
                                     <a href="{{route('admin.employees.show', ['employee' => $employee->id])}}">
                                         <button>
                                             <i class="fa-solid fa-user"></i>
-                                        </button>
-                                    </a>
-                                    <a href="{{route('admin.employees.edit', ['employee' => $employee->id])}}">
-                                        <button>
-                                            <i class="fa-solid fa-marker"></i>
-                                        </button>
-                                    </a>
+                                        </button></a>
                                     @if($employee->contracts->isNotEmpty())    
                                         {{-- creazione busta paga --}}
                                         <a href="{{route('admin.payrolls.create', ['employee_id' => $employee->id])}}">
                                             <button>
                                                 <i class="fa-solid fa-euro-sign"></i>
-                                            </button>
-                                        </a>
+                                            </button></a>
                                     @else
                                         {{-- creazione di un nuovo contratto --}}
                                         <a href="{{ route('admin.contracts.create', ['employee_id' => $employee->id]) }}">
                                             <button>
                                                 <i class="fa-solid fa-plus"></i>
-                                            </button>
-                                        </a>
+                                            </button></a>
                                     @endif
+                                    <button class="" data-bs-toggle="modal" data-bs-target="#modalDeleteEmployee{{ $employee->id }}"><i class="fa-solid fa-trash cestino"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -70,4 +63,7 @@
             </div>
         </div>
     </div>
+    @foreach ($employees as $employee)
+        @include('admin.employees.partials.modal_delete_employee', ['employee_id' => $employee->id])
+    @endforeach
 </x-app-layout>
