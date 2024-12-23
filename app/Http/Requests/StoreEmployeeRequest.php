@@ -28,6 +28,7 @@ class StoreEmployeeRequest extends FormRequest
         return [
             'employee_name' => ['required', 'string', 'max:100'],
             'employee_surname' => ['required', 'string', 'max:100'],
+            'employee_sex' => ['required', 'in:Uomo,Donna'],
             'employee_email' => ['required', 'string', 'email', 'max:100', Rule::unique('employees')],
             'employee_phone' => ['required','regex:/^[0-9]{10}$/', 'size:10', Rule::unique('employees')],
             'employee_state' => ['nullable', 'string', 'max:50'],
@@ -51,6 +52,9 @@ class StoreEmployeeRequest extends FormRequest
             'employee_surname.required' => 'Il cognome è obbligatorio.',
             'employee_surname.string' => 'Il cognome deve essere valido.',
             'employee_surname.max' => 'Il cognome non può superare i 100 caratteri.',
+
+            'employee_sex.required' => 'Il sesso è obbligatorio.',
+            'employee_sex.in' => 'Il sesso deve essere uno dei seguenti: Uomo, Donna.', 
 
             'employee_email.required' => 'L\'email è obbligatoria.',
             'employee_email.email' => 'L\'email deve essere un indirizzo valido.',

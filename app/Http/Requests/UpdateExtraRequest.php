@@ -45,7 +45,7 @@ class UpdateExtraRequest extends FormRequest
             'extra_fourteenth_salary.boolean' => 'Spunta l\'opzione se il campo "Quattordicesima" è presente.',
 
             'bonus_rewards.numeric' => 'I bonus e i premi devono essere dei numeri validi.', 
-            'bonus_rewards.min' => 'I bonus e i premi non possono essere numeri negativi.', 
+            'bonus_rewards.min' => 'I bonus e i premi devono essere maggiori o uguali a 0.', 
             'bonus_rewards.max' => 'I numeri e i premi non possono essere superiori a 999999.99.',  
 
             'extra_notes.string' =>'Le note devono essere un testo valido.';
