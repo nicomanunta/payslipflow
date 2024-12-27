@@ -18,7 +18,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-general">
+    <body class="font-sans antialiased bg-general overflow-x-hidden">
         <div class="min-h-screen dark:bg-gray-900">
             <div class="d-flex ">
                 <div class="col-3 fixed vh-100">
