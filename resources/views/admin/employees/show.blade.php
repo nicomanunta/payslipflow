@@ -31,7 +31,7 @@
                 
             </div>
                 
-            <div class="row mx-1 mt-4">
+            <div class="row mx-1 mt-5">
                 <h3 class="pb-2">Dati personali</h3>
                 <div class="col-7">
                     <ul class="p-0">
@@ -48,7 +48,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row mx-1 mt-4">
+            <div class="row mx-1 mt-5">
                 <h3 class="pb-2">Contratto attivo</h3>
                 <div class="col-7">
                     <ul class="p-0">
@@ -71,10 +71,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="row mx-1 mt-4">
+            <div class="row mx-1 mt-5">
                 <h3 class="pb-2">Ultime due buste paga </h3>    
                 @if ($payroll)
-                    @foreach ($payroll as $item)
+                @foreach ($payroll as $item)
+                <button class="" data-bs-toggle="modal" data-bs-target="#modalInfoPayroll{{ $item->id }}"><i class="fa-solid fa-circle-info"></i></button>
                         <div class="col-7 mt-2">
                             <ul class="p-0">
                                 <li class="mb-2"><b>Mese:</b> {{$item->payroll_month}}</li>               
@@ -93,4 +94,7 @@
             </div>
         </div>
     </div>
+    @foreach ($payroll as $item)
+        @include('admin.payrolls.partials.modal_info_payroll', ['payroll_id' => $item->id])
+    @endforeach
 </x-app-layout>
