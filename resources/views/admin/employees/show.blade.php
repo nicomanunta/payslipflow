@@ -71,11 +71,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="row mx-1 mt-5">
-                <h3 class="pb-2">Ultime due buste paga </h3>    
-                @if ($payroll)
-                @foreach ($payroll as $item)
-                <button class="" data-bs-toggle="modal" data-bs-target="#modalInfoPayroll{{ $item->id }}"><i class="fa-solid fa-circle-info"></i></button>
+            @if ($payroll && $payroll->isNotEmpty())
+                <div class="row mx-1 mt-5">
+                    <h3 class="pb-2">Ultime due buste paga </h3>    
+                    @foreach ($payroll as $item)
+                        <button class="" data-bs-toggle="modal" data-bs-target="#modalInfoPayroll{{ $item->id }}"><i class="fa-solid fa-circle-info"></i></button>
                         <div class="col-7 mt-2">
                             <ul class="p-0">
                                 <li class="mb-2"><b>Mese:</b> {{$item->payroll_month}}</li>               
@@ -89,9 +89,9 @@
                         </div>
                     
                     @endforeach
-                @endif
-                
-            </div>
+                    
+                </div>
+            @endif
         </div>
     </div>
     @foreach ($payroll as $item)

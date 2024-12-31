@@ -14,7 +14,7 @@ class Payroll extends Model
     protected $dates = ['deleted_at'];
     
     // AGGIUNGERE DETRAZIONI IRPEF
-    protected $fillable = ['employee_id', 'contract_id', 'payroll_month', 'payroll_day_paid', 'payroll_monthly_employee_deduction', 'payroll_net_salary', 'payroll_taxable_irpef'];
+    protected $fillable = ['employee_id', 'contract_id', 'payroll_month', 'payroll_day_paid', 'payroll_monthly_employee_deduction', 'payroll_net_salary', 'payroll_taxable_irpef', 'payroll_irpef_to_pay', 'payroll_total_inps', 'payroll_monthly_basic_deduction', 'payroll_monthly_family_deduction', 'payroll_monthly_children_deduction', 'payroll_total_surcharge'];
 
     public function employee(){
         return $this->belongsTo(Employee::class);
