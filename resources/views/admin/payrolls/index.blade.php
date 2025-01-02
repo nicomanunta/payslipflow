@@ -26,7 +26,6 @@
                 
                                 <td>{{ $payroll->payroll_month }}</td>
                                 <td>{{ $payroll->payroll_net_salary }}</td>
-                
                                 <td>
                                     <a href="{{route('admin.payrolls.edit', ['payroll' => $payroll->id])}}">
                                         <button>

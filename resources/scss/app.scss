@@ -82,8 +82,35 @@ td, th {
     display: block;
     box-shadow: 8px 8px 8px #3b83f63f;
 }
-
+// modale show payrolls
 .modal-dialog{
-    min-width: 60%;    
+    min-width: 70%;    
+}
+
+.logo-container {
+    height: 120px;
+    width: 100%;
+}
+
+.logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 50%; 
+    display: inline-flex;
+    
+}
+.btn-close{
+    margin-left: 0px !important;
+    right: 2%;
+    top: 2%;
+}
+.modal-title{
+    display: inline;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+.table-50 td{
+    width: 50%;
 }
 

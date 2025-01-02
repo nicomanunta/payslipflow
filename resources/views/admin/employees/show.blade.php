@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-5 ">
                     <ul class="p-0">
-                        <li class="mb-2"><b>Salario lordo:</b> {{$contract->contract_gross_monthly_salary}}€</li>
+                        <li class="mb-2"><b>Salario lordo:</b> {{$contract->contract_gross_monthly_salary}}&euro;</li>
                         <li class="mb-2"><b>Ore settimanali di lavoro:</b> {{$contract->contract_week_hours}}</li>
                         <li class="mb-2"><b>Numero di ferie annuali:</b> {{$contract->contract_vacation_days}}</li>   
                         <li class="mb-2"><b>Data fine:</b> {{ \Carbon\Carbon::parse($contract->contract_end_date)->format('d-m-Y') }}</li>   
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-5 mt-2">
                             <ul class="p-0">
-                                <li class="mb-2"><b>Salario netto:</b> <span class="fs-5">{{$item->payroll_net_salary}}€</span></li>
+                                <li class="mb-2"><b>Salario netto:</b> <span class="fs-5">{{$item->payroll_net_salary}}&euro;</span></li>
                             </ul>
                         </div>
                     

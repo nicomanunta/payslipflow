@@ -85,8 +85,9 @@ class EmployeeController extends Controller
     {
         $contract = $employee->contracts()->latest()->first();
         $payroll = $employee->payrolls()->latest()->take(2)->with('extra')->get();
+        $user = $employee->user;
        
-        return view('admin.employees.show', compact('employee', 'contract', 'payroll'));
+        return view('admin.employees.show', compact('employee', 'contract', 'payroll', 'user'));
     }
 
     /**

@@ -133,7 +133,7 @@
                     {{-- DEDUCTIONS --}}
                     {{-- payroll_monthly_basic_deduction --}}
                     <div class="form-group">
-                        <label for="payroll_monthly_basic_deduction">Detrazioni lavoratore dipendente per questo mese (€)</label>
+                        <label for="payroll_monthly_basic_deduction">Detrazioni lavoratore dipendente per questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_monthly_basic_deduction" name="payroll_monthly_basic_deduction" class="form-control" readonly>    
                         @error('payroll_monthly_basic_deduction')
                             <div class="text-danger">{{$message}}</div>
@@ -142,7 +142,7 @@
 
                     {{-- payroll_monthly_family_deduction --}}
                     <div class="form-group">
-                        <label for="payroll_monthly_family_deduction">Detrazioni familiari a carico per questo mese (€)</label>
+                        <label for="payroll_monthly_family_deduction">Detrazioni familiari a carico per questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_monthly_family_deduction" name="payroll_monthly_family_deduction" class="form-control" readonly>    
                         @error('payroll_monthly_family_deduction')
                             <div class="text-danger">{{$message}}</div>
@@ -151,7 +151,7 @@
 
                     {{-- payroll_monthly_children_deduction --}}
                     <div class="form-group">
-                        <label for="payroll_monthly_children_deduction">Detrazioni figli a carico per questo mese (€)</label>
+                        <label for="payroll_monthly_children_deduction">Detrazioni figli a carico per questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_monthly_children_deduction" name="payroll_monthly_children_deduction" class="form-control" readonly>    
                         @error('payroll_monthly_children_deduction')
                             <div class="text-danger">{{$message}}</div>
@@ -160,7 +160,7 @@
 
                     {{-- payroll_monthly_employee_deduction --}}
                     <div class="form-group">
-                        <label for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese (€)</label>
+                        <label for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="form-control" readonly>    
                         @error('payroll_monthly_employee_deduction')
                             <div class="text-danger">{{$message}}</div>
@@ -169,7 +169,7 @@
 
                     {{-- payroll_total_surcharge --}}
                     <div class="form-group">
-                        <label for="payroll_total_surcharge">Addizionali totali, regionali + comunali (€)</label>
+                        <label for="payroll_total_surcharge">Addizionali totali, regionali + comunali &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="form-control" readonly>    
                         @error('payroll_total_surcharge')
                             <div class="text-danger">{{$message}}</div>
@@ -178,7 +178,7 @@
 
                     {{-- payroll_total_inps --}}
                     <div class="form-group">
-                        <label for="payroll_total_inps">INPS da pagare questo mese (€)</label>
+                        <label for="payroll_total_inps">INPS da pagare questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_total_inps" name="payroll_total_inps" class="form-control" readonly>    
                         @error('payroll_total_inps')
                             <div class="text-danger">{{$message}}</div>
@@ -188,7 +188,7 @@
                     
                     {{-- payroll_taxable_irpef --}}
                     <div class="form-group">
-                        <label for="payroll_taxable_irpef">Imponibile IRPEF annuale per questo mese (€)</label>
+                        <label for="payroll_taxable_irpef">Imponibile IRPEF annuale per questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="form-control" readonly>    
                         @error('payroll_taxable_irpef')
                         <div class="text-danger">{{$message}}</div>
@@ -197,7 +197,7 @@
                     
                     {{-- payroll_irpef_to_pay --}}
                     <div class="form-group">
-                        <label for="payroll_irpef_to_pay">IRPEF finale da pagare questo mese (€)</label>
+                        <label for="payroll_irpef_to_pay">IRPEF finale da pagare questo mese &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_irpef_to_pay" name="payroll_irpef_to_pay" class="form-control" readonly>    
                         @error('payroll_irpef_to_pay')
                             <div class="text-danger">{{$message}}</div>
@@ -207,7 +207,7 @@
                 
                     {{-- payroll_net_salary --}}
                     <div class="form-group">
-                        <label for="payroll_net_salary">Salario netto (€)</label>
+                        <label for="payroll_net_salary">Salario netto &#40;&euro;&#41;</label>
                         <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="form-control" readonly >  
                         @error('payroll_net_salary')
                             <div class="text-danger">{{$message}}</div>
