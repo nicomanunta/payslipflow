@@ -13,8 +13,8 @@
         
         {{-- table dettagli --}}
         <div class="modal-body border-0">
-          <h5 class="text-center text-uppercase border border-bottom-0 m-0 py-2 montserrat-bold">Dettagli generali</h5>
-          <table class="table mb-5">
+          <h6 class="text-center text-uppercase border border-bottom-0 m-0 py-2 montserrat-bold">Dettagli generali</h6>
+          <table class="table mb-5 ">
             <tbody class="roboto-regular table-50">
               <tr class="">
                 <td class="border border-bottom-0">
@@ -61,7 +61,7 @@
 
 
           {{-- table imposte --}}
-          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli imposte</h5>
+          <h6 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli imposte</h6>
           <table class="table mb-5">
             <tbody class="roboto-regular table-50">
               <tr>
@@ -83,7 +83,7 @@
           </table>
 
           {{-- table detrazioni --}}
-          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli irpef</h5>
+          <h6 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli irpef</h6>
           <table class="table mb-5">
             <tbody class="roboto-regular table-50">
               <tr>
@@ -113,8 +113,8 @@
           </table>
 
           {{-- table netto --}}
-          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">salario finale</h5>
-          <table class="table ">
+          <h6 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">salario finale</h6>
+          <table class="table mb-5">
             <tbody class="table-50">
               <tr>
                 <td class="border">
@@ -127,49 +127,31 @@
             </tbody>
           </table>
 
-          <div class="row">
-            <div class="col-6">
-              
+          @if ($item->extra->extra_notes)
+              <h6 class="py-2 text-uppercase montserrat-bold">note</h6>
+              <p>{{$item->extra->extra_notes}}</p>
+              <hr>
+          @endif
+
+          <div class="row pb-4 px-3">
+            <div class="col-3">
+              <span><b>Versamento:</b> {{ \Carbon\Carbon::parse($item->payroll_day_paid)->format('d-m-Y') }}</span>
             </div>
-            <div class="col-6">
-              <ul class="p-0">
-                
-          
-              </ul>
+            <div class="col-3 text-center">
+              <span><b>{{$employee->employee_name}} {{$employee->employee_surname}}</b></span>
+            </div>
+            <div class="col-3 text-center">
+              <span><b>{{$user->name}}</b></span>  
+            </div>
+            <div class="col-3 text-end">
+              <a href="{{route('admin.payrolls.edit', ['payroll' => $item->id])}}">
+                <button>
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </a>
             </div>
           </div>
-          
-          <ul class="p-0">
-             
-            <li class="mb-2"><b>Imponibile IRPEF:</b> {{$item->payroll_taxable_irpef}}&euro;.</li>  
-            
-            <li class="mb-2"><b>Mese:</b> {{$item->payroll_month}}.</li>  
-            <li class="mb-2"><b>Data versamento:</b> {{ \Carbon\Carbon::parse($item->payroll_day_paid)->format('d-m-Y') }}.</li>
-            <li class="mb-2"><b>IRPEF pagato:</b> {{$item->payroll_irpef_to_pay}}.</li>  
-            <li class="mb-2"><b>INPS pagato:</b> {{$item->payroll_total_inps}}.</li>  
-            <li class="mb-2"><b>Detrazione lavoratore dipendente:</b> {{$item->payroll_monthly_basic_deduction}}.</li>  
-            <li class="mb-2"><b>Detrazione familiari a carico:</b> {{$item->payroll_monthly_family_deduction}}.</li>  
-            <li class="mb-2"><b>Detrazione figli a carico:</b> {{$item->payroll_monthly_children_deduction}}.</li>  
-            <li class="mb-2"><b>Detrazioni totali:</b> {{$item->payroll_monthly_employee_deduction}}.</li>  
-            <li class="mb-2"><b>Addizionali &#40;regionali + comunali&#41;:</b> {{$item->payroll_total_surcharge}}.</li>  
-            <li class="mb-2"><b>Salario netto:</b> {{$item->payroll_net_salary}}.</li>  
-            <li class="mb-2"><b>Ore straordinari nei giorni feriali:</b> {{$item->extra->extra_weekday_overtime_hours}}.</li>  
-            <li class="mb-2"><b>Ore straordinari nel fine settimana:</b> {{$item->extra->extra_weekend_overtime_hours}}.</li>  
-            <li class="mb-2"><b>Ore straordinari nei giorni festivi:</b> {{$item->extra->extra_holiday_overtime_hours}}.</li>  
-            <li class="mb-2"><b>Rimborso spese:</b> {{$item->extra->extra_reimbursement_expenses}}.</li>  
-            <li class="mb-2"><b>Bonus/Premio lordo:</b> {{$item->extra->extra_bonus_rewards}}&euro;.</li>  
-
-          </ul>
         </div>
-        
-        {{-- <div class="modal-footer border-0">
-            <button type="button" class="btn" data-bs-dismiss="modal">Chiudi</button>
-                <form action="{{route('admin.employees.destroy', ['employee'=> $employee->id])}}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn ">Elimina</button>
-            </form>
-        </div> --}}
       </div>
     </div>
   </div>

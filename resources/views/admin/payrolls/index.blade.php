@@ -29,7 +29,7 @@
                                 <td>
                                     <a href="{{route('admin.payrolls.edit', ['payroll' => $payroll->id])}}">
                                         <button>
-                                            <i class="fa-solid fa-euro-sign"></i>
+                                            <i class="fa-regular fa-pen-to-square"></i>
                                         </button>
                                     </a>
                                 </td>

@@ -419,6 +419,10 @@
                 let totalDeduction = (basicDeduction + familyDeduction + childrenDeduction) ;
                 console.log('Detrazioni totali all anno sono di €' + totalDeduction);
 
+                const monthlyBasicDeduction = basicDeduction / 12;
+                const monthlyFamilyDeduction = familyDeduction / 12;
+                const monthlyChildrenDeduction = childrenDeduction / 12;
+
                 const monthlyDeduction = totalDeduction / 12;
                 console.log('Detrazioni di questo mese sono di €' + monthlyDeduction);
     
