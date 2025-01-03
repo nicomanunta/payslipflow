@@ -11,12 +11,12 @@
         <button type="button" class="btn-close text-end position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
         <h3 class="modal-title text-center mt-4 mb-2 montserrat-bold" id="modalInfoPayrollLabel"> busta paga di "{{$employee->employee_name}} {{$employee->employee_surname}}" del "{{$item->payroll_month}}"</h3>
         
+        {{-- table dettagli --}}
         <div class="modal-body border-0">
-
-          <table class="table">
-            <h5 class="text-center text-uppercase border border-bottom-0 m-0 py-2 montserrat-bold">Dettagli</h5>
-            <tbody class="rorboto-regular">
-              <tr class="table-50">
+          <h5 class="text-center text-uppercase border border-bottom-0 m-0 py-2 montserrat-bold">Dettagli generali</h5>
+          <table class="table mb-5">
+            <tbody class="roboto-regular table-50">
+              <tr class="">
                 <td class="border border-bottom-0">
                   <b>Ore straordinari nei giorni feriali:</b> {{$item->extra->extra_weekday_overtime_hours}}. 
                 </td>
@@ -44,35 +44,88 @@
                 <td class="border-start border-end">
                   <b>Ore straordinari nei giorni festivi:</b> {{$item->extra->extra_holiday_overtime_hours}}.
                 </td>
-                <td class="border-0">
-                  
+                <td class="border">
+                  <b>Bonus/Premio lordo:</b> {{$item->extra->extra_bonus_rewards}}&euro; 
                 </td>
               </tr>
               <tr>
-                <td class="border border-bottom-0"> 
-                  <b>Bonus/Premio lordo:</b> {{$item->extra->extra_bonus_rewards}}&euro;.
+                <td class=" border-0"> 
                 </td>
                 <td class="border ">
-                  <b>Salario lordo:</b> {{$contract->contract_gross_monthly_salary}}&euro;.</li>  
+                  <b>Rimborso spese:</b> {{$item->extra->extra_reimbursement_expenses}}&euro;
                 </td>
               </tr>
+              
+            </tbody>
+          </table>
+
+
+          {{-- table imposte --}}
+          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli imposte</h5>
+          <table class="table mb-5">
+            <tbody class="roboto-regular table-50">
               <tr>
-                <td class="border-start">
-                  <b>Rimborso spese:</b> {{$item->extra->extra_reimbursement_expenses}}&euro;.
+                <td class="border ">
+                  <b>INPS:</b> {{$item->payroll_total_inps}}&euro;
                 </td>
-                <td class="border-start border-end">
-                  <b>Salario netto:</b> {{$item->payroll_net_salary}}&euro;.</li>
+                <td class="border ">
+                  <b>IRPEF:</b> {{$item->payroll_irpef_to_pay}}&euro;
+                </td> 
+              </tr>
+              <tr>
+                <td class="border-0 "> 
+                </td>
+                <td class="border  ">
+                  <b>Addizionali &#40;regionali + comunali&#41;:</b> {{$item->payroll_total_surcharge}}&euro;
                 </td>
               </tr>
             </tbody>
           </table>
 
+          {{-- table detrazioni --}}
+          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">dettagli irpef</h5>
+          <table class="table mb-5">
+            <tbody class="roboto-regular table-50">
+              <tr>
+                <td class="border ">
+                  <b>Imponibile IRPEF:</b> {{$item->payroll_taxable_irpef}}&euro;
+                </td>
+                <td class="border border-bottom-0  ">
+                  <b>Detrazione lavoratore dipendente:</b> {{$item->payroll_monthly_basic_deduction}}&euro;
+                </td> 
+              </tr>
+              <tr>
+                <td class=" border-0"> 
+                </td>
+                <td class="border border-top-0 border-bottom-0">
+                  <b>Detrazione familiari a carico:</b> {{$item->payroll_monthly_family_deduction}}&euro;
+                </td>
+              </tr>
+              <tr>
+                <td class=" border "> 
+                  <b>Detrazioni totali:</b> {{$item->payroll_monthly_employee_deduction}}&euro;
+                </td>
+                <td class="border border-top-0 ">
+                  <b>Detrazione figli a carico:</b> {{$item->payroll_monthly_children_deduction}}&euro;
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-
-
-
-
-
+          {{-- table netto --}}
+          <h5 class="text-center text-uppercase border border-bottom-0  m-0 py-2 montserrat-bold">salario finale</h5>
+          <table class="table ">
+            <tbody class="table-50">
+              <tr>
+                <td class="border">
+                  <b>Salario lordo:</b> {{$contract->contract_gross_monthly_salary}}&euro;
+                </td>
+                <td class="border">
+                  <b>Salario netto:</b> {{$item->payroll_net_salary}}&euro;
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <div class="row">
             <div class="col-6">

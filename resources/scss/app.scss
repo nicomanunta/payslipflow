@@ -20,7 +20,7 @@
     font-weight: 500;
     font-style: normal;
 }
-.rorboto-regular{ //per testi
+.roboto-regular{ //per testi
     font-family: "Roboto", serif;
     font-weight: 400;
     font-style: normal;
@@ -110,7 +110,8 @@ td, th {
     vertical-align: middle;
     text-transform: uppercase;
 }
-.table-50 td{
+.table-50 > tr > td{
     width: 50%;
 }
+
 
