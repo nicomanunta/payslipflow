@@ -25,8 +25,9 @@ class EmployeeController extends Controller
     {
         
         $employees = Employee::latest()->get();
+        $user = $employees->first()?->user;
 
-        return view('admin.employees.index', compact('employees'));
+        return view('admin.employees.index', compact('employees', 'user'));
     }
 
     /**

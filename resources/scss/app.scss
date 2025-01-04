@@ -36,10 +36,10 @@
     color: #1F2937;
 }
 .steel-blue{ //per sottotitoli  
-    color: #3B82F6;
+    color: #3B82F6 !important;
 }
 .medium-grey{ //per testi
-    color: #4B5563;
+    color: #4B5563 !important;
 }
 .bg-steel-blue{ //background per bottoni, testo bianco
     background-color: #3B82F6;
@@ -54,6 +54,12 @@
     background-color: #EFF6FF;
 }
 
+.text-shadow-blue{
+    text-shadow: 2px 2px 2px #3b83f63f;
+}
+.text-shadow-grey{
+    text-shadow: 2px 2px 2px #1f29376f;
+}
 
 
 
@@ -79,6 +85,46 @@ td, th {
     vertical-align: middle; 
 }
 
+// FILE EMPLOYEE INDEX
+.btn-add-employee{
+    background-color: #3B82F6;
+    color: white;
+    height: 30px;
+    border-radius: 7px;
+    font-size: 15px;
+    padding: 2px 10px;
+    box-shadow: 3px 3px 3px #3b83f63f;
+
+    &:hover{
+        background-color: #10B981;
+    }
+    &:active{
+        background-color: #0d9a6b;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    }
+}
+
+
+
+.btn-tools-index{
+    background-color: #3B82F6;
+    color: white;
+    width: 30px; 
+    height: 30px;
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 3px 3px 3px #3b83f63f;
+
+    &:hover{
+        background-color: #10B981;
+    }
+    &:active{
+        background-color: #0d9a6b;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    }
+}
 
 // FILE EMPLOYEE SHOW
 .show-employee-img {

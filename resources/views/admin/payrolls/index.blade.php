@@ -2,33 +2,33 @@
     <div class="container ">
         <div class="row">
             <div class="col-12">
-                <h1>Elenco buste paga</h1>
-                <table class="table">
+                <h1 class="text-shadow-grey text-center text-uppercase mt-4 montserrat-bold dark-grey">Buste paga {{$user->name}}</h1>
+                <table class="table border mt-4">
                     <thead>
-                      <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Cognome</th>
-                        <th scope="col">Ruolo</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Mese-Anno</th>
-                        <th scope="col">Salario netto</th>
-                        <th scope="col">Tools</th>
+                      <tr class="poppins-medium text-shadow-blue">
+                        <th scope="col" class="dark-grey">Nome</th>
+                        <th scope="col" class="dark-grey">Cognome</th>
+                        <th scope="col" class="dark-grey">Ruolo</th>
+                        <th scope="col" class="dark-grey">Status</th>
+                        <th scope="col" class="dark-grey">Mese-Anno</th>
+                        <th scope="col" class="dark-grey">Salario netto</th>
+                        <th scope="col" class="dark-grey">Tools</th>
                       </tr>
                     </thead>
                     <tbody>
                         @foreach ($payrolls as $payroll)
-                            <tr>
+                            <tr class="text-shadow roboto-regular">
                                 
-                                <td>{{ $payroll->employee->employee_name }}</td>
-                                <td>{{ $payroll->employee->employee_surname }}</td>
-                                <td>{{ $payroll->employee->employee_role }}</td>
-                                <td>{{ $payroll->employee->employee_status }}</td>
+                                <td class="medium-grey">{{ $payroll->employee->employee_name }}</td>
+                                <td class="medium-grey">{{ $payroll->employee->employee_surname }}</td>
+                                <td class="medium-grey">{{ $payroll->employee->employee_role }}</td>
+                                <td class="medium-grey">{{ $payroll->employee->employee_status }}</td>
                 
-                                <td>{{ $payroll->payroll_month }}</td>
-                                <td>{{ $payroll->payroll_net_salary }}</td>
-                                <td>
+                                <td class="medium-grey">{{ $payroll->payroll_month }}</td>
+                                <td class="medium-grey">{{ $payroll->payroll_net_salary }}&euro;</td>
+                                <td class="medium-grey">
                                     <a href="{{route('admin.payrolls.edit', ['payroll' => $payroll->id])}}">
-                                        <button>
+                                        <button class="btn-tools-index">
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </button>
                                     </a>
