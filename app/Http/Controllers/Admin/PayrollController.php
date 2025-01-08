@@ -24,8 +24,11 @@ class PayrollController extends Controller
         $payrolls = Payroll::with('employee')->latest()->get();
         $employees = Employee::latest()->get();
         $user = $employees->first()?->user;
+        $employee = Employee::find($payrolls->first()->employee_id);
+        $contract = Contract::find($payrolls->first()->contract_id);
+        
 
-        return view('admin.payrolls.index', compact('payrolls', 'employees', 'user'));
+        return view('admin.payrolls.index', compact('payrolls', 'employees', 'user', 'employee', 'contract'));
     }
 
     /**
@@ -88,6 +91,7 @@ class PayrollController extends Controller
      */
     public function show(Payroll $payroll)
     {
+       
         
     }
 

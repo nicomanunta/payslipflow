@@ -16,22 +16,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($payrolls as $payroll)
+                        @foreach ($payrolls as $item)
                             <tr class="text-shadow roboto-regular">
                                 
-                                <td class="medium-grey">{{ $payroll->employee->employee_name }}</td>
-                                <td class="medium-grey">{{ $payroll->employee->employee_surname }}</td>
-                                <td class="medium-grey">{{ $payroll->employee->employee_role }}</td>
-                                <td class="medium-grey">{{ $payroll->employee->employee_status }}</td>
+                                <td class="medium-grey">{{ $item->employee->employee_name }}</td>
+                                <td class="medium-grey">{{ $item->employee->employee_surname }}</td>
+                                <td class="medium-grey">{{ $item->employee->employee_role }}</td>
+                                <td class="medium-grey">{{ $item->employee->employee_status }}</td>
                 
-                                <td class="medium-grey">{{ $payroll->payroll_month }}</td>
-                                <td class="medium-grey">{{ $payroll->payroll_net_salary }}&euro;</td>
+                                <td class="medium-grey">{{ $item->payroll_month }}</td>
+                                <td class="medium-grey">{{ $item->payroll_net_salary }}&euro;</td>
                                 <td class="medium-grey">
-                                    <a href="{{route('admin.payrolls.edit', ['payroll' => $payroll->id])}}">
-                                        <button class="btn-tools-index">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                        </button>
-                                    </a>
+                                    <button data-bs-toggle="modal" data-bs-target="#modalInfoPayroll{{ $item->id }}" class="btn-tools-index"><i class="fa-regular fa-eye"></i></button>
+                                    <a href="{{route('admin.payrolls.edit', ['payroll' => $item->id])}}"><button class="btn-tools-index"><i class="fa-regular fa-pen-to-square"></i></button></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -40,4 +37,7 @@
             </div>
         </div>
     </div>
+    @foreach ($payrolls as $item)
+        @include('admin.payrolls.partials.modal_info_payroll', ['payroll_id' => $item->id])
+    @endforeach
 </x-app-layout>

@@ -145,7 +145,7 @@
             </div>
             <div class="col-3 text-end">
               <a href="{{route('admin.payrolls.edit', ['payroll' => $item->id])}}">
-                <button>
+                <button class="btn-tools-index">
                   <i class="fa-regular fa-pen-to-square"></i>
                 </button>
               </a>
