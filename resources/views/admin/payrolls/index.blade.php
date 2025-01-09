@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="container ">
+    <div style="min-height: 100vh;" class="container position-relative">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-shadow-grey text-center text-uppercase mt-4 montserrat-bold dark-grey">Buste paga {{$user->name}}</h1>
-                <table class="table border mt-4">
+                <h1 class="text-shadow-grey text-center text-uppercase mt-5 montserrat-bold dark-grey">Buste paga {{$user->name}}</h1>
+                <table class="table border mt-5">
                     <thead>
                       <tr class="poppins-medium text-shadow-blue">
                         <th scope="col" class="dark-grey">Nome</th>
@@ -36,7 +36,9 @@
                   </table>
             </div>
         </div>
+        <img class="logo-payslipflow-dashboard position-absolute" src="{{URL::asset('/img/logo-scritta-sfondo-bianco.jpeg')}}" alt="">
     </div>
+
     @foreach ($payrolls as $item)
         @include('admin.payrolls.partials.modal_info_payroll', ['payroll_id' => $item->id])
     @endforeach

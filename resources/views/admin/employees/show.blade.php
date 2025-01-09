@@ -32,7 +32,7 @@
             </div>
                 
             <div class="row mx-1 mt-5">
-                <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue">Dati personali</h3>
+                <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Dati personali</h3>
                 <div class="col-7 roboto-regular medium-grey">
                     <ul class="p-0">
                         <li class="mb-2"><b class="text-shadow-blue">Email:</b> {{$employee->employee_email}}</li>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="row mx-1 mt-5">
-                <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue">Contratto attivo</h3>
+                <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Contratto attivo</h3>
                 <div class="col-7 roboto-regular medium-grey">
                     <ul class="p-0">
                         <li class="mb-2"><b class="text-shadow-blue">Nome:</b> {{$contract->contract_name}}</li>
@@ -73,7 +73,7 @@
             </div>
             @if ($payroll && $payroll->isNotEmpty())
                 <div class="row mx-1 mt-5">
-                    <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue">Ultime due buste paga </h3>    
+                    <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Ultime due buste paga </h3>    
                     @foreach ($payroll as $item)
                         <div class="col-7 mt-3 roboto-regular medium-grey">
                             <ul class="p-0 ">

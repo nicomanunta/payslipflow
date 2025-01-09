@@ -1,10 +1,10 @@
 
 <x-app-layout>
-    <div class="container ">
+    <div style="min-height: 100vh;" class=" container position-relative">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-shadow-grey text-center text-uppercase mt-4 montserrat-bold dark-grey">dipendenti {{$user->name}}</h1>
-                <a href="{{route('admin.employees.create')}}"><button class="btn-add-employee my-3 text-uppercase montserrat-bold">aggiungi un dipendente <b>+</b></button></a>
+                <h1 class="text-shadow-grey text-center text-uppercase mt-5 montserrat-bold dark-grey">dipendenti {{$user->name}}</h1>
+                <a href="{{route('admin.employees.create')}}"><button class="btn-add-employee mt-4 mb-3 text-uppercase montserrat-bold">aggiungi un dipendente <b>+</b></button></a>
                 
                 <table class="table border mt-2">
                     <thead>
@@ -62,6 +62,7 @@
                   </table>
             </div>
         </div>
+        <img class="logo-payslipflow-dashboard position-absolute" src="{{URL::asset('/img/logo-scritta-sfondo-bianco.jpeg')}}" alt="">
     </div>
     @foreach ($employees as $employee)
         @include('admin.employees.partials.modal_delete_employee', ['employee_id' => $employee->id])

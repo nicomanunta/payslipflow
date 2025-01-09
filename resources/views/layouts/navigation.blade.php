@@ -1,9 +1,9 @@
 
 
-<nav x-data="{ open: false }" class="h-100 bg-steel-blue border-b  overflow-x-hidden overflow-y-auto">
+<nav x-data="{ open: false }" class="h-100  bg-steel-blue border-b  overflow-x-hidden overflow-y-auto">
     <!-- Primary Navigation Menu -->
    
-    <div class="container">
+    <div class="container py-4 h-100 ">
         {{-- <div class="row mt-3 ">
             <!-- Logo -->
             <div class="col-3"></div>
@@ -14,72 +14,103 @@
             </div>
             
         </div> --}}
-        <div class="row mt-4">
+        <div class="h-100  row d-flex flex-column justify-content-between text-uppercase ">
+            <div class="col-12 ">
+                <div class="row ">
+                    <div class="col-12">
+                        <a href="{{route('dashboard')}}">
+                            <div class="d-flex justify-content-center">
+                                <div class="logo-navbar">
+                                    <img class="" src="{{ asset('storage/' . Auth::user()->user_img) }}" alt="">
+                                </div>   
+                            </div>
+                        </a>    
+                        <ul class="p-0 mt-3 list-navbar montserrat-bold text-shadow-grey ">
+                            <li class="my-5">
+                                <a class="text-decoration-none" href="{{route('dashboard')}}">
+                                    <div class="row ">
+                                        <div class="col-3 text-center">
+                                            <i class="fs-4 fa-solid fa-home "></i>
+                                        </div>
+                                        <div class="col-9 text-center ">
+                                            <span>Homepage</span>
+                                            {{-- <span>{{Auth::user()->name}}</span> --}}
+                                        </div>
+                                    </div>    
+                                </a>
+                            </li>
+                            <li class="my-5">
+                                <a class="text-decoration-none" href="{{route('admin.employees.index')}}">
+                                    <div class="row ">
+                                        <div class="col-3 text-center">
+                                            <i class="fs-4 fa-solid fa-users "></i>
+                                        </div>
+                                        <div class="col-9 text-center ">
+                                            <span>Elenco dipendenti</span>
+                                        </div>
+                                    </div>    
+                                </a>
+                            </li>
+                            <li class="my-5">
+                                <a class="text-decoration-none" href="{{route('admin.employees.create')}}">
+                                    <div class="row ">
+                                        <div class="col-3 text-center">
+                                            <i class="fs-4 fa-solid fa-user-plus "></i>
+                                        </div>
+                                        <div class="col-9 text-center">
+                                            <span>Aggiungi dipendente</span>
+                                        </div>   
+                                    </div>
+                                </a>
+                            </li>
+                            
+                            <li class="my-5">
+                                <a class="text-decoration-none" href="{{route('admin.payrolls.index')}}">
+                                    <div class="row ">
+                                        <div class="col-3 text-center">
+                                            <i class="fs-4 fa-solid fa-table-list"></i>
+                                        </div>
+                                        <div class="col-9 text-center">
+                                            <span>Elenco bustepaga </span>
+                                        </div>   
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="my-5">
+                                <a class="text-decoration-none" href="{{route('profile.edit')}}">
+                                    <div class="row ">
+                                        <div class="col-3 text-center">
+                                            <i class="fs-4 fa-regular fa-building"></i>
+                                        </div>
+                                        <div class="col-9 text-center">
+                                            <span>Profilo {{Auth::user()->name}}</span>
+                                        </div>   
+                                    </div>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="col-12">
-                <ul class="p-0 mt-3 list-navbar poppins-medium text-shadow-blue ">
-                    <li class="my-4">
-                        <a class="text-decoration-none" href="{{route('dashboard')}}">
-                            <div class="row ">
-                                <div class="col-3 text-center">
-                                    <i class="fs-4 fa-solid fa-home "></i>
-                                </div>
-                                <div class="col-9 text-center ">
-                                    <span>{{Auth::user()->name}}</span>
-                                </div>
-                            </div>    
-                        </a>
-                    </li>
-                    <li class="my-4">
-                        <a class="text-decoration-none" href="{{route('admin.employees.index')}}">
-                            <div class="row ">
-                                <div class="col-3 text-center">
-                                    <i class="fs-4 fa-solid fa-users "></i>
-                                </div>
-                                <div class="col-9 text-center ">
-                                    <span>Elenco dipendenti</span>
-                                </div>
-                            </div>    
-                        </a>
-                    </li>
-                    <li class="my-4">
-                        <a class="text-decoration-none" href="{{route('admin.employees.create')}}">
-                            <div class="row ">
-                                <div class="col-3 text-center">
-                                    <i class="fs-4 fa-solid fa-user-plus "></i>
-                                </div>
-                                <div class="col-9 text-center">
-                                    <span>Aggiungi dipendente</span>
-                                </div>   
-                            </div>
-                        </a>
-                    </li>
-                    
-                    <li class="my-4">
-                        <a class="text-decoration-none" href="{{route('admin.payrolls.index')}}">
-                            <div class="row ">
-                                <div class="col-3 text-center">
-                                    <i class="fs-4 fa-solid fa-table-list"></i>
-                                </div>
-                                <div class="col-9 text-center">
-                                    <span>Elenco bustepaga</span>
-                                </div>   
-                            </div>
-                        </a>
-                    </li>
-                    
-                </ul>
+
+                <div class="row d-flex justify-content-center mt-5 ">
+                    <div class="col-12"></div>
+                    <img class="logo-payslipflow-navbar " src="{{URL::asset('/img/logo-scritta-blu.jpeg')}}" alt="">
+                </div>
             </div>
         </div>
-        <div class="row mt-5">
+        {{-- <div class="row mt-5">
             <h4 class="ms-2">
                 <a :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     {{Auth::user()->name}}
                 </a>   
             </h4>
-        </div>
+        </div> --}}
 
         <!-- Settings Dropdown -->
-        <div class="hidden sm:flex sm:items-center sm:ms-6">
+        {{-- <div class="hidden sm:flex sm:items-center sm:ms-6">
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -110,7 +141,7 @@
                     </form>
                 </x-slot>
             </x-dropdown>
-        </div>
+        </div> --}}
         
 
         <!-- Hamburger -->
