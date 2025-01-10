@@ -63,7 +63,7 @@
         </div>
         <div>
             <x-input-label for="user_img" :value="__('Immagine Aziendale')" />
-            <input id="user_img" name="user_img" type="file" class="mt-1 block w-full form-control" />
+            <input id="user_img" name="user_img" type="file" class="mt-1 block w-full form-control border-steel-blue" />
             <x-input-error class="mt-2" :messages="$errors->get('user_img')" />
         </div>
 

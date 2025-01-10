@@ -404,8 +404,8 @@ hr{
     border: 2px solid #3B82F6 !important;
     box-shadow: none;
 }
-.border-steel-blue{
-    width: 80%;
+.long-input{
+    width: 70%;
 }
 .btn-save{
     background-color: #3B82F6;
@@ -424,4 +424,10 @@ hr{
         box-shadow: 4px 4px 4px #3b83f63f;
         scale: 0.98;
     }
+}
+.bg-container-form{
+    background-color: white;
+}
+.form-group > label{
+    font-weight:bold ;
 }
