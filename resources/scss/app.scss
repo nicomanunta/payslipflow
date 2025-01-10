@@ -323,4 +323,25 @@ hr{
 
 }
 
+// edit profile
+
+.btn-edit-profile{
+    
+    background-color: #3B82F6;
+    color: white;
+    padding: 0px 10px; 
+    height: 30px;
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 3px 3px 3px #3b83f63f;
+
+    &:hover{
+        background-color: #10B981;
+    }
+    &:active{
+        background-color: #0d9a6b;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    }
+}
 
