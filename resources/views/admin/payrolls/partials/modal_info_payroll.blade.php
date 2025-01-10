@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade mt-1" id="modalInfoPayroll{{ $item->id }}" tabindex="-1" aria-labelledby="modalInfoPayrollLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <div class="modal-dialog modal-dialog-show-payrolls">
       <div class="modal-content border-0 bg-modal">
         <div class="modal-header position-relative  border-0 text-center">
           <div class="logo-container mt-2">
@@ -8,7 +8,7 @@
             <img class="ms-2" src="{{ $employee->employee_img ? asset('storage/' . $employee->employee_img) : URL::asset('/img/profilo-vuoto.jpeg') }}" alt="">         
           </div>
         </div>
-        <button type="button" class="btn-close text-end position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close text-end position-absolute btn-close-show-payrolls" data-bs-dismiss="modal" aria-label="Close"></button>
         <h3 class="modal-title text-center mt-4 mb-2 montserrat-bold" id="modalInfoPayrollLabel"> busta paga di "{{$employee->employee_name}} {{$employee->employee_surname}}" del "{{$item->payroll_month}}"</h3>
         
         {{-- table dettagli --}}

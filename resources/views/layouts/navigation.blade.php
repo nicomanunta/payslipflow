@@ -88,6 +88,22 @@
                                     </div>
                                 </a>
                             </li>
+                            <li class="my-5">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{route('logout')}}" class="text-decoration-none" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <div class="row ">
+                                            <div class="col-3 text-center">
+                                                <i class="fs-4 fa-solid fa-right-from-bracket"></i>
+                                            </div>
+                                            <div class="col-9 text-center">
+                                                {{ __('Esci') }}
+                                            </div>   
+                                        </div>
+                                    </a>   
+                                </form>
+                            </li>
+                            
                             
                         </ul>
                     </div>

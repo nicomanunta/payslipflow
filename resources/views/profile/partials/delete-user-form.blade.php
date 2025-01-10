@@ -19,8 +19,8 @@
             @csrf
             @method('delete')
 
-            <h2 class="montserrat-bold dark-grey text-shadow-grey ">
-                {{ __('Sei sicuro di voler eliminare il tuo account?') }}
+            <h2 class="mb-3  montserrat-bold dark-grey text-shadow-grey ">
+                {{ __('Sei sicuro di voler eliminare questo profilo aziendale?') }}
             </h2>
 
             <p class="poppins-medium steel-blue">
@@ -43,7 +43,7 @@
 
             <div class="mt-6 flex justify-end">
                 <x-secondary-button class=" montserrat-bold text-uppercase" x-on:click="$dispatch('close')">
-                    {{ __('Cancella') }}
+                    {{ __('Chiudi') }}
                 </x-secondary-button>
 
                 <x-danger-button class="ms-3 montserrat-bold text-uppercase">

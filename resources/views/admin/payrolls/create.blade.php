@@ -1,5 +1,4 @@
-@extends('layouts.style')
-@section('content')
+<x-app-layout>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -490,5 +489,4 @@
             calculateNetSalary();
         });
     </script>
-    
-@endsection
+</x-app-layout>

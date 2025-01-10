@@ -175,7 +175,7 @@ td, th {
     scale: 0.95;
 }
 // modale show payrolls
-.modal-dialog{
+.modal-dialog-show-payrolls{
     min-width: 70%;   
 }
 
@@ -192,7 +192,7 @@ td, th {
     display: inline-flex;
     
 }
-.btn-close{
+.btn-close-show-payrolls{
     margin-left: 0px !important;
     right: 2%;
     top: 2%;
@@ -212,7 +212,7 @@ hr{
 
 
 //navbar
-.list-navbar > li > a{
+.list-navbar > li > a, .list-navbar > li > form > a{
     color: white;
     font-weight: bold;  
     font-size: 17px;
@@ -222,6 +222,7 @@ hr{
         text-shadow: 4px 4px 4px #1f2937b6;
     }
 }
+
 .list-navbar > li{
     transition: scale 0.5s;
     transform-origin: 30%;
@@ -344,4 +345,83 @@ hr{
         scale: 0.98;
     }
 }
+.btn-danger-eliminate{
+    height: 30px;
+    background-color: #EF4444;
+    color: white;
+    padding: 0px 10px; 
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 3px 3px 3px #3b83f63f;
 
+    &:hover{
+        background-color: #f74949;
+    }
+    &:active{
+        background-color: #F87171;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    }   
+}
+.btn-delete{
+    height: 30px;
+    background-color: #F3F4F6;
+    color: #1F2937;
+    padding: 0px 10px;
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 3px 3px 3px #3b83f63f;
+    &:hover{
+        background-color: #f3f4f6b3;
+    }
+    &:active{
+        background-color: #e2e3e4;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    } 
+
+}
+
+// modal delete employee
+.btn-close-modal-delete{
+    margin-left: 0px !important;
+    right: 3%;
+    top: 25%;
+}
+
+.modal-dialog-delete-employees{
+    max-width: 42rem;
+   
+}
+.modal-title{
+    text-transform: none;
+}
+
+
+// create employee
+
+.border-steel-blue:focus{
+    border: 2px solid #3B82F6 !important;
+    box-shadow: none;
+}
+.border-steel-blue{
+    width: 80%;
+}
+.btn-save{
+    background-color: #3B82F6;
+    color: white;
+    padding: 0px 10px; 
+    height: 30px;
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 3px 3px 3px #3b83f63f;
+
+    &:hover{
+        background-color: #10B981;
+    }
+    &:active{
+        background-color: #0d9a6b;
+        box-shadow: 4px 4px 4px #3b83f63f;
+        scale: 0.98;
+    }
+}
