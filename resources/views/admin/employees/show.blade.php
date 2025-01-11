@@ -30,7 +30,7 @@
                 </div>
                 
             </div>
-                
+            {{-- DATI PERSONALI --}}
             <div class="row mx-1 mt-5">
                 <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Dati personali</h3>
                 <div class="col-7 roboto-regular medium-grey">
@@ -48,6 +48,8 @@
                     </ul>
                 </div>
             </div>
+            {{-- CONTRATTO ATTIVO --}}
+            @if ($contract)  
             <div class="row mx-1 mt-5">
                 <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Contratto attivo</h3>
                 <div class="col-7 roboto-regular medium-grey">
@@ -71,6 +73,8 @@
                     </ul>
                 </div>
             </div>
+            @endif
+            {{-- ULTIME DUE BUSTE PAGA --}}
             @if ($payroll && $payroll->isNotEmpty())
                 <div class="row mx-1 mt-5">
                     <h3 class="pb-2 poppins-medium steel-blue text-shadow-blue text-uppercase">Ultime due buste paga </h3>    
