@@ -1,11 +1,11 @@
 <x-app-layout>
     <div class="container position-relative">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 my-4">
                 @if (request()->has('employee_id') && $selectedEmployee = $employees->firstWhere('id', request()->input('employee_id')))
-                    <h1 class="text-uppercase montserrat-bold dark-grey text-shadow-grey text-center my-4">Compila la busta paga di "{{$employees->employee_name}} {{$employees->employee_surname}}"</h1>    
+                    <h1 class="text-uppercase montserrat-bold dark-grey text-shadow-grey text-center ">Compila la busta paga di "{{$employees->employee_name}} {{$employees->employee_surname}}"</h1>    
                 @else
-                    <h1 class="text-uppercase montserrat-bold dark-grey text-shadow-grey text-center my-4">Compila la busta paga </h1>      
+                    <h1 class="text-uppercase montserrat-bold dark-grey text-shadow-grey text-center ">Compila la busta paga </h1>      
                 @endif
             </div>
             <div class="col-12 ">
@@ -22,7 +22,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue " for="employee_name">Nome e Cognome</label>
                                 {{-- Se l'employee_id è passato nella query string --}}
                                 <input type="hidden" name="employee_id" value="{{ $selectedEmployee->id }}">
-                                <input type="text" class="form-control border-steel-blue long-input" value="{{ $selectedEmployee->employee_name }} {{ $selectedEmployee->employee_surname }}" disabled>
+                                <input type="text" class="roboto-regular medium-grey form-control border-steel-blue long-input" value="{{ $selectedEmployee->employee_name }} {{ $selectedEmployee->employee_surname }}" disabled>
                             </div>
                             @else
                                 {{-- Se l'employee_id non è passato, mostra il select --}}
@@ -42,7 +42,7 @@
                             {{-- payroll_month --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_month">Mese</label>
-                                <input class="form-control border-steel-blue long-input" type="text" name="payroll_month" id="payroll_month" placeholder="MM-YYYY" value="{{old('payroll_month')}}">
+                                <input class="form-control roboto-regular medium-grey border-steel-blue long-input" type="text" name="payroll_month" id="payroll_month" placeholder="MM-YYYY" value="{{old('payroll_month')}}">
                                 @error('payroll_month')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -52,7 +52,7 @@
                             {{-- payroll_day_paid --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_day_paid">Data di pagamento</label>
-                                <input type="date" class="form-control border-steel-blue long-input" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
+                                <input type="date" class="form-control roboto-regular medium-grey border-steel-blue long-input" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
                                 @error('payroll_day_paid')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -60,8 +60,8 @@
 
                             {{-- extra_notes --}}
                             <div class="form-group my-3 d-flex flex-column flex-grow-1">
-                                <label class=" fw-bold  roboto-regular medium-grey text-shadow-blue" for="extra_notes">Note</label>
-                                <textarea style="height:100%;" name="extra_notes" id="extra_notes" class="form-control border-steel-blue long-input flex-grow-1" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
+                                <label class="my-1 fw-bold roboto-regular medium-grey text-shadow-blue" for="extra_notes">Note</label>
+                                <textarea name="extra_notes" id="extra_notes" class="form-control roboto-regular medium-grey border-steel-blue long-input flex-grow-1" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
                                 @error('extra_notes')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -70,9 +70,9 @@
 
                         <div class="col-6">
                             {{-- extra_weekday_overtime_hours --}}
-                            <div class="form-group ">
+                            <div class="form-group mb-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekday_overtime_hours">Ore di straordinario nei giorni feriali</label>
-                                <input type="time" class="form-control border-steel-blue long-input" name="extra_weekday_overtime_hours" id="extra_weekday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni feriali" value="{{old('extra_weekday_overtime_hours', '00:00')}}">
+                                <input type="time" class="form-control roboto-regular medium-grey border-steel-blue long-input" name="extra_weekday_overtime_hours" id="extra_weekday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni feriali" value="{{old('extra_weekday_overtime_hours', '00:00')}}">
                                 @error('extra_weekday_overtime_hours')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -81,7 +81,7 @@
                             {{-- extra_weekend_overtime_hours --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekend_overtime_hours">Ore di straordinario nel fine settimana</label>
-                                <input type="time" class="form-control border-steel-blue long-input" name="extra_weekend_overtime_hours" id="extra_weekend_overtime_hours" placeholder="Numero di ore di straordinario nel fine settimana" value="{{old('extra_weekend_overtime_hours', '00:00')}}">
+                                <input type="time" class="form-control roboto-regular medium-grey border-steel-blue long-input" name="extra_weekend_overtime_hours" id="extra_weekend_overtime_hours" placeholder="Numero di ore di straordinario nel fine settimana" value="{{old('extra_weekend_overtime_hours', '00:00')}}">
                                 @error('extra_weekend_overtime_hours')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -90,7 +90,7 @@
                             {{-- extra_holiday_overtime_hours --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_holiday_overtime_hours">Ore di straordinario nei giorni festivi</label>
-                                <input type="time" class="form-control border-steel-blue long-input" name="extra_holiday_overtime_hours" id="extra_holiday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni festivi" value="{{old('extra_holiday_overtime_hours', '00:00')}}">
+                                <input type="time" class="form-control roboto-regular medium-grey border-steel-blue long-input" name="extra_holiday_overtime_hours" id="extra_holiday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni festivi" value="{{old('extra_holiday_overtime_hours', '00:00')}}">
                                 @error('extra_holiday_overtime_hours')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -98,7 +98,7 @@
 
                             {{-- extra_thirteenth_salary --}}
                             <div class="form-group my-3 form-check">
-                                <input type="checkbox" class="form-check-input" name="extra_thirteenth_salary" id="extra_thirteenth_salary" value="1" 
+                                <input type="checkbox" class="form-check-input roboto-regular medium-grey" name="extra_thirteenth_salary" id="extra_thirteenth_salary" value="1" 
                                 {{ old('extra_thirteenth_salary') ? 'checked' : '' }}>
                                 <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_thirteenth_salary">Tredicesima</label>
                                 @error('extra_thirteenth_salary')
@@ -108,7 +108,7 @@
                             
                             {{-- extra_fourteenth_salary --}}
                             <div class="form-group my-3 form-check">
-                                <input type="checkbox" class="form-check-input" name="extra_fourteenth_salary" id="extra_fourteenth_salary" value="1" 
+                                <input type="checkbox" class="form-check-input roboto-regular medium-grey" name="extra_fourteenth_salary" id="extra_fourteenth_salary" value="1" 
                                 {{ old('extra_fourteenth_salary') ? 'checked' : '' }}>
                                 <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_fourteenth_salary">Quattordicesima</label>
                                 @error('extra_fourteenth_salary')
@@ -119,7 +119,7 @@
                             {{-- extra_reimbursement_expenses --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_reimbursement_expenses">Rimborso spese</label>
-                                <input type="number" class="form-control border-steel-blue long-input" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
+                                <input type="number" class="form-control roboto-regular medium-grey border-steel-blue long-input" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
                                 @error('extra_reimbursement_expenses')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -128,7 +128,7 @@
                             {{-- extra_bonus_rewards --}}
                             <div class="form-group my-3">
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_bonus_rewards">Bonus o premi</label>
-                                <input class="form-control border-steel-blue long-input" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
+                                <input class="form-control roboto-regular medium-grey border-steel-blue long-input" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
                                 @error('extra_bonus_rewards')
                                     <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -208,7 +208,7 @@
                             
                             {{-- payroll_total_surcharge --}}
                             <div class="form-group my-3">
-                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_surcharge">Addizionali totali, regionali + comunali:</label>
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_surcharge">Addizionali totali &#40;regionali + comunali&#41;:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
                                     <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
@@ -243,7 +243,7 @@
                             </div>
                             <hr>
                             {{-- payroll_net_salary --}}
-                            <div class="form-group mt-3 mb-5">
+                            <div class="form-group my-3">
                                 <label class="my-1   roboto-regular medium-grey text-shadow-blue" for="payroll_net_salary">Salario netto:</label>
                                 
                                 <div class="fs-2">
