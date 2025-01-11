@@ -8,216 +8,255 @@
                     <h1 class="text-uppercase montserrat-bold dark-grey text-shadow-grey text-center my-4">Compila la busta paga </h1>      
                 @endif
             </div>
-            <div class="col-12 mx-3">
+            <div class="col-12 ">
                 {{-- FORM CREATE PER TABELLA PAYROLLS & EXTRAS --}}
                 <form action="{{route('admin.payrolls.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    {{-- DATI --}}
+                    <div class="row bg-white mx-3 section-create-payroll">
+                        <h2 class="mb-3 poppins-medium steel-blue text-shadow-blue text-uppercase"> inserimento dati</h2>
+                        <div class="col-6 d-flex flex-column">
+                            {{-- employee_id --}}
+                            @if (request()->has('employee_id') && $selectedEmployee = $employees->firstWhere('id', request()->input('employee_id')))
+                            <div class="form-group  mb-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue " for="employee_name">Nome e Cognome</label>
+                                {{-- Se l'employee_id è passato nella query string --}}
+                                <input type="hidden" name="employee_id" value="{{ $selectedEmployee->id }}">
+                                <input type="text" class="form-control border-steel-blue long-input" value="{{ $selectedEmployee->employee_name }} {{ $selectedEmployee->employee_surname }}" disabled>
+                            </div>
+                            @else
+                                {{-- Se l'employee_id non è passato, mostra il select --}}
+                                <select class="my-1  roboto-regular medium-grey text-shadow-blue" name="employee_id" id="employee_id" class="form-control border-steel-blue long-input">
+                                    <option value="">Seleziona un dipendente</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
+                                            {{ $employee->employee_name }} {{ $employee->employee_surname }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+                            @error('employee_id')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
-                    {{-- TABELLA PAYROLLS --}}
-                    {{-- employee_id --}}
-                    @if (request()->has('employee_id') && $selectedEmployee = $employees->firstWhere('id', request()->input('employee_id')))
-                    <div class="form-group  mb-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue " for="employee_name">Nome</label>
-                        {{-- Se l'employee_id è passato nella query string --}}
-                        <input type="hidden" name="employee_id" value="{{ $selectedEmployee->id }}">
-                        <input type="text" class="form-control border-steel-blue long-input" value="{{ $selectedEmployee->employee_name }} {{ $selectedEmployee->employee_surname }}" disabled>
-                    </div>
-                    @else
-                        {{-- Se l'employee_id non è passato, mostra il select --}}
-                        <select class="my-1  roboto-regular medium-grey text-shadow-blue" name="employee_id" id="employee_id" class="form-control border-steel-blue long-input">
-                            <option value="">Seleziona un dipendente</option>
-                            @foreach ($employees as $employee)
-                                <option value="{{ $employee->id }}" {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
-                                    {{ $employee->employee_name }} {{ $employee->employee_surname }}
-                                </option>
-                            @endforeach
-                        </select>
-                    @endif
-                    @error('employee_id')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                            {{-- payroll_month --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_month">Mese</label>
+                                <input class="form-control border-steel-blue long-input" type="text" name="payroll_month" id="payroll_month" placeholder="MM-YYYY" value="{{old('payroll_month')}}">
+                                @error('payroll_month')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                        
+                        
+                            {{-- payroll_day_paid --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_day_paid">Data di pagamento</label>
+                                <input type="date" class="form-control border-steel-blue long-input" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
+                                @error('payroll_day_paid')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
 
-                    {{-- payroll_month --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_month">Mese</label>
-                        <input class="form-control border-steel-blue long-input" type="text" name="payroll_month" id="payroll_month" placeholder="MM-YYYY" value="{{old('payroll_month')}}">
-                        @error('payroll_month')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
+                            {{-- extra_notes --}}
+                            <div class="form-group my-3 d-flex flex-column flex-grow-1">
+                                <label class=" fw-bold  roboto-regular medium-grey text-shadow-blue" for="extra_notes">Note</label>
+                                <textarea style="height:100%;" name="extra_notes" id="extra_notes" class="form-control border-steel-blue long-input flex-grow-1" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
+                                @error('extra_notes')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
 
-                    {{-- payroll_day_paid --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_day_paid">Data di pagamento</label>
-                        <input type="date" class="form-control border-steel-blue long-input" name="payroll_day_paid" id="payroll_day_paid" placeholder="Data di pagamento" value="{{old('payroll_day_paid')}}">
-                        @error('payroll_day_paid')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
+                        <div class="col-6">
+                            {{-- extra_weekday_overtime_hours --}}
+                            <div class="form-group ">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekday_overtime_hours">Ore di straordinario nei giorni feriali</label>
+                                <input type="time" class="form-control border-steel-blue long-input" name="extra_weekday_overtime_hours" id="extra_weekday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni feriali" value="{{old('extra_weekday_overtime_hours', '00:00')}}">
+                                @error('extra_weekday_overtime_hours')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
 
+                            {{-- extra_weekend_overtime_hours --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekend_overtime_hours">Ore di straordinario nel fine settimana</label>
+                                <input type="time" class="form-control border-steel-blue long-input" name="extra_weekend_overtime_hours" id="extra_weekend_overtime_hours" placeholder="Numero di ore di straordinario nel fine settimana" value="{{old('extra_weekend_overtime_hours', '00:00')}}">
+                                @error('extra_weekend_overtime_hours')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
 
-                    {{-- TABELLA EXTRAS --}}
-                    {{-- extra_weekday_overtime_hours --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekday_overtime_hours">Ore di straordinario nei giorni feriali</label>
-                        <input type="time" class="form-control border-steel-blue long-input" name="extra_weekday_overtime_hours" id="extra_weekday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni feriali" value="{{old('extra_weekday_overtime_hours', '00:00')}}">
-                        @error('extra_weekday_overtime_hours')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-                    
-                    {{-- extra_weekend_overtime_hours --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_weekend_overtime_hours">Ore di straordinario nel fine settimana</label>
-                        <input type="time" class="form-control border-steel-blue long-input" name="extra_weekend_overtime_hours" id="extra_weekend_overtime_hours" placeholder="Numero di ore di straordinario nel fine settimana" value="{{old('extra_weekend_overtime_hours', '00:00')}}">
-                        @error('extra_weekend_overtime_hours')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
+                            {{-- extra_holiday_overtime_hours --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_holiday_overtime_hours">Ore di straordinario nei giorni festivi</label>
+                                <input type="time" class="form-control border-steel-blue long-input" name="extra_holiday_overtime_hours" id="extra_holiday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni festivi" value="{{old('extra_holiday_overtime_hours', '00:00')}}">
+                                @error('extra_holiday_overtime_hours')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
 
-                    {{-- extra_holiday_overtime_hours --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_holiday_overtime_hours">Ore di straordinario nei giorni festivi</label>
-                        <input type="time" class="form-control border-steel-blue long-input" name="extra_holiday_overtime_hours" id="extra_holiday_overtime_hours" placeholder="Numero di ore di straordinario nei giorni festivi" value="{{old('extra_holiday_overtime_hours', '00:00')}}">
-                        @error('extra_holiday_overtime_hours')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
+                            {{-- extra_thirteenth_salary --}}
+                            <div class="form-group my-3 form-check">
+                                <input type="checkbox" class="form-check-input" name="extra_thirteenth_salary" id="extra_thirteenth_salary" value="1" 
+                                {{ old('extra_thirteenth_salary') ? 'checked' : '' }}>
+                                <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_thirteenth_salary">Tredicesima</label>
+                                @error('extra_thirteenth_salary')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                            
+                            {{-- extra_fourteenth_salary --}}
+                            <div class="form-group my-3 form-check">
+                                <input type="checkbox" class="form-check-input" name="extra_fourteenth_salary" id="extra_fourteenth_salary" value="1" 
+                                {{ old('extra_fourteenth_salary') ? 'checked' : '' }}>
+                                <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_fourteenth_salary">Quattordicesima</label>
+                                @error('extra_fourteenth_salary')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+        
+                            {{-- extra_reimbursement_expenses --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_reimbursement_expenses">Rimborso spese</label>
+                                <input type="number" class="form-control border-steel-blue long-input" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
+                                @error('extra_reimbursement_expenses')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+        
+                            {{-- extra_bonus_rewards --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_bonus_rewards">Bonus o premi</label>
+                                <input class="form-control border-steel-blue long-input" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
+                                @error('extra_bonus_rewards')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
 
-                    {{-- extra_thirteenth_salary --}}
-                    <div class="form-group my-3 form-check">
-                        <input type="checkbox" class="form-check-input" name="extra_thirteenth_salary" id="extra_thirteenth_salary" value="1" 
-                        {{ old('extra_thirteenth_salary') ? 'checked' : '' }}>
-                        <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_thirteenth_salary">Tredicesima</label>
-                        @error('extra_thirteenth_salary')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-                    
-                    {{-- extra_fourteenth_salary --}}
-                    <div class="form-group my-3 form-check">
-                        <input type="checkbox" class="form-check-input" name="extra_fourteenth_salary" id="extra_fourteenth_salary" value="1" 
-                        {{ old('extra_fourteenth_salary') ? 'checked' : '' }}>
-                        <label class="form-check-label roboto-regular medium-grey text-shadow-blue" for="extra_fourteenth_salary">Quattordicesima</label>
-                        @error('extra_fourteenth_salary')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    {{-- extra_reimbursement_expenses --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_reimbursement_expenses">Rimborso spese</label>
-                        <input type="number" class="form-control border-steel-blue long-input" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
-                        @error('extra_reimbursement_expenses')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    {{-- extra_bonus_rewards --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_bonus_rewards">Bonus o premi</label>
-                        <input class="form-control border-steel-blue long-input" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
-                        @error('extra_bonus_rewards')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    {{-- extra_notes --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_notes">Note</label>
-                        <textarea name="extra_notes" id="extra_notes" class="form-control border-steel-blue long-input" placeholder="Inserisci qui eventuali note" >{{ old('extra_notes') }}</textarea>
-                        @error('extra_notes')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-
-
-                    {{-- DEDUCTIONS --}}
-                    {{-- payroll_monthly_basic_deduction --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_basic_deduction">Detrazioni lavoratore dipendente per questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_monthly_basic_deduction" name="payroll_monthly_basic_deduction" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_monthly_basic_deduction')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
+                        </div>
+                        
                     </div>
 
-                    {{-- payroll_monthly_family_deduction --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_family_deduction">Detrazioni familiari a carico per questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_monthly_family_deduction" name="payroll_monthly_family_deduction" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_monthly_family_deduction')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
+                    {{-- CALCOLO --}}
+                    <div class="row bg-white mx-3 mt-4 section-create-payroll">
+                        <h2 class="mb-3 poppins-medium steel-blue text-shadow-blue text-uppercase"> Calcolo</h2>
+                        <div class="col-6">
 
-                    {{-- payroll_monthly_children_deduction --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_children_deduction">Detrazioni figli a carico per questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_monthly_children_deduction" name="payroll_monthly_children_deduction" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_monthly_children_deduction')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
+                            {{-- payroll_monthly_basic_deduction --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_basic_deduction">Detrazioni lavoratore dipendente per questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_monthly_basic_deduction" name="payroll_monthly_basic_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_monthly_basic_deduction')
+                                <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
+                            
+                            {{-- payroll_monthly_family_deduction --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_family_deduction">Detrazioni familiari a carico per questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_monthly_family_deduction" name="payroll_monthly_family_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_monthly_family_deduction')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
 
-                    {{-- payroll_monthly_employee_deduction --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_monthly_employee_deduction')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
+                            {{-- payroll_monthly_children_deduction --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_children_deduction">Detrazioni figli a carico per questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_monthly_children_deduction" name="payroll_monthly_children_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_monthly_children_deduction')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
 
-                    {{-- payroll_total_surcharge --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_surcharge">Addizionali totali, regionali + comunali &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_total_surcharge')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
+                            {{-- payroll_monthly_employee_deduction --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_monthly_employee_deduction')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            
+                            {{-- payroll_total_inps --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_inps">INPS da pagare questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_total_inps" name="payroll_total_inps" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_total_inps')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
+                            
+                            {{-- payroll_total_surcharge --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_surcharge">Addizionali totali, regionali + comunali:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_total_surcharge')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
 
-                    {{-- payroll_total_inps --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_inps">INPS da pagare questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_total_inps" name="payroll_total_inps" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_total_inps')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
+                            {{-- payroll_taxable_irpef --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_taxable_irpef">Imponibile IRPEF annuale per questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_taxable_irpef')
+                                <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
 
-                    
-                    {{-- payroll_taxable_irpef --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_taxable_irpef">Imponibile IRPEF annuale per questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_taxable_irpef')
-                        <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
-                    
-                    {{-- payroll_irpef_to_pay --}}
-                    <div class="form-group my-3">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_irpef_to_pay">IRPEF finale da pagare questo mese &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_irpef_to_pay" name="payroll_irpef_to_pay" class="form-control border-steel-blue long-input" readonly>    
-                        @error('payroll_irpef_to_pay')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
-                    
-                
-                    {{-- payroll_net_salary --}}
-                    <div class="form-group mt-3 mb-5">
-                        <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_net_salary">Salario netto &#40;&euro;&#41;</label>
-                        <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="form-control border-steel-blue long-input" readonly >  
-                        @error('payroll_net_salary')
-                            <div class="text-danger">{{$message}}</div>
-                        @enderror 
-                    </div>
-
-
-                    <div class="text-end me-5 my-5"> 
+                            {{-- payroll_irpef_to_pay --}}
+                            <div class="form-group my-3">
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_irpef_to_pay">IRPEF finale da pagare questo mese:</label>
+                                <div class="fs-5">
+                                    <span class="roboto-regular medium-grey">&euro; </span>
+                                    <input type="number" id="payroll_irpef_to_pay" name="payroll_irpef_to_pay" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                </div>
+                                @error('payroll_irpef_to_pay')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
+                            <hr>
+                            {{-- payroll_net_salary --}}
+                            <div class="form-group mt-3 mb-5">
+                                <label class="my-1   roboto-regular medium-grey text-shadow-blue" for="payroll_net_salary">Salario netto:</label>
+                                
+                                <div class="fs-2">
+                                    <span class="roboto-regular medium-grey text-shadow-grey">&euro; </span>
+                                    <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="fw-bold fs-2 ps-0 input-number  border-steel-blue d-inline-block roboto-regular medium-grey" readonly >  
+                                </div>
+                                @error('payroll_net_salary')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror 
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="text-end me-5  my-5"> 
                         <button class="btn-save montserrat-bold text-white text-uppercase" type="submit">Salva busta paga</button>
                     </div>
 

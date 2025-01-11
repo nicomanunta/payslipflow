@@ -54,6 +54,9 @@
 .bg-light-blue{ //background sezioni particolari
     background-color: #EFF6FF;
 }
+.bg-white{
+    background-color: white;
+}
 
 .text-shadow-blue{
     text-shadow: 2px 2px 2px #3b83f63f;
@@ -405,7 +408,7 @@ hr{
     box-shadow: none;
 }
 .long-input{
-    width: 70%;
+    width: 80%;
 }
 .btn-save{
     background-color: #3B82F6;
@@ -432,13 +435,24 @@ hr{
     font-weight:bold ;
 }
 
-
+// create and edit payroll
+.section-create-payroll{
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #4b556351;
+}
 // RIMUOVERE FRECCETTE INPUT NUMBER
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//     -webkit-appearance: none;
-//     margin: 0;
-// }
-// input[type=number] {
-//     -moz-appearance: textfield;
-// }
+.input-number[type=number]::-webkit-inner-spin-button,
+.input-number[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input-number[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-number{
+    max-width: 70%;
+    border: 0px;
+}
+

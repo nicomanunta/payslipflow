@@ -17,13 +17,13 @@
         @csrf
         @method('patch')
 
-        <div>
+        <div class="form-group">
             <x-input-label for="name" :value="__('Nome')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
+        <div class="form-group">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -46,22 +46,22 @@
                 </div>
             @endif
         </div>
-        <div>
+        <div class="form-group">
             <x-input-label for="phone" :value="__('Telefono')" />
             <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
-        <div>
+        <div class="form-group">
             <x-input-label for="legal_city" :value="__('Sede legale')" />
             <x-text-input id="legal_city" name="legal_city" type="text" class="mt-1 block w-full" :value="old('legal_city', $user->legal_city)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('legal_city')" />
         </div>
-        <div>
+        <div class="form-group">
             <x-input-label for="zip_code" :value="__('CAP')" />
             <x-text-input id="zip_code" name="zip_code" type="text" class="mt-1 block w-full" :value="old('zip_code', $user->zip_code)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('zip_code')" />
         </div>
-        <div>
+        <div class="form-group">
             <x-input-label for="user_img" :value="__('Immagine Aziendale')" />
             <input id="user_img" name="user_img" type="file" class="mt-1 block w-full form-control border-steel-blue" />
             <x-input-error class="mt-2" :messages="$errors->get('user_img')" />
