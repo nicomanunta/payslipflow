@@ -454,5 +454,9 @@ hr{
 .input-number{
     max-width: 70%;
     border: 0px;
+    &:focus{
+        border: 0px !important;
+        box-shadow: none;
+    }
 }
 

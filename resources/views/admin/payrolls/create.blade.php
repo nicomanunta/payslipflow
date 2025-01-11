@@ -148,7 +148,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_basic_deduction">Detrazioni lavoratore dipendente per questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_monthly_basic_deduction" name="payroll_monthly_basic_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_monthly_basic_deduction" name="payroll_monthly_basic_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_monthly_basic_deduction')
                                 <div class="text-danger">{{$message}}</div>
@@ -160,7 +160,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_family_deduction">Detrazioni familiari a carico per questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_monthly_family_deduction" name="payroll_monthly_family_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_monthly_family_deduction" name="payroll_monthly_family_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_monthly_family_deduction')
                                     <div class="text-danger">{{$message}}</div>
@@ -172,7 +172,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_children_deduction">Detrazioni figli a carico per questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_monthly_children_deduction" name="payroll_monthly_children_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_monthly_children_deduction" name="payroll_monthly_children_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_monthly_children_deduction')
                                     <div class="text-danger">{{$message}}</div>
@@ -184,7 +184,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_monthly_employee_deduction">Detrazioni totali per questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_monthly_employee_deduction" name="payroll_monthly_employee_deduction" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_monthly_employee_deduction')
                                     <div class="text-danger">{{$message}}</div>
@@ -199,7 +199,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_inps">INPS da pagare questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_total_inps" name="payroll_total_inps" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_total_inps" name="payroll_total_inps" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_total_inps')
                                     <div class="text-danger">{{$message}}</div>
@@ -211,7 +211,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_total_surcharge">Addizionali totali, regionali + comunali:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_total_surcharge" name="payroll_total_surcharge" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_total_surcharge')
                                     <div class="text-danger">{{$message}}</div>
@@ -223,7 +223,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_taxable_irpef">Imponibile IRPEF annuale per questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_taxable_irpef" name="payroll_taxable_irpef" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_taxable_irpef')
                                 <div class="text-danger">{{$message}}</div>
@@ -235,7 +235,7 @@
                                 <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="payroll_irpef_to_pay">IRPEF finale da pagare questo mese:</label>
                                 <div class="fs-5">
                                     <span class="roboto-regular medium-grey">&euro; </span>
-                                    <input type="number" id="payroll_irpef_to_pay" name="payroll_irpef_to_pay" class="fs-5 ps-0 roboto-regular medium-grey input-number border-steel-blue d-inline-block" readonly>    
+                                    <input type="number" id="payroll_irpef_to_pay" name="payroll_irpef_to_pay" class="fs-5 ps-0 roboto-regular medium-grey input-number d-inline-block" readonly>    
                                 </div>
                                 @error('payroll_irpef_to_pay')
                                     <div class="text-danger">{{$message}}</div>
@@ -248,7 +248,7 @@
                                 
                                 <div class="fs-2">
                                     <span class="roboto-regular medium-grey text-shadow-grey">&euro; </span>
-                                    <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="fw-bold fs-2 ps-0 input-number  border-steel-blue d-inline-block roboto-regular medium-grey" readonly >  
+                                    <input type="number" id="payroll_net_salary" name="payroll_net_salary" class="fw-bold fs-2 ps-0 input-number  d-inline-block roboto-regular medium-grey" readonly >  
                                 </div>
                                 @error('payroll_net_salary')
                                     <div class="text-danger">{{$message}}</div>
