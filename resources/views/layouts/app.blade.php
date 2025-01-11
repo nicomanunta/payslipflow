@@ -30,6 +30,7 @@
                     <main>
                         {{ $slot }}
                     </main>
+                    
                 </div>     
 
             </div>

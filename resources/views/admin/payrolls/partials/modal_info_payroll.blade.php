@@ -3,13 +3,14 @@
     <div class="modal-dialog modal-dialog-show-payrolls">
       <div class="modal-content border-0 bg-modal">
         <div class="modal-header position-relative  border-0 text-center">
+          <img class="logo-payslipflow-modal-info position-absolute" src="{{URL::asset('/img/logo-sfondo-bianco.jpeg')}}" alt="">
           <div class="logo-container mt-2">
             <img class="me-2" src="{{ asset('storage/' . $user->user_img) }}" alt="">
             <img class="ms-2" src="{{ $employee->employee_img ? asset('storage/' . $employee->employee_img) : URL::asset('/img/profilo-vuoto.jpeg') }}" alt="">         
           </div>
         </div>
         <button type="button" class="btn-close text-end position-absolute btn-close-show-payrolls" data-bs-dismiss="modal" aria-label="Close"></button>
-        <h3 class="modal-title text-center mt-4 mb-2 montserrat-bold" id="modalInfoPayrollLabel"> busta paga di "{{$employee->employee_name}} {{$employee->employee_surname}}" del "{{$item->payroll_month}}"</h3>
+        <h3 class="modal-title text-center mt-4 mb-2 montserrat-bold text-uppercase" id="modalInfoPayrollLabel"> busta paga di "{{$employee->employee_name}} {{$employee->employee_surname}}" del "{{$item->payroll_month}}"</h3>
         
         {{-- table dettagli --}}
         <div class="modal-body border-0">
@@ -143,7 +144,8 @@
             <div class="col-3 text-center">
               <span><b>{{$user->name}}</b></span>  
             </div>
-            <div class="col-3 text-end">
+            <div class="col-3 text-end ">
+              
               <a href="{{route('admin.payrolls.edit', ['payroll' => $item->id])}}">
                 <button class="btn-tools-index">
                   <i class="fa-regular fa-pen-to-square"></i>
