@@ -34,22 +34,22 @@
                                 @auth
                                     <a
                                         href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        class="rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
                                         Dashboard
                                     </a>
                                 @else
                                     <a
                                         href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
-                                        Accedi
+                                        Homepage
                                     </a>
             
                                     @if (Route::has('register'))
                                         <a
                                             href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
                                             Registra la tua Azienda
                                         </a>
@@ -63,13 +63,13 @@
         </header>
 
         <main class="w-100 bg-light-grey position-absolute">
-            <x-auth-session-status class="mb-4" :status="session('status')" />
-            <div class="container py-5">
-                <h1 class="py-3 text-center text-uppercase montserrat-bold dark-grey text-shadow-grey">Accedi al gestionale dipendenti</h1>
+            <x-auth-session-status class="mb-3" :status="session('status')" />
+            <div class="container pb-5 pt-4">
+                <h1 class="pt-3 mb-5 text-center text-uppercase montserrat-bold dark-grey text-shadow-grey">Accedi al gestionale dipendenti</h1>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <section class="bg-white section-login mt-4 p-3 ">
-                            <h4 class="mt-2 mb-4 fw-bold poppins-medium steel-blue text-shadow-blue text-uppercase">Login</h4>
+                        <section class="bg-white section-login mt-4 px-3 py-4 ">
+                            <h4 class="mt-2 mb-4 fw-bold montserrat-bold steel-blue text-shadow-blue text-uppercase">Login</h4>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                 
@@ -92,16 +92,16 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class=" text-start mt-2 ">
+                                    <a class="roboto-regular  steel-blue" href="{{ route('register') }}">
+                                        <p class="register-link">Se non hai ancora un account premi qui per registrare la tua azienda.</p>
+                                    </a>
+                                </div>
                             
-                                <div class="flex items-center justify-end mt-4">
+                                <div class="flex items-center justify-end mb-2">
                                     <button class="ms-3 btn-save montserrat-bold text-white text-uppercase ">
                                         {{ __('Accedi') }}
                                     </button>    
-                                </div>
-                                <div class=" text-center mt-4 ">
-                                    <a class="roboto-regular  steel-blue" href="{{ route('register') }}">
-                                        <p>Se non hai ancora un account premi qui per registrare la tua azienda</p>
-                                    </a>
                                 </div>
                                 
                                 <div class="mb-4 text-center d-flex justify-content-center">
