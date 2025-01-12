@@ -21,14 +21,14 @@
             </style>
         @endif
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-            <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        <div class="flex lg:justify-center lg:col-start-2">
-                           <img src="{{URL::asset('/img/logo-sfondo-grigio.jpeg')}}" alt="" srcset="">
-                        </div>
+    <body class="font-sans antialiased vh-100 bg-light-grey overflow-hidden">
+        <header class="bg-steel-blue">
+            <div class="container py-3 ">
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        <img style="width: 35%" src="{{URL::asset('/img/logo-scritta-blu.jpeg')}}" alt="" srcset="">
+                    </div>
+                    <div class="col-6">
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
                                 @auth
@@ -45,7 +45,7 @@
                                     >
                                         Accedi
                                     </a>
-
+            
                                     @if (Route::has('register'))
                                         <a
                                             href="{{ route('register') }}"
@@ -57,61 +57,93 @@
                                 @endauth
                             </nav>
                         @endif
-                    </header>
+                    </div>
+                </div>
+            </div>  
+        </header>
 
-                    <main class="mt-6">
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <main class="w-100 bg-light-grey position-absolute">
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+            <div class="container py-5">
+                <h1 class="py-3 text-center text-uppercase montserrat-bold dark-grey text-shadow-grey">Accedi al gestionale dipendenti</h1>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                        <section class="bg-white section-login mt-4 p-3 ">
+                            <h4 class="mt-2 mb-4 fw-bold poppins-medium steel-blue text-shadow-blue text-uppercase">Login</h4>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                
+                                <!-- Email Address -->
+                                <div class="mb-4 mt-3">
+                                    <label class="my-1  roboto-regular medium-grey" for="email">Email</label>
+                                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                
+                                <!-- Password -->
+                                <div class="my-4">
+                                    <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="email">Password</label>
 
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <!-- Email Address -->
-                            <div>
-                                <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Password -->
-                            <div class="mt-4">
-                                <x-input-label for="password" :value="__('Password')" />
-
-                                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-
-                                @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Remember Me -->
-                            <div class="block mt-4">
-                                <label for="remember_me" class="inline-flex items-center">
-                                    <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                                </label>
-                            </div>
-
-                            <div class="flex items-center justify-end mt-4">
-                                @if (Route::has('password.request'))
-                                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                                        {{ __('Forgot your password?') }}
+                                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            
+                                <div class="flex items-center justify-end mt-4">
+                                    <button class="ms-3 btn-save montserrat-bold text-white text-uppercase ">
+                                        {{ __('Accedi') }}
+                                    </button>    
+                                </div>
+                                <div class=" text-center mt-4 ">
+                                    <a class="roboto-regular  steel-blue" href="{{ route('register') }}">
+                                        <p>Se non hai ancora un account premi qui per registrare la tua azienda</p>
                                     </a>
-                                @endif
+                                </div>
+                                
+                                <div class="mb-4 text-center d-flex justify-content-center">
+                                    <img style="width:10%;" src="{{URL::asset('/img/logo-sfondo-bianco.jpeg')}}" alt="">
+                                </div>
+                            </form>
+                            
+                        </section>
 
-                                <x-primary-button class="ms-3">
-                                    {{ __('Log in') }}
-                                </x-primary-button>
-                            </div>
-                        </form>
-                    </main>
-
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        
-                    </footer>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="card-what-left position-absolute bg-steel-blue ">   
+                <h5 class="montserrat-bold  dark-grey my-3">Cos'è PaySlipFlow&#63;</h5>
+                <p class="roboto-regular text-white">PayslipFlow è il software progettato per semplificare la gestione delle buste paga aziendali. Registra la tua azienda, crea profili per i dipendenti, aggiungi contratti e genera buste paga mensili in modo rapido e intuitivo.</p>    
+            </div>
+            <div class="container card-what-right position-absolute bg-steel-blue ">  
+                <div class="row">
+                    <h5 class="text-center montserrat-bold  dark-grey my-3">Social</h5>
+                    <div class="col-6 text-end">
+                        <span class=" text-shadow-grey"><i class="fa-brands icon-social  fa-linkedin"></i></span>
+                    </div>
+                    <div class="col-6 text-start">
+                        <span class=" text-shadow-grey"><i class="fa-brands icon-social fa-square-instagram"></i></span>
+                    </div>
+                    <div class="col-6 text-end">
+                        <span class=" text-shadow-grey"><i class="fa-brands icon-social fa-square-facebook"></i></span>
+                    </div>
+                    <div class="col-6 text-start">
+                        <span class=" text-shadow-grey"><i class="fa-brands icon-social  fa-square-x-twitter"></i></span>
+                    </div>
+                </div> 
+                   
+            </div>
+        </main>
+
+        {{-- <footer class=" bg-steel-blue">
+            <div class="container">
+                <div class="row">
+                </div>
+            </div>
+        </footer> --}}
+            
     </body>
 </html>

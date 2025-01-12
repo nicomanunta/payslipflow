@@ -466,4 +466,61 @@ hr{
 }
 
 
+// welcome page
+.section-login{
+    width: 40%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #4b556351;
+}
+
+.card-what-left{
+    width: 20%;
+    padding: 20px 10px;
+    border-radius: 10px;
+    bottom: 20%;
+    left: 3%;
+    box-shadow: 0px 0px 10px #4b556351;
+    line-height: 1.8rem;
+}
+
+.card-what-left {
+    transform: perspective(1000px) rotateY(-15deg); /* Aggiunge prospettiva e rotazione iniziale */
+    transition: transform 0.6s ease, box-shadow 0.6s ease; /* Anima trasformazione e ombra */
+    box-shadow: 5px 10px 10px #4b556360; /* Ombra iniziale */
+}
+
+.card-what-left:hover {
+    transform: perspective(1000px) rotateY(0deg); /* Ritorna frontale al passaggio del mouse */
+    box-shadow: 0px 0px 10px #4b5563c0;
+}
+.card-what-right{
+    width: 10%;
+    padding: 20px 10px;
+    border-radius: 10px;
+    bottom: 30%;
+    right: 10%;
+    box-shadow: 0px 0px 10px #4b556351;
+    line-height: 1.8rem;
+}
+
+.card-what-right {
+    transform: perspective(1000px) rotateY(15deg); /* Aggiunge prospettiva e rotazione iniziale */
+    transition: transform 0.6s ease, box-shadow 0.6s ease; /* Anima trasformazione e ombra */
+    box-shadow: 3px 8px 10px #4b556360; /* Ombra iniziale */
+}
+
+.card-what-right:hover {
+    transform: perspective(1000px) rotateY(0deg); /* Ritorna frontale al passaggio del mouse */
+    box-shadow: 0px 0px 10px #4b5563c0;
+}
+.icon-social{
+    color: white;
+    font-size: 40px;
+    transition: scale 0.5s;
+    &:hover{
+        transition: scale 0.5s;
+        scale: 1.1;
+    }
+}
+
 
