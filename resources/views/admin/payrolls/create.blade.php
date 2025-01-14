@@ -118,7 +118,7 @@
         
                             {{-- extra_reimbursement_expenses --}}
                             <div class="form-group my-3">
-                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_reimbursement_expenses">Rimborso spese</label>
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_reimbursement_expenses">Rimborso spese &#40;&euro;&#41;</label>
                                 <input type="number" class="form-control roboto-regular medium-grey border-steel-blue long-input" step="0.01" min="0" name="extra_reimbursement_expenses" id="extra_reimbursement_expenses" placeholder="Rimborso spese" value="{{old('extra_reimbursement_expenses')}}">
                                 @error('extra_reimbursement_expenses')
                                     <div class="text-danger">{{$message}}</div>
@@ -127,7 +127,7 @@
         
                             {{-- extra_bonus_rewards --}}
                             <div class="form-group my-3">
-                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_bonus_rewards">Bonus o premi</label>
+                                <label class="my-1  roboto-regular medium-grey text-shadow-blue" for="extra_bonus_rewards">Bonus o premi &#40;&euro;&#41;</label>
                                 <input class="form-control roboto-regular medium-grey border-steel-blue long-input" type="number" step="0.01" min="0" name="extra_bonus_rewards" id="extra_bonus_rewards" placeholder="Bonus o premi" value="{{old('extra_bonus_rewards')}}">
                                 @error('extra_bonus_rewards')
                                     <div class="text-danger">{{$message}}</div>

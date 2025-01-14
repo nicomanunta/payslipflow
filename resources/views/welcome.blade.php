@@ -39,21 +39,27 @@
                                         Dashboard
                                     </a>
                                 @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Homepage
-                                    </a>
-            
                                     @if (Route::has('register'))
                                         <a
                                             href="{{ route('register') }}"
-                                            class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white text-uppercase"
                                         >
                                             Registra la tua Azienda
                                         </a>
                                     @endif
+                                    <a
+                                        href="{{ route('login') }}"
+                                        class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white text-uppercase"
+                                    >
+                                        Contatti
+                                    </a>
+                                    <a
+                                        href="{{ route('login') }}"
+                                        class="link-login-page rounded-md px-3 py-2 poppins-medium fw-bold text-shadow-grey ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white text-uppercase"
+                                    >
+                                        Chi siamo
+                                    </a>
+            
                                 @endauth
                             </nav>
                         @endif
@@ -65,7 +71,7 @@
         <main class="w-100 bg-light-grey position-absolute">
             <x-auth-session-status class="mb-3" :status="session('status')" />
             <div class="container pb-5 pt-4">
-                <h1 class="pt-3 mb-5 text-center text-uppercase montserrat-bold dark-grey text-shadow-grey">Accedi al gestionale dipendenti</h1>
+                <h1 class="title-welcome pt-3 mb-5 text-center text-uppercase montserrat-bold dark-grey text-shadow-grey">Accedi al gestionale dipendenti</h1>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
                         <section class="bg-white section-login mt-4 px-3 py-4 ">

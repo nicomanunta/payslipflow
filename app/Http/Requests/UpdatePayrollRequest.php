@@ -81,6 +81,6 @@ class UpdatePayrollRequest extends FormRequest
             'payroll_taxable_irpef.required' => 'L\'imponibile IRPEF è obbligatorio.',
             'payroll_taxable_irpef.numeric' => 'L\'imponibile IRPEF deve essere un numero.',
             'payroll_taxable_irpef.min' => 'L\'imponibile IRPEF deve essere maggiore o uguale a 0.',
-        ]
+        ];
     }
 }
