@@ -37,6 +37,7 @@ class EmployeeController extends Controller
     {
         $users = User::all();
         $employees = Employee::where('user_id', auth()->id())->get();
+         
 
         return view('admin.employees.create', compact('users', 'employees'));
     }
